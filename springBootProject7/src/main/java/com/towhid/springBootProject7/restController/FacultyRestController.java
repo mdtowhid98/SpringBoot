@@ -26,8 +26,8 @@ public class FacultyRestController {
 
     @PostMapping("/save")
     public void saveFaculty(@RequestBody Faculty f) {
-        Department newDep = departmentRepository.findById(f.getDepartment().getId()).get();
-        f.setDepartment(newDep);
+//        Department newDep = departmentRepository.findById(f.getDepartment().getId()).get();
+//        f.setDepartment(newDep);
         facultyService.saveFaculty(f);
     }
 

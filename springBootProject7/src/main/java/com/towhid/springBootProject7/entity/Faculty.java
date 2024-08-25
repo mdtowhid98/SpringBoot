@@ -18,8 +18,8 @@ public class Faculty {
    private String name;
     @Column(nullable = false)
    private int totalSeat;
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    @JoinColumn(name = "depId")
-    private Department department;
+//    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+//    @JoinColumn(name = "depId")
+//    private Department department;
 
 }
