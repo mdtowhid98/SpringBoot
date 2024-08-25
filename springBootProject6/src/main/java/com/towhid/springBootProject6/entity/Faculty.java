@@ -22,9 +22,9 @@ public class Faculty {
     private int totalSeat;
 
 
- @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
- @JoinColumn(name = "depId")
-private Department department;
+// @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+// @JoinColumn(name = "depId")
+//private Department department;
 
 
 

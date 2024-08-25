@@ -23,4 +23,8 @@ public class Student {
     private String cell;
     private Date dob;
 
+    @ManyToOne
+    @JoinColumn(name = "depId")
+    private Department department;
+
 }
