@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/department")
+@CrossOrigin("*")
 public class DepartmentRestController {
 
     @Autowired
