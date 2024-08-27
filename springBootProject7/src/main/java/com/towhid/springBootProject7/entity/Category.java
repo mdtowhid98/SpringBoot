@@ -6,21 +6,20 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "Departments")
+@Table(name = "Categories")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Department {
+public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+   private int id;
     @Column(nullable = false,unique = true)
-    private String name;
-
-    @ManyToOne
-    @JoinColumn(name = "facultyId")
-    private Faculty faculty;
-
-
+   private String name;
+//    @Column(nullable = false)
+//   private int totalSeat;
+//    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+//    @JoinColumn(name = "depId")
+//    private Department department;
 
 }

@@ -6,20 +6,29 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "Faculties")
+@Table(name = "Products")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Faculty {
+public class Products {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-   private int id;
+    private int id;
     @Column(nullable = false,unique = true)
-   private String name;
-    @Column(nullable = false)
-   private int totalSeat;
-//    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-//    @JoinColumn(name = "depId")
-//    private Department department;
+    private String name;
+
+    private String photo;
+
+    private int unitPrice;
+
+    private int stock;
+
+    private int quantity;
+
+    @ManyToOne
+    @JoinColumn(name = "categoryId")
+    private Category category;
+
+
 
 }

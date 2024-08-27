@@ -8,24 +8,24 @@ import lombok.NoArgsConstructor;
 import java.sql.Date;
 
 @Entity
-@Table(name = "Students")
+@Table(name = "Sales")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Student {
+public class Sales {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(nullable = false)
-    private String name;
-    @Column(nullable = false,unique = true)
-    private String email;
-    private String cell;
-    private String gender;
-    private Date dob;
+    private String customerName;
+
+    private Date salesDate;
+    private int  totalPrice;
+//    private String gender;
+//    private Date dob;
 
     @ManyToOne
-    @JoinColumn(name = "depId")
-    private Department department;
+    @JoinColumn(name = "proId")
+    private Products products;
 
 }
