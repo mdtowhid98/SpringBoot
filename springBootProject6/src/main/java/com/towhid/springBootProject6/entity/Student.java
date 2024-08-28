@@ -23,7 +23,7 @@ public class Student {
     private String cell;
     private Date dob;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name = "depId")
     private Department department;
 
