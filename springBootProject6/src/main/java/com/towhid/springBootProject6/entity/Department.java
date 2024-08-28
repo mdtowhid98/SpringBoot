@@ -17,7 +17,7 @@ public class Department {
     @Column(nullable = false,unique = true)
     private String name;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name = "facultyId")
     private Faculty faculty;
 
