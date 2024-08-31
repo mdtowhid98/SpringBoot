@@ -6,20 +6,23 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "Departments")
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-public class Department {
+@Table(name="Users")
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(nullable = false,unique = true)
+
     private String name;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "facultyId")
-    private Faculty faculty;
+    @Column(nullable = false,unique = true)
+    private String email;
+
+    private String password;
+
+    private String image;
 
 
 }
