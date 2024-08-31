@@ -19,6 +19,7 @@ public class DepartmentRestController {
     public List<Department>getAllDep(){
         return departmentService.getAllDep();
     }
+
     @PostMapping("/save")
     public void saveDep(@RequestBody Department d){
         departmentService.saveDep(d);
