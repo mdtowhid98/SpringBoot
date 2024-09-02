@@ -2,6 +2,7 @@ package com.towhid.springBootProject6.restController;
 
 import com.towhid.springBootProject6.entity.User;
 import com.towhid.springBootProject6.service.UserService;
+import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,7 +19,11 @@ public class UserRestController {
 
     @PostMapping("/save")
     public void saveUser(@RequestBody User u) {
-        userService.saveUser(u);
+        try {
+            userService.saveUser(u);
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
