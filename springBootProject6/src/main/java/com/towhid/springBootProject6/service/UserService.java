@@ -28,13 +28,28 @@ public class UserService {
     @Value("${image.upload.dir}")
     private String uploadDir;
 
-    @Transactional
-    public void saveUser(User user, MultipartFile imageFile) throws MessagingException, IOException {
+//    @Transactional
+//    public void saveUser(User user, MultipartFile imageFile) throws MessagingException, IOException {
+//        // Save the image if it exists
+//        if (imageFile != null && !imageFile.isEmpty()) {
+//            String imageFilename = saveImage(imageFile);
+//            user.setImage(imageFilename); // Set the image filename in the user entity
+//        }
+//
+//        // Save the user
+//        userRepository.save(user);
+//
+//        // Send registration email
+//        String toEmail = user.getEmail();
+//        String subject = "Registration Confirmation";
+//        String body = String.format("Thanks %s, \n Stay with us and your \n User Name is %s.", user.getName(), user.getEmail());
+//        emailService.sendSimpleEmail(toEmail, subject, body);
+//    }
+
+
+
+    public void saveUser(User user) throws MessagingException {
         // Save the image if it exists
-        if (imageFile != null && !imageFile.isEmpty()) {
-            String imageFilename = saveImage(imageFile);
-            user.setImage(imageFilename); // Set the image filename in the user entity
-        }
 
         // Save the user
         userRepository.save(user);

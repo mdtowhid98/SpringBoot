@@ -29,6 +29,10 @@ public class FacultyService {
         return facultyRepository.findById(id).get();
     }
 
+//    public List<Faculty>findByName(String name){
+//        return facultyRepository.findByName(name);
+//    };
+
     public void updateFaculty(Faculty f, int id) {
         facultyRepository.save(f);
     }
