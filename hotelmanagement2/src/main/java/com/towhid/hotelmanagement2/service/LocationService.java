@@ -3,6 +3,7 @@ package com.towhid.hotelmanagement2.service;
 import com.towhid.hotelmanagement2.entity.Hotel;
 import com.towhid.hotelmanagement2.entity.Location;
 import com.towhid.hotelmanagement2.repository.LocationRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,6 +18,7 @@ import java.util.UUID;
 @Service
 public class LocationService {
 
+    @Autowired
     private LocationRepository locationRepository;
 
     @Value("src/main/resources/static/images")
