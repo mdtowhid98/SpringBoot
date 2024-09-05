@@ -23,7 +23,6 @@ public class RoomService {
 
     @Autowired
     private RoomRepository roomRepository;
-
     @Autowired
     private HotelRepository hotelRepository;
 
@@ -31,9 +30,12 @@ public class RoomService {
     private String uploadDir;
 
 
-    public List<Room>getAllRoom(){
+    public List<Room> getALlRooms() {
+
         return roomRepository.findAll();
+
     }
+
 
     @Transactional
     public void saveRoom(Room room, MultipartFile imageFile) throws IOException {
@@ -55,15 +57,27 @@ public class RoomService {
 
     }
 
-
-    public void deleteRoom(int id){
+    public void deleteRoom(int id) {
         roomRepository.deleteById(id);
     }
 
-    public Room findByid(int id){
+    public Room findById(int id) {
         return roomRepository.findById(id)
-                .orElseThrow(()->new RuntimeException("Hotel With this Id not Found"));
+                .orElseThrow(() -> new RuntimeException("Room Not Foound by this Id"));
     }
+
+    public List<Room> findRoomByHotelName(String hotelName) {
+
+        return roomRepository.findRoomByHotelName(hotelName);
+
+    }
+
+    public List<Room> findRoomByHotelId(int hotelid) {
+
+        return roomRepository.findRoomByHotelId(hotelid);
+
+    }
+
 
 
 
@@ -85,6 +99,9 @@ public class RoomService {
 
         return filename; // Return the filename for storing in the database
     }
+
+
+
 
 
 

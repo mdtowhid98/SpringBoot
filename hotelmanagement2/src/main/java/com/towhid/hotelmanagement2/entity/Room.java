@@ -12,27 +12,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Table(name = "Rooms")
 public class Room {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int id;
-
-  private String roomType;
-
-  private int adultNo;
-
-  private int childNo;
-
-  private float price;
-
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private  int id;
+  private  String roomType;
+  private String image;
+  private  float price;
+  private  int area;
+  private  int adultNo;
+  private  int childNo;
   private boolean avilability;
 
-  private int area;
-
-  private String image;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "hotelId")
-    private  Hotel hotel;
-
-
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "hotelId")
+  private  Hotel hotel;
 }
