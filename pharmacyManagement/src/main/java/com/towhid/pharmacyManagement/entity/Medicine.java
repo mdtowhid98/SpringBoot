@@ -22,11 +22,12 @@ public class Medicine {
     private String manufacturer;
     private double price;
     private int quantity;
-    private String expiryDate;
+    private Date expiryDate;
+    private Date manufacturerDate;
 
     @ManyToOne
     @JoinColumn(name = "categoryId")
-    private MedicineCategory category;
+    private MedicineGeneric category;
 
 
 }

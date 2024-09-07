@@ -28,7 +28,7 @@ public class SalesOrder {
     @JoinColumn(name = "pharmacistId")
     private Pharmacist pharmacist;
 
-    private String orderDate;
+    private Date orderDate;
     private double totalAmount;
 
 //    @OneToMany(mappedBy = "salesOrder", cascade = CascadeType.ALL)

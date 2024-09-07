@@ -5,15 +5,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "MedicineCategories")
+@Table(name = "MedicineGenerics")
 
-public class MedicineCategory {
+public class MedicineGeneric {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,9 +1,7 @@
 package com.towhid.pharmacyManagement.restController;
 
-import com.towhid.pharmacyManagement.entity.Medicine;
-import com.towhid.pharmacyManagement.entity.MedicineCategory;
-import com.towhid.pharmacyManagement.service.MedicineCategoryService;
-import com.towhid.pharmacyManagement.service.MedicineService;
+import com.towhid.pharmacyManagement.entity.MedicineGeneric;
+import com.towhid.pharmacyManagement.service.MedicineGenericService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,18 +13,18 @@ import java.util.List;
 @RequestMapping("/api/medicinecategory")
 @CrossOrigin("*")
 
-public class MedicineCategoryRestController {
+public class MedicineGenericRestController {
 
     @Autowired
-    private MedicineCategoryService medicineCategoryService;
+    private MedicineGenericService medicineCategoryService;
 
     @GetMapping("/")
-    public List<MedicineCategory> getAllMedicineCategory() {
+    public List<MedicineGeneric> getAllMedicineCategory() {
         return medicineCategoryService.getAllMedicineCategory();
     }
 
     @PostMapping("/save")
-    public ResponseEntity<MedicineCategory> saveMedicineCategory(@RequestBody MedicineCategory mc) {
+    public ResponseEntity<MedicineGeneric> saveMedicineCategory(@RequestBody MedicineGeneric mc) {
         medicineCategoryService.saveMedicineCategory(mc);
         return new ResponseEntity<>(mc, HttpStatus.CREATED);
     }
@@ -37,7 +35,7 @@ public class MedicineCategoryRestController {
     }
 
     @PutMapping("/update/{id}")
-    public void updateMedicineCtegory(@RequestBody MedicineCategory mc) {
+    public void updateMedicineCtegory(@RequestBody MedicineGeneric mc) {
         medicineCategoryService.saveMedicineCategory(mc);
     }
 

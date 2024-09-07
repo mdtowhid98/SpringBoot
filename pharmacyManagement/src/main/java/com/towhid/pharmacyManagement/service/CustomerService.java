@@ -1,9 +1,7 @@
 package com.towhid.pharmacyManagement.service;
 
 import com.towhid.pharmacyManagement.entity.Customer;
-import com.towhid.pharmacyManagement.entity.MedicineCategory;
 import com.towhid.pharmacyManagement.repository.CustomerRepository;
-import com.towhid.pharmacyManagement.repository.MedicineCategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

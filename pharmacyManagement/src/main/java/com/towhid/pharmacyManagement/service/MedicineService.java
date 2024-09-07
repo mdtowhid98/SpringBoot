@@ -1,8 +1,8 @@
 package com.towhid.pharmacyManagement.service;
 
 import com.towhid.pharmacyManagement.entity.Medicine;
-import com.towhid.pharmacyManagement.entity.MedicineCategory;
-import com.towhid.pharmacyManagement.repository.MedicineCategoryRepository;
+import com.towhid.pharmacyManagement.entity.MedicineGeneric;
+import com.towhid.pharmacyManagement.repository.MedicineGenericRepository;
 import com.towhid.pharmacyManagement.repository.MedicineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,11 +16,11 @@ public class MedicineService {
     private MedicineRepository medicineRepository;
 
     @Autowired
-    private MedicineCategoryRepository medicineCategoryRepository;
+    private MedicineGenericRepository medicineCategoryRepository;
 
 
     public void saveMedicine(Medicine m) {
-        MedicineCategory medicineCategory = medicineCategoryRepository.findById(m.getCategory().getId())
+        MedicineGeneric medicineCategory = medicineCategoryRepository.findById(m.getCategory().getId())
                 .orElseThrow(
                         () -> new RuntimeException("User not found " + m.getCategory().getId())
                 );
