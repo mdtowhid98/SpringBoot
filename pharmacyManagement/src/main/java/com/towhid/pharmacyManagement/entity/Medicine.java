@@ -24,10 +24,11 @@ public class Medicine {
     private int quantity;
     private Date expiryDate;
     private Date manufacturerDate;
+    private String image;
 
     @ManyToOne
     @JoinColumn(name = "categoryId")
-    private MedicineGeneric category;
+    private MedicineGeneric generic;
 
 
 }

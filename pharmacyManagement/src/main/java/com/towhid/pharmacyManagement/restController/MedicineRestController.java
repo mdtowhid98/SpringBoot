@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -25,9 +27,14 @@ public class MedicineRestController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<Medicine> saveMedicine(@RequestBody Medicine medicine) {
-        medicineService.saveMedicine(medicine);
-        return new ResponseEntity<>(medicine, HttpStatus.CREATED);
+    public ResponseEntity<String> saveMedicin(
+            @RequestPart(value = "medicine") Medicine medicine,
+            @RequestParam(value = "image", required = true) MultipartFile file
+    ) throws IOException {
+        medicineService.saveMedicine(medicine, file);
+
+        return new ResponseEntity<>("Medicine added succesfully with image", HttpStatus.OK);
+
     }
 
     @DeleteMapping("/delete/{id}")
@@ -35,10 +42,10 @@ public class MedicineRestController {
         medicineService.deleteMedicineById(id);
     }
 
-    @PutMapping("/update/{id}")
-    public void updateMedicine(@RequestBody Medicine m) {
-        medicineService.saveMedicine(m);
-    }
+//    @PutMapping("/update/{id}")
+//    public void updateMedicine(@RequestBody Medicine m) {
+//        medicineService.saveMedicine(m);
+//    }
 
 
 }

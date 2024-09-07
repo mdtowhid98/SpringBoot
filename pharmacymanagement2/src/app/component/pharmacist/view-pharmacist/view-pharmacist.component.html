@@ -1,0 +1,35 @@
+<div class="container bg-category-table">
+    <h1 class="text-center">All Pharmacist Here</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Role</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let ph of pharmacists | async">
+                <td>{{ph.id}}</td>
+                <td>{{ph.name}}</td>
+                <td>{{ph.email}}</td>
+                <td>{{ph.password}}</td>
+                <td>{{ph.role}}</td>
+                <td>
+                    <button>
+                        Update
+                    </button>
+                </td>
+                <td>
+                    <button>
+                        Delete
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,32 @@
+<div class="container bg-category-form">
+    <h1 class="text-center">Add Pharmacist</h1>
+    <form [formGroup]="formValue" (ngSubmit)="createPharmacist()">
+      <!-- Name -->
+      <div class="form-group">
+        <label for="exampleInputName">Name</label>
+        <input type="text" class="form-control" formControlName="name" placeholder="Enter name">
+      </div>
+  
+      <!-- Email -->
+      <div class="form-group">
+        <label for="exampleInputEmail">Email</label>
+        <input type="email" class="form-control" formControlName="email" placeholder="Enter email">
+      </div>
+  
+      <!-- Password -->
+      <div class="form-group">
+        <label for="exampleInputPassword">Password</label>
+        <input type="password" class="form-control" formControlName="password" placeholder="Enter password">
+      </div>
+  
+      <!-- Role -->
+      <div class="form-group">
+        <label for="exampleInputRole">Role</label>
+        <input type="text" class="form-control" formControlName="role" placeholder="Enter role">
+      </div>
+  
+      <!-- Submit Button -->
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+  
