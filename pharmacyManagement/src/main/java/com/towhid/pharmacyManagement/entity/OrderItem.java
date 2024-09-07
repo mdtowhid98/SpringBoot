@@ -20,6 +20,7 @@ public class OrderItem {
     private int quantity;
     private double unitPrice;
     private double totalPrice;
+    
 
     @ManyToOne
     @JoinColumn(name = "medicineId")
