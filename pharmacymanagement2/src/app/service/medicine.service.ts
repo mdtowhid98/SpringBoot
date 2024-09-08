@@ -24,6 +24,9 @@ export class MedicineService {
   // }
 
 
+  
+
+
   createMedicine(medicine: MedicineModel, image: File): Observable<MedicineModel> {
 
     const formData = new FormData();
