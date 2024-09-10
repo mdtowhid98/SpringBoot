@@ -26,7 +26,7 @@ public class Medicine {
     private Date manufacturerDate;
     private String image;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "categoryId")
     private MedicineGeneric generic;
 
