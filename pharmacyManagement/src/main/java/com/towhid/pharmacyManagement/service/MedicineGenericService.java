@@ -15,18 +15,22 @@ public class MedicineGenericService {
 
 
     public void saveMedicineCategory(MedicineGeneric mc) {
+
         medicineCategoryRepository.save(mc);
     }
 
     public List<MedicineGeneric> getAllMedicineCategory() {
+
         return medicineCategoryRepository.findAll();
     }
 
     public void deleteMedicineCategoryById(long id) {
+
         medicineCategoryRepository.deleteById(id);
     }
 
     public MedicineGeneric findByid(long id) {
+
         return medicineCategoryRepository.findById(id).get();
     }
 
@@ -35,6 +39,7 @@ public class MedicineGenericService {
 //    };
 
     public void updateMedicineCategory(MedicineGeneric mc, long id) {
+
         medicineCategoryRepository.save(mc);
     }
 

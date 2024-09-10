@@ -10,7 +10,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let category of generics | async">
+            <tr *ngFor="let category of generics ">
                 <td>{{category.id}}</td>
                 <td>{{category.name}}</td>
                 <td>
@@ -19,9 +19,7 @@
                     </button>
                 </td>
                 <td>
-                    <button>
-                        Delete
-                    </button>
+                    <button class="btn btn-danger" (click)="deleteMedicineGeneric(category.id)">Delete</button>
                 </td>
             </tr>
         </tbody>
