@@ -21,4 +21,9 @@ export class MedicineGenericService {
     return this.httpClient.post(this.baseUrl + "save", generic);
   }
 
+  deleteMedicineGeneric(id: number): Observable<void> {
+    return this.httpClient.delete<void>(`${this.baseUrl}delete/${id}`);
+  }
+
+
 }

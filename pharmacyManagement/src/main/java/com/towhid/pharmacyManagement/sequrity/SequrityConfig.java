@@ -34,7 +34,7 @@ public class SequrityConfig {
                         .authorizeHttpRequests(
 
                                 req ->
-                                        req.requestMatchers("/login", "/register", "api/medicine/", "api/medicinegeneric/","api/pharmacist/")
+                                        req.requestMatchers("/login", "/register", "api/medicine/", "api/medicinegeneric/","api/pharmacist/","api/medicine/save","api/medicinegeneric/save","api/pharmacist/save","api/medicinegeneric/delete/{id}")
                                                 .permitAll()
                                                 .requestMatchers("api/medicine/save", "api/medicinegeneric/save")
                                                 .hasAuthority("ADMIN")

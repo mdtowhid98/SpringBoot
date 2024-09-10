@@ -29,6 +29,11 @@ public class MedicineGenericRestController {
         return new ResponseEntity<>(mc, HttpStatus.CREATED);
     }
 
+//    @DeleteMapping("/delete/{id}")
+//    public void deleteMedicineCategory(@PathVariable long id) {
+//        medicineCategoryService.deleteMedicineCategoryById(id);
+//    }
+
     @DeleteMapping("/delete/{id}")
     public void deleteMedicineCategory(@PathVariable long id) {
         medicineCategoryService.deleteMedicineCategoryById(id);
