@@ -4,6 +4,7 @@ import com.towhid.pharmacyManagement.entity.Medicine;
 import com.towhid.pharmacyManagement.entity.MedicineGeneric;
 import com.towhid.pharmacyManagement.repository.MedicineGenericRepository;
 import com.towhid.pharmacyManagement.repository.MedicineRepository;
+import com.towhid.pharmacyManagement.util.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Service
@@ -38,21 +41,43 @@ public class MedicineService {
 //    }
 
 
-    public void saveMedicine(Medicine m, MultipartFile imageFile) throws IOException {
+    public ApiResponse saveMedicine(Medicine m, MultipartFile imageFile) throws IOException {
+        ApiResponse apiResponse = new ApiResponse();
+        try {
+            MedicineGeneric medicineGeneric = medicineCategoryRepository.findById(m.getGeneric().getId())
+                    .orElseThrow(() -> new RuntimeException("Medicine with this id not found"));
 
-        MedicineGeneric medicineGeneric = medicineCategoryRepository.findById(m.getGeneric().getId())
-                .orElseThrow(() -> new RuntimeException("Medicine with this id not found"));
+            if (imageFile != null && !imageFile.isEmpty()) {
+                String imageFileName = saveImage(imageFile, m);
+                m.setImage(imageFileName);
+            }
 
-        if (imageFile != null && !imageFile.isEmpty()) {
-            String imageFileName = saveImage(imageFile, m);
-            m.setImage(imageFileName);
+            medicineRepository.save(m);
+            apiResponse.setSuccessful(true);
+            apiResponse.setMessage("Medicine saved successfully");
+            return apiResponse;
+        } catch (Exception e) {
+            apiResponse.setMessage(e.getMessage());
+            return apiResponse;
         }
-
-        medicineRepository.save(m);
     }
 
-    public List<Medicine> getAllMedicine() {
-        return medicineRepository.findAll();
+    public ApiResponse getAllMedicine() {
+        ApiResponse apiResponse = new ApiResponse();
+        try {
+            List<Medicine> medicines = medicineRepository.findAll();
+
+            Map<String, Object> map = new HashMap<>();
+            map.put("medicines", medicines);
+
+            apiResponse.setData(map);
+            apiResponse.setSuccessful(true);
+            apiResponse.setMessage("All medicines found");
+            return apiResponse;
+        } catch (Exception e) {
+            apiResponse.setMessage(e.getMessage());
+            return apiResponse;
+        }
     }
 
     public void deleteMedicineById(long id) {
@@ -79,7 +104,11 @@ public class MedicineService {
             Files.createDirectories(uploadPath);
         }
 
-        String filename = m.getName() + "_" + UUID.randomUUID().toString();
+        String originalFilename = file.getOriginalFilename();
+        String fileExtension = originalFilename != null ?
+                originalFilename.substring(originalFilename.lastIndexOf('.')) : "";
+
+        String filename = m.getName() + "_" + UUID.randomUUID() + fileExtension;
         Path filePath = uploadPath.resolve(filename);
 
         Files.copy(file.getInputStream(), filePath);

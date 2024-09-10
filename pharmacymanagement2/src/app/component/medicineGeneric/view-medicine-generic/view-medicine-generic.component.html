@@ -14,9 +14,7 @@
                 <td>{{category.id}}</td>
                 <td>{{category.name}}</td>
                 <td>
-                    <button>
-                        Update
-                    </button>
+                    <button class="btn btn-warning" (click)="updateMedicineGeneric(category.id)">Edit</button>
                 </td>
                 <td>
                     <button class="btn btn-danger" (click)="deleteMedicineGeneric(category.id)">Delete</button>

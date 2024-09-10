@@ -45,4 +45,13 @@ public class MedicineGenericRestController {
     }
 
 
+    @GetMapping("/{id}")
+    public  MedicineGeneric getMedicineById(@PathVariable long id) {
+
+        return  medicineCategoryService.findByid(id);
+
+    }
+
+
+
 }

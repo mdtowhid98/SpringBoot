@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MedicineService } from '../../../service/medicine.service';
 import { MedicineGenericService } from '../../../service/medicine-generic.service';
 import { Router } from '@angular/router';
+import { MedicineModel } from '../../../model/medicine.model';
 
 @Component({
   selector: 'app-view-medicine',
@@ -12,7 +13,7 @@ export class ViewMedicineComponent implements OnInit{
 
 
   generics: any;
-  medicine: any;
+  medicines: MedicineModel[] = [];
   
 
   constructor(
@@ -34,13 +35,16 @@ export class ViewMedicineComponent implements OnInit{
     this.generics = this.genericService.getAllMedicineGeneric();
     this.medicineService.getAllMedicine().subscribe({
 
-      next: res => {
-        this.medicine = res;
+      next: apiResponse => {
+        console.log(apiResponse)
+        if (apiResponse && apiResponse.successful) {
+          this.medicines = apiResponse.data['medicines'];
+        } else {
+          alert('No medicine found')
+        }
       },
-
       error: err => {
-        console.log(err)
-
+        alert(err.apiResponse?.message);
       }
 
     });

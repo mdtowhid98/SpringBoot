@@ -1,9 +1,12 @@
 package com.towhid.pharmacyManagement.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -19,7 +22,8 @@ public class MedicineGeneric {
 
     private String name;
 
-//    @OneToMany(mappedBy = "category")
-//    private List<Medicine> medicines;
+    @JsonIgnore
+    @OneToMany(mappedBy = "generic", cascade = CascadeType.ALL)
+    private List<Medicine> medicines;
 
 }

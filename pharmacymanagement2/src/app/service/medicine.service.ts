@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { MedicineModel } from '../model/medicine.model';
+import { ApiResponse } from '../util/api.response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,8 @@ export class MedicineService {
   constructor(private httpClient: HttpClient) { }
 
 
-  getAllMedicine(): Observable<any> {
-    return this.httpClient.get(this.baseUrl);
+  getAllMedicine(): Observable<ApiResponse> {
+    return this.httpClient.get<ApiResponse>(this.baseUrl);
   }
 
   // createMedicine(medicine:MedicineModel):Observable<MedicineModel>{
@@ -27,7 +28,7 @@ export class MedicineService {
   
 
 
-  createMedicine(medicine: MedicineModel, image: File): Observable<MedicineModel> {
+  createMedicine(medicine: MedicineModel, image: File): Observable<ApiResponse> {
 
     const formData = new FormData();
 
@@ -36,7 +37,7 @@ export class MedicineService {
     // Append image file
     formData.append('image', image);
 
-    return this.httpClient.post<MedicineModel>(this.baseUrl + "save", formData);
+    return this.httpClient.post<ApiResponse>(this.baseUrl + "save", formData);
 
   }
 

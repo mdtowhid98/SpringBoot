@@ -69,13 +69,15 @@ export class CreateMedicineComponent {
       };
 
       this.medicineService.createMedicine(medicine, this.image).subscribe({
-        next: res => {
-          console.log('Medicine added successfully', res);
-          this.router.navigate(['/viewmedicine']);
-          console.log('Response:', res);
+        next: apiResponse => {
+          if (apiResponse && apiResponse.successful) {
+            console.log(apiResponse.message);
+            this.formGroup.reset();
+            this.router.navigate(['/viewmedicine']);
+          }
         },
         error: err => {
-          console.error('Error adding medicine:', err);
+          console.error('Error adding medicine:', err.apiResponse?.message);
         }
       });
     } else {

@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, catchError } from 'rxjs';
 import { MedicineGenericModel } from '../model/medicineGeneric.model';
+import { error } from 'console';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,21 @@ export class MedicineGenericService {
   deleteMedicineGeneric(id: number): Observable<void> {
     return this.httpClient.delete<void>(`${this.baseUrl}delete/${id}`);
   }
+
+  // updateMedicineGeneric(id: number, generic: MedicineGenericModel): Observable<any> {
+  //   return this.httpClient.put(`${this.baseUrl}update/${id}`, generic);
+  // }
+  updateMedicineGeneric(id: number, generic: MedicineGenericModel): Observable<any> {
+    return this.httpClient.put(this.baseUrl+id, generic); // Corrected with comma
+  }
+  
+
+  
+  getById(id:number):Observable<any>{
+
+    return this.httpClient.get(this.baseUrl+id);
+  }
+
 
 
 }

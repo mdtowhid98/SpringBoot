@@ -8,14 +8,14 @@ import { Router } from '@angular/router';
   templateUrl: './view-medicine-generic.component.html',
   styleUrl: './view-medicine-generic.component.css'
 })
-export class ViewMedicineGenericComponent implements OnInit{
+export class ViewMedicineGenericComponent implements OnInit {
 
   generics: MedicineGenericModel[] = [];
 
   constructor(
     private genericService: MedicineGenericService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loadGenerics();
@@ -46,6 +46,11 @@ export class ViewMedicineGenericComponent implements OnInit{
         }
       });
     }
+  }
+
+  updateMedicineGeneric(id: number) {
+
+    this.router.navigate(['/updategeneric', id]);
   }
 
 

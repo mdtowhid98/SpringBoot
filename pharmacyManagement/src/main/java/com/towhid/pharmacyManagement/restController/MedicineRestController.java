@@ -3,6 +3,7 @@ package com.towhid.pharmacyManagement.restController;
 import com.towhid.pharmacyManagement.entity.Medicine;
 import com.towhid.pharmacyManagement.repository.MedicineRepository;
 import com.towhid.pharmacyManagement.service.MedicineService;
+import com.towhid.pharmacyManagement.util.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,18 +23,17 @@ public class MedicineRestController {
     private MedicineService medicineService;
 
     @GetMapping("/")
-    public List<Medicine> getAllMedicine() {
+    public ApiResponse getAllMedicine() {
         return medicineService.getAllMedicine();
     }
 
     @PostMapping("/save")
-    public ResponseEntity<String> saveMedicin(
+    public ApiResponse saveMedicin(
             @RequestPart(value = "medicine") Medicine medicine,
             @RequestParam(value = "image", required = true) MultipartFile file
     ) throws IOException {
-        medicineService.saveMedicine(medicine, file);
-
-        return new ResponseEntity<>("Medicine added succesfully with image", HttpStatus.OK);
+        ApiResponse apiResponse = medicineService.saveMedicine(medicine, file);
+        return apiResponse;
 
     }
 
