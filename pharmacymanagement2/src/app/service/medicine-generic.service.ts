@@ -30,7 +30,7 @@ export class MedicineGenericService {
   //   return this.httpClient.put(`${this.baseUrl}update/${id}`, generic);
   // }
   updateMedicineGeneric(id: number, generic: MedicineGenericModel): Observable<any> {
-    return this.httpClient.put(this.baseUrl+id, generic); // Corrected with comma
+    return this.httpClient.put(this.baseUrl+"update/"+id, generic); // Corrected with comma
   }
   
 

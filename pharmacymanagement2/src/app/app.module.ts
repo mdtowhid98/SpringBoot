@@ -12,6 +12,8 @@ import { ViewMedicineComponent } from './component/medicine/view-medicine/view-m
 import { ViewPharmacistComponent } from './component/pharmacist/view-pharmacist/view-pharmacist.component';
 import { CreatePharmacistComponent } from './component/pharmacist/create-pharmacist/create-pharmacist.component';
 import { UpdateMedicineGenericComponent } from './component/medicineGeneric/update-medicine-generic/update-medicine-generic.component';
+import { ViewCustomerComponent } from './component/customer/view-customer/view-customer.component';
+import { CreateCustomerComponent } from './component/customer/create-customer/create-customer.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { UpdateMedicineGenericComponent } from './component/medicineGeneric/upda
     ViewMedicineComponent,
     ViewPharmacistComponent,
     CreatePharmacistComponent,
-    UpdateMedicineGenericComponent
+    UpdateMedicineGenericComponent,
+    ViewCustomerComponent,
+    CreateCustomerComponent
   ],
   imports: [
     BrowserModule,
