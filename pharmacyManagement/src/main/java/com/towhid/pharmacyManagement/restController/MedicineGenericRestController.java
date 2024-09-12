@@ -40,13 +40,14 @@ public class MedicineGenericRestController {
     }
 
     @PutMapping("/update/{id}")
-    public void updateMedicineCtegory(@RequestBody MedicineGeneric mc) {
-        medicineCategoryService.saveMedicineCategory(mc);
+    public ResponseEntity <MedicineGeneric>pdateMedicineCtegory(@RequestBody MedicineGeneric mc,@PathVariable long id) {
+       MedicineGeneric generic= medicineCategoryService.updateMedicineCategory(mc,id);
+      return new ResponseEntity<>(generic, HttpStatus.OK);
     }
 
 
     @GetMapping("/{id}")
-    public  MedicineGeneric getMedicineById(@PathVariable long id) {
+    public  MedicineGeneric getMedicineById(@PathVariable("id") long id) {
 
         return  medicineCategoryService.findByid(id);
 

@@ -38,9 +38,9 @@ public class MedicineGenericService {
 //        return facultyRepository.findByName(name);
 //    };
 
-    public void updateMedicineCategory(MedicineGeneric mc, long id) {
+    public MedicineGeneric updateMedicineCategory(MedicineGeneric mc, long id) {
 
-        medicineCategoryRepository.save(mc);
+       return medicineCategoryRepository.save(mc);
     }
 
 
