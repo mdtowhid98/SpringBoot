@@ -97,6 +97,12 @@ public class MedicineService {
     }
 
 
+
+    public List<Medicine>findMedicineByGenericName(String genericName){
+        return medicineRepository.finndMedicineByGenericName(genericName);
+    }
+
+
     public String saveImage(MultipartFile file, Medicine m) throws IOException {
         Path uploadPath = Paths.get(uploadDir + "/medicine");
 

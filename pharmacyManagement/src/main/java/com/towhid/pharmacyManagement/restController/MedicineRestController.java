@@ -37,6 +37,12 @@ public class MedicineRestController {
 
     }
 
+    @GetMapping("/m/searchmedicine")
+    public ResponseEntity<List<Medicine>>findMedicineByGenericName(@RequestParam(value ="genericName" )String genericName){
+        List<Medicine> products=medicineService.findMedicineByGenericName(genericName);
+        return ResponseEntity.ok(products);
+    }
+
     @DeleteMapping("/delete/{id}")
     public void deleteMedicine(@PathVariable long id) {
         medicineService.deleteMedicineById(id);
