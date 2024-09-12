@@ -1,11 +1,13 @@
 package com.towhid.pharmacyManagement.service;
 
 import com.towhid.pharmacyManagement.entity.AuthenticationResponse;
+import com.towhid.pharmacyManagement.entity.Role;
 import com.towhid.pharmacyManagement.entity.Token;
 import com.towhid.pharmacyManagement.entity.User;
 import com.towhid.pharmacyManagement.jwt.JwtService;
 import com.towhid.pharmacyManagement.repository.TokenRepository;
 import com.towhid.pharmacyManagement.repository.UserRepository;
+import jakarta.mail.MessagingException;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,6 +25,7 @@ public class AuthService {
     private final JwtService jwtService;
     private final TokenRepository tokenRepository;
     private final AuthenticationManager authenticationManager;
+    private final EmailService emailService;
 
     private void saveUserToken(String jwt, User user) {
         Token token = new Token();
@@ -50,29 +53,82 @@ public class AuthService {
         tokenRepository.saveAll(validTokens);
     }
 
-    public AuthenticationResponse register(User request) {
+    public AuthenticationResponse register(User user) {
 
         // Check if the user already exists
-        if(userRepository.findByEmail(request.getUsername()).isPresent()) {
+        if(userRepository.findByEmail(user.getUsername()).isPresent()) {
             return new AuthenticationResponse(null, "User already exists");
         }
 
         // Create a new user entity and save it to the database
 //        User user = new User();
-//        user.setName(request.getName());
-//        user.setEmail(request.getEmail());
-        request.setPassword(passwordEncoder.encode(request.getPassword()));
-//        user.setRole(request.getRole());
-//        user.setDob(request.getDob());
-//        user.setCell(request);
-//        user = userRepository.save(user);
-        userRepository.save(request);
+//        user.setName(user.getName());
+//        user.setEmail(user.getEmail());
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+//
+        user.setRole(Role.valueOf("USER"));
+//        user.setLock(true);
+        user.setActive(false);
+        userRepository.save(user);
 
         // Generate JWT token for the newly registered user
-        String jwt = jwtService.generateToken(request);
+        String jwt = jwtService.generateToken(user);
 
         // Save the token to the token repository
-        saveUserToken(jwt, request);
+        saveUserToken(jwt, user);
+        sendActivationEmail(user);
+
+        return new AuthenticationResponse(jwt, "User registration was successful");
+    }
+
+    public AuthenticationResponse registerAdmin(User user) {
+
+        // Check if the user already exists
+        if (userRepository.findByEmail(user.getUsername()).isPresent()) {
+            return new AuthenticationResponse(null, "User already exists");
+        }
+
+        // Create a new user entity and save it to the database
+
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRole(Role.valueOf("ADMIN"));
+//        user.setLock(true);
+        user.setActive(false);
+
+        userRepository.save(user);
+
+        // Generate JWT token for the newly registered user
+        String jwt = jwtService.generateToken(user);
+
+        // Save the token to the token repository
+        saveUserToken(jwt, user);
+        sendActivationEmail(user);
+
+        return new AuthenticationResponse(jwt, "User registration was successful");
+    }
+
+    public AuthenticationResponse registerPharmacist(User user) {
+
+        // Check if the user already exists
+        if (userRepository.findByEmail(user.getUsername()).isPresent()) {
+            return new AuthenticationResponse(null, "User already exists");
+        }
+
+        // Create a new user entity and save it to the database
+
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRole(Role.valueOf("PHARMACIST"));
+//        user.setLock(false);
+        user.setActive(false);
+
+        userRepository.save(user);
+
+        // Generate JWT token for the newly registered user
+        String jwt = jwtService.generateToken(user);
+
+        // Save the token to the token repository
+        saveUserToken(jwt, user);
+        sendActivationEmail(user);
 
         return new AuthenticationResponse(jwt, "User registration was successful");
     }
@@ -103,6 +159,47 @@ public class AuthService {
 
         return new AuthenticationResponse(jwt, "User login was successful");
     }
+
+
+    private void sendActivationEmail(User user) {
+        String activationLink = "http://localhost:8087/activate/" + user.getId();
+
+        String mailText = "<h3>Dear " + user.getName()
+                + ",</h3>"
+                + "<p>Please click on the following link to confirm your account:</p>"
+                + "<a href=\"" + activationLink + "\">Activate Account</a>"
+                + "<br><br>Regards,<br>Pharmacy";
+
+        String subject = "Confirm User Account";
+
+        try {
+
+            emailService.sendSimpleEmail(user.getEmail(), subject, mailText);
+
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+
+
+    }
+
+    // Activate user based on the token
+    public String activateUser(long id) {
+
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not Found with this ID"));
+
+        if (user != null) {
+
+            user.setActive(true);
+            //  user.setActivationToken(null); // Clear token after activation
+            userRepository.save(user);
+            return "User activated successfully!";
+        } else {
+            return "Invalid activation token!";
+        }
+    }
+
 
 
 

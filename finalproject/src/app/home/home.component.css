@@ -1,0 +1,166 @@
+/* Reset default browser margins and paddings */
+body, h2, h3, p, a {
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* General body styling */
+  body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f4f4; /* Light gray background for the whole page */
+    color: #333; /* Dark text color for readability */
+  }
+  
+  /* Homepage container styling */
+  .homepage {
+    position: relative;
+    background-image: url('https://i.postimg.cc/RZ8Qz1pF/240-F-163131613-n0-ZXu-Skx-VBs-Lu-Hl19-JV9we7-Eq3-C4g-Mn-K.jpg'); /* Background image */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  /* Overlay styling */
+  .overlay {
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent dark overlay */
+    width: 100%;
+    height: 100%;
+    padding: 40px 20px;
+  }
+  
+  /* Container styling for central content */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  /* Text center alignment for headings */
+  .text-center {
+    text-align: center;
+  }
+  
+  /* Styling for headings */
+  h2, h3 {
+    color: #fff; /* Light text color for headings */
+  }
+  
+  h2 {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  
+  h3 {
+    font-size: 24px;
+    font-weight: 400;
+  }
+  
+  /* Styling for rows */
+  .row {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  
+  /* Styling for images in the row */
+  .row img {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+  
+  /* Card styling */
+  .card {
+    border: none;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  /* Card body styling */
+  .card-body {
+    padding: 20px;
+  }
+  
+  /* Card icon styling */
+  .card-body fa-icon {
+    color: #007bff; /* Icon color */
+  }
+  
+  /* Card title styling */
+  .card-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 15px 0 10px;
+  }
+  
+  /* Card text styling */
+  .card-text {
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+  
+  /* Button styling */
+  .btn-light {
+    color: #333;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 14px;
+  }
+  
+  .btn-light:hover {
+    background-color: #e2e6ea;
+    border-color: #dae0e5;
+  }
+  
+  /* Custom card button styles */
+  .btn-green {
+    background-color: #28a745;
+    color: #fff;
+  }
+  
+  .btn-blue {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .btn-purple {
+    background-color: #6f42c1;
+    color: #fff;
+  }
+  
+  .btn-orange {
+    background-color: #fd7e14;
+    color: #fff;
+  }
+  
+  /* Hover effect for cards */
+  .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .row {
+      flex-direction: column;
+    }
+  
+    .col-md-3 {
+      margin-bottom: 20px;
+    }
+  }
+  

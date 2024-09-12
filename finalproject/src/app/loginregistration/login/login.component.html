@@ -1,0 +1,22 @@
+<div class="container my-6 bg-form-container">
+  <div class="row">
+    <div class="col-md-6">
+      <img src="https://i.postimg.cc/mDYncm8F/download.png" alt="" width="350" height="">
+    </div>
+    <div class="col-md-6">
+      <h2 class="text-center">Login</h2>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label for="email" class="form-label"><fa-icon [icon]="faEnvelope"></fa-icon> Email</label>
+          <input type="email" id="email" formControlName="email" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label"><fa-icon [icon]="faLock"></fa-icon> Password</label>
+          <input type="password" id="password" formControlName="password" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary"><fa-icon [icon]="faSignInAlt"></fa-icon> Login</button>
+      </form>
+      <a href="/reg"><fa-icon [icon]="faSignInAlt"></fa-icon> Register</a>
+    </div>
+  </div>
+</div>
