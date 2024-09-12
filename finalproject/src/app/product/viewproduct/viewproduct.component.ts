@@ -5,6 +5,8 @@ import { ProductModule } from '../../module/product/product.module';
 import { Router } from '@angular/router';
 import { UserModule } from '../../module/user/user.module';
 import { AuthService } from '../../service/auth.service';
+import { CategoryService } from '../../service/category.service';
+import { CategoryModule } from '../../module/category/category.module';
 
 interface ProductWithCategory extends ProductModule {
   categoryname: string;
@@ -16,97 +18,88 @@ interface ProductWithCategory extends ProductModule {
   styleUrls: ['./viewproduct.component.css']
 })
 export class ViewproductComponent implements OnInit {
-  productsByCategory: { [key: string]: ProductWithCategory[] } = {};
-  filteredProducts: ProductWithCategory[] = [];
-  dropdownVisible = false;
+
 
   userRole: string | null = '';
   currentUser: UserModule | null = null;
+  categories: CategoryModule[] = [];
+  products: ProductModule[] = [];
+  selectedCategory: string = '';
 
   faEdit = faEdit;
   faTrash = faTrash;
 
   constructor(
     private productService: ProductService,
-    private authService:AuthService,
-    private router: Router
-  ) {}
+    private authService: AuthService,
+    private router: Router,
+    private categoryService: CategoryService
+  ) { }
 
   ngOnInit(): void {
-    this.loadProducts();
+    this.getAllCategory();
+    this.getAllProducts(); // Ensure products are loaded on initialization
 
-    this.authService.currentUser$.subscribe(user =>{
+    this.authService.currentUser$.subscribe(user => {
       this.currentUser = user;
       this.userRole = user?.role || null;
     });
   }
 
-  toggleDropdown(): void {
-    this.dropdownVisible = !this.dropdownVisible;
-  }
+  // Method to filter or perform action based on selected category
+  filterByCategory(event: Event) {
+    const target = event.target as HTMLSelectElement; // Cast event.target to HTMLSelectElement
+    const selectedValue = target.value; // Access the value property
+    this.selectedCategory = selectedValue; // Set the selected category
 
-  filterByCategory(event: Event): void {
-    const target = event.target as HTMLSelectElement;
-    const selectedCategory = target.value;
-
-    if (selectedCategory) {
-      this.filteredProducts = this.productsByCategory[selectedCategory] || [];
+    // Call appropriate method based on category selection
+    if (this.selectedCategory) {
+      this.loadProductsByCategory(this.selectedCategory); // Load products for selected category
     } else {
-      this.filteredProducts = this.getAllProducts();
+      this.getAllProducts(); // Load all products if no category is selected
     }
   }
 
-  loadProducts(): void {
-    this.productService.getProduct().subscribe((data: ProductModule[]) => {
-      // console.log('Received products data:', data); // Log the data for inspection
-      this.groupProductsByCategory(data);
-      this.filteredProducts = this.getAllProducts(); // Initially display all products
-    });
-  }
-  
-
-  groupProductsByCategory(products: ProductModule[]): void {
-    this.productsByCategory = {};
-  
-    products.forEach(product => {
-      const categories = Array.isArray(product.categories) ? product.categories : [product.categories];
-  
-      categories.forEach(category => {
-        if (category && category.categoryname) { // Check if category and categoryname exist
-          if (!this.productsByCategory[category.categoryname]) {
-            this.productsByCategory[category.categoryname] = [];
-          }
-          const productWithCategory: ProductWithCategory = { ...product, categoryname: category.categoryname };
-          this.productsByCategory[category.categoryname].push(productWithCategory);
-        } else {
-          // console.warn('Category or categoryname is undefined for product:', product);
-        }
-      });
-    });
-  }
-  
-
-  getAllProducts(): ProductWithCategory[] {
-    return Object.values(this.productsByCategory).flat();
-  }
-
-  getCategoryKeys(): string[] {
-    return Object.keys(this.productsByCategory);
-  }
-
-  deleteProduct(id: string): void {
-    this.productService.deleteProduct(id).subscribe({
-      next: () => {
-        this.loadProducts(); // Reload products after deletion
-        this.router.navigate(['/viewproduct']);
+  loadProductsByCategory(categoryName: string) {
+    this.productService.findProductByCategoryName(categoryName).subscribe(
+      res => {
+        this.products = res;
+        console.log(this.products);
       },
-      error: error => {
-        console.error(error);
+      err => {
+        console.log(err);
       }
-    });
+    );
+  }
+
+  getAllProducts() {
+    this.productService.getAllProductForSales().subscribe(
+      res => {
+        this.products = res;
+        console.log(this.products);
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
+
+  getAllCategory() {
+    this.categoryService.getAllCategory().subscribe(
+      res => {
+        this.categories = res;
+        console.log(this.categories);
+      },
+      err => {
+        console.log(err);
+      }
+    );
   }
 
   updateProduct(id: string): void {
     this.router.navigate(['updateProduct', id]);
   }
+
+
+
 }

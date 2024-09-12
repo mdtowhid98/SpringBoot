@@ -1,9 +1,12 @@
 package com.towhid.practicepharmacy.restController;
 
 import com.towhid.practicepharmacy.entity.Category;
+import com.towhid.practicepharmacy.entity.Product;
 import com.towhid.practicepharmacy.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.condition.ProducesRequestCondition;
 
 import java.util.List;
 
@@ -40,6 +43,7 @@ public class CategoryRestController {
     public void updateCategory(@RequestBody Category f) {
         categoryService.saveCategory(f);
     }
+
 
 
 

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { ProductModule } from '../module/product/product.module';
@@ -9,29 +9,35 @@ import { CategoryModule } from '../module/category/category.module';
 })
 export class ProductService {
 
-  baseUrl: string = "localhost:8087/api/product/";
+  private baseUrl: string = 'http://localhost:8087/api/product/';
 
   categoriesUrl: string = "http://localhost:8087/api/category/"; 
 
   constructor(private httpClient: HttpClient) { }
 
-  getProduct(): Observable<ProductModule[]> {
-    return this.httpClient.get<ProductModule[]>(this.baseUrl).pipe(
-      map(products => 
-        products.map(product => ({
-          ...product,
-          category: Array.isArray(product.categories) ? product.categories : [product.categories]
-        }))
-      )
-    );
+  // getProduct(): Observable<ProductModule[]> {
+  //   return this.httpClient.get<ProductModule[]>(this.baseUrl+"h/searchproduct").pipe(
+  //     map(products => 
+  //       products.map(product => ({
+  //         ...product,
+  //         category: Array.isArray(product.categories) ? product.categories : [product.categories]
+  //       }))
+  //     )
+  //   );
+  // }
+
+
+  findProductByCategoryName(categoryName: string): Observable<ProductModule[]> {
+    const params = new HttpParams().set('categoryName', categoryName);
+    // Correctly append the endpoint to baseUrl
+    return this.httpClient.get<ProductModule[]>(`${this.baseUrl}h/searchproduct`, { params });
   }
+
 
   getAllProductForSales():Observable<ProductModule[]>{
 
-    return this.httpClient.get<ProductModule[]>(this.baseUrl)
-    .pipe(
-      catchError(this.handleError)
-    )
+    return this.httpClient.get<ProductModule[]>(this.baseUrl);
+   
   
   }
  
@@ -67,9 +73,9 @@ export class ProductService {
     return this.httpClient.get(this.baseUrl + "/" + id);
   }
 
- getCategories(): Observable<CategoryModule[]> {
-  return this.httpClient.get<CategoryModule[]>(this.categoriesUrl);
-}
+//  getCategories(): Observable<CategoryModule[]> {
+//   return this.httpClient.get<CategoryModule[]>(this.categoriesUrl);
+// }
   
   
   }
