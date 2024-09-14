@@ -14,7 +14,7 @@ import { ProductModule } from '../module/product/product.module';
 })
 export class SalesService {
 
-  baseUrl: string = "http://localhost:3000/sales/";
+  baseUrl: string = "http://localhost:8087/api/sales/";
 
   constructor(private httpClient: HttpClient) { }
 
@@ -39,7 +39,7 @@ export class SalesService {
 
   createSales(sales: SalesModule): Observable<SalesModule> {
 
-    return this.httpClient.post<SalesModule>(this.baseUrl, sales);
+    return this.httpClient.post<SalesModule>(this.baseUrl+"save", sales);
   }
 
   deleteSales(id: string): Observable<any> {

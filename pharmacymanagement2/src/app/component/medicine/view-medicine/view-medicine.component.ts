@@ -52,6 +52,26 @@ export class ViewMedicineComponent implements OnInit{
 
   }
 
+  // Delete method
+  deleteMedicine(id: number) {
+    if (confirm('Are you sure you want to delete this generic?')) {
+      this.medicineService.deleteMedicine(id).subscribe({
+        next: () => {
+          // Refresh the generics list after successful deletion
+          this.loadMedicine();
+        },
+        error: (error) => {
+          console.log('Error deleting generic', error);
+        }
+      });
+    }
+  }
+
+  updateMedicine(id: number) {
+    this.router.navigate(['/updatemedicine',id]);
+
+  }
+
  
 
 

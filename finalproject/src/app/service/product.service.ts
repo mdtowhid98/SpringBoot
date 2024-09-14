@@ -11,7 +11,7 @@ export class ProductService {
 
   private baseUrl: string = 'http://localhost:8087/api/product/';
 
-  categoriesUrl: string = "http://localhost:8087/api/category/"; 
+  // categoriesUrl: string = "http://localhost:8087/api/category/"; 
 
   constructor(private httpClient: HttpClient) { }
 
@@ -47,11 +47,20 @@ export class ProductService {
   
   }
   
-  createProduct(product: ProductModule): Observable<any> {
-  
-    return this.httpClient.post(this.baseUrl+"save", product);
+  createProduct(product: ProductModule, image: File): Observable<any> {
+
+    const formData = new FormData();
+
+    formData.append('product', new Blob([JSON.stringify(product)], { type: 'application/json' }));
+
+    // Append image file
+    formData.append('image', image);
+
+    return this.httpClient.post<any>(this.baseUrl + "save", formData);
+
   }
-  
+
+
   
   
   updateProducts(product: ProductModule): Observable<ProductModule> {

@@ -1,0 +1,58 @@
+<div class="container mt-5">
+    <h2 class="text-center mb-4"><i class="fas fa-edit"></i> Update Medicine</h2>
+    <form (ngSubmit)="updateMedicine()">
+        
+        <img [src]="'http://localhost:8087/images/medicine/' + medicine.image" class="card-img-top my-1" alt="{{ medicine.name }}">
+
+        
+        <div class="mb-3">
+            <label for="name" class="form-label"><i class="fas fa-hotel"></i> Name</label>
+            <input type="text" class="form-control" id="name" name="name" [(ngModel)]="medicine.name" placeholder="Enter hotel name" required>
+        </div>
+
+   
+        <div class="mb-3">
+            <label for="manufacturer" class="form-label"><i class="fas fa-map-marker-alt"></i> Manufacture</label>
+            <input type="text" class="form-control" id="manufacturer" name="manufacturer" [(ngModel)]="medicine.manufacturer" placeholder="Enter address" required>
+        </div>
+
+       
+        <div class="mb-3">
+            <label for="price" class="form-label"><i class="fas fa-money-bill-alt"></i>  Price</label>
+            <input type="number" class="form-control" id="price" name="price" [(ngModel)]="medicine.price" placeholder="Enter max price" required>
+        </div>
+
+      
+        <div class="mb-3">
+            <label for="quantity" class="form-label"><i class="fas fa-money-bill-alt"></i>Quantity</label>
+            <input type="number" class="form-control" id="quantity" name="quantity" [(ngModel)]="medicine.quantity" placeholder="Enter min price" required>
+        </div>
+
+      
+        <div class="mb-3">
+            <label for="expiryDate" class="form-label"><i class="fas fa-star"></i> ExpiryDate</label>
+            <input type="date" class="form-control" id="expiryDate" name="expiryDate" [(ngModel)]="medicine.expiryDate" placeholder="Enter rating" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="manufacturerDate" class="form-label"><i class="fas fa-star"></i> ManufacturerDate</label>
+            <input type="date" class="form-control" id="manufacturerDate" name="manufacturerDate" [(ngModel)]="medicine.manufacturerDate" placeholder="Enter rating" required>
+        </div>
+
+       
+        <div class="mb-3">
+            <label for="generic" class="form-label"><i class="fas fa-map-marker-alt"></i> Generic</label>
+            <select class="form-select" id="generic" [(ngModel)]="medicine.generic" name="generic" required>
+                <option *ngFor="let loc of generics" [ngValue]="loc">{{ loc.name }}</option>
+            </select>
+        </div>
+
+     
+        <div class="mb-3">
+            <label for="image" class="form-label"><i class="fas fa-image"></i> Image</label>
+            <input type="file" class="form-control" id="image" (change)="onImageSelected($event)">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update Medicine</button>
+    </form>
+</div>

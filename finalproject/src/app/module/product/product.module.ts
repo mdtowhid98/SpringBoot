@@ -17,7 +17,7 @@ export class ProductModule {
   stock!: number
   unitprice!:number
   quantity!:number
-  categories!:CategoryModule[] 
+  category!:CategoryModule[] 
     
   
  }

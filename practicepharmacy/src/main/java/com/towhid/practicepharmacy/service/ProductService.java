@@ -84,7 +84,7 @@ public class ProductService {
     }
 
     public String saveImage(MultipartFile file, Product p) throws IOException {
-        Path uploadPath = Paths.get(uploadDir + "/hotel");
+        Path uploadPath = Paths.get(uploadDir + "/product");
 
         if (!Files.exists(uploadPath)) {
             Files.createDirectories(uploadPath);

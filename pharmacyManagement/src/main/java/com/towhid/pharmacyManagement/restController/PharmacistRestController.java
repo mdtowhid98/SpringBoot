@@ -36,8 +36,17 @@ public class PharmacistRestController {
     }
 
     @PutMapping("/update/{id}")
-    public void updatePharmacist(@RequestBody Pharmacist p) {
-        pharmacistService.savePharmacist(p);
+    public ResponseEntity <Pharmacist>updatePharmacist(@RequestBody Pharmacist p,@PathVariable long id) {
+        Pharmacist pharmacist= pharmacistService.updatePharmacist(p,id);
+        return new ResponseEntity<>(pharmacist, HttpStatus.OK);
     }
+
+    @GetMapping("/{id}")
+    public  Pharmacist getPharmacistById(@PathVariable("id") long id) {
+
+        return  pharmacistService.findByid(id);
+
+    }
+
 
 }

@@ -1,0 +1,37 @@
+<div class="container">
+    <h2>Sales Orders</h2>
+  
+    <!-- If no sales orders, show message -->
+    <div *ngIf="salesOrders.length === 0">
+      <p>No sales orders available.</p>
+    </div>
+  
+    <!-- Sales Orders Table -->
+    <table *ngIf="salesOrders.length > 0" class="table table-striped">
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>Customer</th>
+          <th>Pharmacist</th>
+          <th>Total Price</th>
+          <th>Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of salesOrders">
+          <td>{{ order.id }}</td>
+          <td>{{ order.customer.name}}</td>  <!-- Replace with the appropriate field names -->
+          <td>{{ order.pharmacist.name }}</td> <!-- Replace with the appropriate field names -->
+          <td>{{ order.totalAmount }}</td>
+          <td>{{ order.orderDate | date:'short' }}</td>
+          <td>
+            <!-- Actions for viewing, editing, or deleting the order -->
+            <!-- <button (click)="editOrder(order.id)" class="btn btn-primary">Edit</button>
+            <button (click)="deleteOrder(order.id)" class="btn btn-danger">Delete</button> -->
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

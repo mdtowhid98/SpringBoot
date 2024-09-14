@@ -25,10 +25,17 @@ public class Medicine {
     private Date expiryDate;
     private Date manufacturerDate;
     private String image;
+    private double stock;
+
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "categoryId")
     private MedicineGeneric generic;
+
+
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "salesMedicineId")
+//    private SalesMedicine salesMedicine;
 
 
 }

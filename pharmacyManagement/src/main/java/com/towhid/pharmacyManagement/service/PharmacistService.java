@@ -17,18 +17,22 @@ public class PharmacistService {
 
 
     public void savePharmacist(Pharmacist p) {
+
         pharmacistRepository.save(p);
     }
 
     public List<Pharmacist> getAllPharmacist() {
+
         return pharmacistRepository.findAll();
     }
 
     public void deletePharmacistById(long id) {
+
         pharmacistRepository.deleteById(id);
     }
 
     public Pharmacist findByid(long id) {
+
         return pharmacistRepository.findById(id).get();
     }
 
@@ -36,8 +40,9 @@ public class PharmacistService {
 //        return facultyRepository.findByName(name);
 //    };
 
-    public void updatePharmacist(Pharmacist p, long id) {
-        pharmacistRepository.save(p);
+    public Pharmacist updatePharmacist(Pharmacist p, long id) {
+
+        return pharmacistRepository.save(p);
     }
 
 }

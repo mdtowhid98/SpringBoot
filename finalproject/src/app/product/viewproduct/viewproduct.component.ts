@@ -96,6 +96,18 @@ export class ViewproductComponent implements OnInit {
     );
   }
 
+  deleteProduct(id: string): void {
+    this.productService.deleteProduct(id).subscribe({
+      next: () => {
+        this.getAllProducts(); // Reload products after deletion
+        this.router.navigate(['/viewproduct']);
+      },
+      error: error => {
+        console.error(error);
+      }
+    });
+  }
+
   updateProduct(id: string): void {
     this.router.navigate(['updateProduct', id]);
   }

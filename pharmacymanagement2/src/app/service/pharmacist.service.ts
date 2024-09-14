@@ -19,4 +19,20 @@ export class PharmacistService {
 
     return this.httpClient.post(this.baseUrl + "save", pharmacist);
   }
+
+  deletePharmacist(id: number): Observable<void> {
+    return this.httpClient.delete<void>(`${this.baseUrl}delete/${id}`);
+  }
+
+  
+  updatePharmacist(id: number, pharmacist: PharmacistModel): Observable<any> {
+    return this.httpClient.put<any>(this.baseUrl + "update/" + id, pharmacist); 
+  }
+
+
+
+  getById(id: number): Observable<any> {
+
+    return this.httpClient.get(this.baseUrl + id);
+  }
 }

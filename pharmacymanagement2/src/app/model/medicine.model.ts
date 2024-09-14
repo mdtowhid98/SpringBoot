@@ -9,6 +9,7 @@ export class MedicineModel{
     quantity!:number;
     expiryDate!:Date;
     manufacturerDate!:Date;
+    stock!:number;
     image!:string;
     generic!:MedicineGenericModel;
 

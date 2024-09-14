@@ -37,6 +37,7 @@ export class CreateMedicineComponent {
       quantity: [''],
       expiryDate: [''],
       manufacturerDate: [''],
+      stock: [''],
       image: [''],
       generic: [null]
     });

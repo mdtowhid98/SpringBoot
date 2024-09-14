@@ -25,7 +25,7 @@ export class MedicineService {
   // }
 
 
-  
+ 
 
 
   createMedicine(medicine: MedicineModel, image: File): Observable<ApiResponse> {
@@ -40,7 +40,27 @@ export class MedicineService {
     return this.httpClient.post<ApiResponse>(this.baseUrl + "save", formData);
 
   }
+  deleteMedicine(id: number): Observable<void> {
+    return this.httpClient.delete<void>(`${this.baseUrl}delete/${id}`);
+  }
 
- 
+  updateMedicine(id: number, medicine: MedicineModel, image?: File): Observable<any> {
+    const formData = new FormData();
+
+   
+    formData.append('hotel', new Blob([JSON.stringify(medicine)], { type: 'application/json' }));
+
+
+    if (image) {
+        formData.append('image', image);
+    }
+
+    return this.httpClient.put(this.baseUrl + 'updatemedicine/' + id, formData);
+}
+
+getMedicineById(medicineId: number): Observable<any> {
+  return this.httpClient.get<any>(this.baseUrl + medicineId);
+}
+
 
 }

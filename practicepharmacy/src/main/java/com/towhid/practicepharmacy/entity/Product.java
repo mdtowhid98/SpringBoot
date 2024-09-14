@@ -26,10 +26,15 @@ public class Product {
     private int stock;
 
     private int quantity;
+    private int unitprice;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "categoryId")
     private Category category;
+
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "salesId")
+//    private Sales sales;
 
     
 }

@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 import { MedicineGenericModel } from '../model/medicineGeneric.model';
 import { error } from 'console';
 
@@ -26,18 +26,29 @@ export class MedicineGenericService {
     return this.httpClient.delete<void>(`${this.baseUrl}delete/${id}`);
   }
 
-  // updateMedicineGeneric(id: number, generic: MedicineGenericModel): Observable<any> {
-  //   return this.httpClient.put(`${this.baseUrl}update/${id}`, generic);
-  // }
+
   updateMedicineGeneric(id: number, generic: MedicineGenericModel): Observable<any> {
-    return this.httpClient.put<any>(this.baseUrl+"update/"+id, generic); // Corrected with comma
+    return this.httpClient.put<any>(this.baseUrl + "update/" + id, generic); // Corrected with comma
   }
-  
 
-  
-  getById(id:number):Observable<any>{
 
-    return this.httpClient.get(this.baseUrl+id);
+
+  getById(id: number): Observable<any> {
+
+    return this.httpClient.get(this.baseUrl + id);
+  }
+
+  getAllCategoryforMedicine(): Observable<MedicineGenericModel[]> {
+    return this.httpClient.get<MedicineGenericModel[]>(this.baseUrl)
+      .pipe(
+        catchError(this.handleError)
+      )
+
+  }
+
+  private handleError(error: any) {
+    console.error('An error occurred:', error);
+    return throwError(() => new Error('test'));
   }
 
 

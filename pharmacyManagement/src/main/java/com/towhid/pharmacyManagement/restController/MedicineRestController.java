@@ -38,13 +38,14 @@ public class MedicineRestController {
     }
 
     @GetMapping("/m/searchmedicine")
-    public ResponseEntity<List<Medicine>>findMedicineByGenericName(@RequestParam(value ="genericName" )String genericName){
-        List<Medicine> products=medicineService.findMedicineByGenericName(genericName);
+    public ResponseEntity<List<Medicine>> findMedicineByGenericName(@RequestParam(value = "genericName") String genericName) {
+        List<Medicine> products = medicineService.findMedicineByGenericName(genericName);
         return ResponseEntity.ok(products);
     }
 
     @DeleteMapping("/delete/{id}")
     public void deleteMedicine(@PathVariable long id) {
+
         medicineService.deleteMedicineById(id);
     }
 
@@ -52,6 +53,25 @@ public class MedicineRestController {
 //    public void updateMedicine(@RequestBody Medicine m) {
 //        medicineService.saveMedicine(m);
 //    }
+@GetMapping("/{id}")
+public ResponseEntity<Medicine> getMedicineById(@PathVariable int id) {
+    Medicine medicine = medicineService.getMedicineById(id);
+    return ResponseEntity.ok(medicine);
+}
+
+    @PutMapping("/updatemedicine/{id}")
+    public ResponseEntity<String> updateMedicine(
+            @PathVariable long id,
+            @RequestPart("medicine") Medicine medicine,
+            @RequestParam(value = "image", required = false) MultipartFile file
+    ) throws IOException {
+        try {
+            medicineService.updateMedicine(id, medicine, file);
+            return ResponseEntity.ok("Medicine updated successfully");
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Medicine not found with this ID");
+        }
+    }
 
 
 }

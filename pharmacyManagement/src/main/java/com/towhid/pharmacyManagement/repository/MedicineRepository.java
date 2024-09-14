@@ -15,4 +15,5 @@ public interface MedicineRepository extends JpaRepository<Medicine,Long> {
     @Query("SELECT m FROM Medicine m WHERE m.generic.name=:genericName ")
     List<Medicine> finndMedicineByGenericName(@Param("genericName") String genericName);
 
+
 }

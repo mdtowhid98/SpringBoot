@@ -14,6 +14,11 @@ import { CreatePharmacistComponent } from './component/pharmacist/create-pharmac
 import { UpdateMedicineGenericComponent } from './component/medicineGeneric/update-medicine-generic/update-medicine-generic.component';
 import { ViewCustomerComponent } from './component/customer/view-customer/view-customer.component';
 import { CreateCustomerComponent } from './component/customer/create-customer/create-customer.component';
+import { UpdatemedicineComponent } from './component/medicine/updatemedicine/updatemedicine.component';
+import { UpdatePharmacistComponent } from './component/pharmacist/update-pharmacist/update-pharmacist.component';
+import { ViewSalesOrderComponent } from './component/salesOrder/view-sales-order/view-sales-order.component';
+import { CreateSalesOrderComponent } from './component/salesOrder/create-sales-order/create-sales-order.component';
+
 
 @NgModule({
   declarations: [
@@ -26,7 +31,13 @@ import { CreateCustomerComponent } from './component/customer/create-customer/cr
     CreatePharmacistComponent,
     UpdateMedicineGenericComponent,
     ViewCustomerComponent,
-    CreateCustomerComponent
+    CreateCustomerComponent,
+    UpdatemedicineComponent,
+    UpdatePharmacistComponent,
+    ViewSalesOrderComponent,
+    CreateSalesOrderComponent,
+    
+  
   ],
   imports: [
     BrowserModule,

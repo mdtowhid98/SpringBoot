@@ -1,9 +1,12 @@
 package com.towhid.pharmacyManagement.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -20,6 +23,10 @@ public class Pharmacist {
     private String email;
     private String password;
     private String role;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "pharmacist", cascade = CascadeType.ALL)
+    private List<SalesOrder> salesOrders;
 
 
 }

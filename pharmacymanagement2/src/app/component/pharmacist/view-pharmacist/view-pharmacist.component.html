@@ -21,13 +21,13 @@
                 <td>{{ph.role}}</td>
                 <td>
                     <button>
-                        Update
+                        <button class="btn btn-warning" (click)="updatePharmavcist(ph.id)">Edit</button>
                     </button>
                 </td>
                 <td>
-                    <button>
-                        Delete
-                    </button>
+                   
+                        <button class="btn btn-danger" (click)="deletePharmacist(ph.id)">Delete</button>
+                    
                 </td>
             </tr>
         </tbody>

@@ -8,6 +8,7 @@ import com.towhid.pharmacyManagement.util.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -84,21 +85,57 @@ public class MedicineService {
         medicineRepository.deleteById(id);
     }
 
-    public Medicine findByid(long id) {
-        return medicineRepository.findById(id).get();
-    }
+//    public Medicine findByid(long id) {
+//
+//        return medicineRepository.findById(id).get();
+//    }
+    public Medicine getMedicineById(long id){
 
-//    public List<Faculty>findByName(String name){
-//        return facultyRepository.findByName(name);
-//    };
-
-    public void updateMedicine(Medicine m, long id) {
-        medicineRepository.save(m);
+        return medicineRepository.findById(id).orElse(new Medicine());
     }
 
 
+//    public void updateMedicine(Medicine m, long id) {
+//
+//        medicineRepository.save(m);
+//    }
 
-    public List<Medicine>findMedicineByGenericName(String genericName){
+
+    @Transactional
+    public void updateMedicine(long id, Medicine updatedMedicine, MultipartFile imageFile) throws IOException {
+        Medicine existingMedicine = medicineRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Medicine not found with this ID"));
+
+
+        existingMedicine.setName(updatedMedicine.getName());
+        existingMedicine.setManufacturer(updatedMedicine.getManufacturer());
+        existingMedicine.setPrice(updatedMedicine.getPrice());
+        existingMedicine.setQuantity(updatedMedicine.getQuantity());
+        existingMedicine.setExpiryDate(updatedMedicine.getExpiryDate());
+        existingMedicine.setManufacturerDate(updatedMedicine.getManufacturerDate());
+        existingMedicine.setStock(updatedMedicine.getStock());
+        existingMedicine.setImage(updatedMedicine.getImage());
+
+
+        MedicineGeneric generic = medicineCategoryRepository.findById(updatedMedicine.getGeneric().getId())
+                .orElseThrow(() -> new RuntimeException("Generic with this ID not found"));
+        existingMedicine.setGeneric(generic);
+
+        // Update image if provided
+        if (imageFile != null && !imageFile.isEmpty()) {
+            String imageFilename = saveImage(imageFile, existingMedicine);
+            existingMedicine.setImage(imageFilename);
+        }
+
+        medicineRepository.save(existingMedicine);
+    }
+
+    public void updateMedicine(Medicine medicine) {
+        medicineRepository.save(medicine);
+    }
+
+
+    public List<Medicine> findMedicineByGenericName(String genericName) {
         return medicineRepository.finndMedicineByGenericName(genericName);
     }
 
@@ -121,6 +158,12 @@ public class MedicineService {
 
 
         return filename;
+    }
+
+
+    public  Medicine findById(long id){
+        return   medicineRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("Medicine Not Found by this Id"));
     }
 
 

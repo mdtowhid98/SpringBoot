@@ -1,0 +1,52 @@
+<div class="container">
+    <h2>Create Sales Order</h2>
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+  
+      <!-- Customer Selection -->
+      <div class="form-group">
+        <label for="customer">Select Customer:</label>
+        <select id="customer" formControlName="customer" class="form-control">
+          <option value="" disabled selected>Select a customer</option>
+          <option *ngFor="let customer of customers" [value]="customer.id">{{ customer.name }}</option>
+        </select>
+        <div *ngIf="formGroup.controls['customer'].invalid && formGroup.controls['customer'].touched" class="text-danger">
+          Customer is required
+        </div>
+      </div>
+  
+      <!-- Pharmacist Selection -->
+      <div class="form-group">
+        <label for="pharmacist">Select Pharmacist:</label>
+        <select id="pharmacist" formControlName="pharmacist" class="form-control">
+          <option value="" disabled selected>Select a pharmacist</option>
+          <option *ngFor="let pharmacist of pharmacists" [value]="pharmacist.id">{{ pharmacist.name }}</option>
+        </select>
+        <div *ngIf="formGroup.controls['pharmacist'].invalid && formGroup.controls['pharmacist'].touched" class="text-danger">
+          Pharmacist is required
+        </div>
+      </div>
+  
+      <!-- Order Date -->
+      <div class="form-group">
+        <label for="orderDate">Order Date:</label>
+        <input type="date" id="orderDate" formControlName="orderDate" class="form-control">
+        <div *ngIf="formGroup.controls['orderDate'].invalid && formGroup.controls['orderDate'].touched" class="text-danger">
+          Order date is required
+        </div>
+      </div>
+  
+      <!-- Total Amount -->
+      <div class="form-group">
+        <label for="totalAmount">Total Amount:</label>
+        <input type="number" id="totalAmount" formControlName="totalAmount" class="form-control" placeholder="Enter total amount">
+        <div *ngIf="formGroup.controls['totalAmount'].invalid && formGroup.controls['totalAmount'].touched" class="text-danger">
+          Total amount is required
+        </div>
+      </div>
+  
+      <!-- Submit Button -->
+      <button type="submit" class="btn btn-primary" [disabled]="formGroup.invalid">Create Sales Order</button>
+  
+    </form>
+  </div>
+  

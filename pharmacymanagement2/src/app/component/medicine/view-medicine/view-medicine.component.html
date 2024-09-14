@@ -14,6 +14,7 @@
                 <p class="card-text">Quantity: {{ m.quantity}}</p>
                 <p class="card-text">Expiry Date: {{ m.expiryDate}}</p>
                 <p class="card-text">Expiry Date: {{ m.manufacturerDate}}</p>
+                <p class="card-text">Stock: {{ m.stock}}</p>
                 
 
 
@@ -22,7 +23,8 @@
 
                 
                 <!-- <button class="btn btn-primary btn-sm" (click)="viewRooms(h.id)">View</button> -->
-                <!-- <button class="btn btn-danger btn-sm">Delete</button> -->
+                <button class="btn btn-warning" (click)="updateMedicine(m.id)">Edit</button>
+                <button class="btn btn-danger" (click)="deleteMedicine(m.id)">Delete</button>
             </div>
         </div>
     
