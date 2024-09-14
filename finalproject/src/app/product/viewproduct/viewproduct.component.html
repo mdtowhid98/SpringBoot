@@ -14,7 +14,7 @@
     <img [src]="'http://localhost:8087/images/product/' + product.photo" class="card-img-top my-1"
       alt="{{ product.name }}">
     <h4>{{ product.name }}</h4>
-    <p *ngFor="let category of product.category">Category: {{ category.categoryname }}</p>
+    <p *ngFor="let category of product.categories">Category: {{ category.categoryname }}</p>
     <!-- Display each category name -->
     <!-- <img [src]="product.photo" alt="{{ product.name }}" /> -->
     <p>Unit Price: {{ product.unitprice | currency }}</p>

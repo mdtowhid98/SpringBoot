@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -21,13 +22,9 @@ public class Sales {
     private Date salesdate;
     private int totalprice;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "productId")
-    private Product product;
 
-//    @JsonIgnore
-//    @OneToMany(mappedBy ="product",cascade = CascadeType.ALL )
-//    private Product product;
+    @ManyToMany
+    private List<Product> product;
 
 
 }

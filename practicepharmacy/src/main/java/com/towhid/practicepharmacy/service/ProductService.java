@@ -4,6 +4,7 @@ import com.towhid.practicepharmacy.entity.Category;
 import com.towhid.practicepharmacy.entity.Product;
 import com.towhid.practicepharmacy.repository.CategoryRepository;
 import com.towhid.practicepharmacy.repository.ProductRepository;
+import com.towhid.practicepharmacy.util.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -33,21 +34,43 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public void saveProduct(Product product, MultipartFile imageFile) throws IOException {
+//    public void saveProduct(Product product, MultipartFile imageFile) throws IOException {
+//
+//        Category category = categoryRepository.findById(product.getCategory().getId())
+//                .orElseThrow(() -> new RuntimeException("Category with this id not found"));
+//
+//        if (imageFile != null && !imageFile.isEmpty()) {
+//            String imageFileName = saveImage(imageFile, product);
+//            product.setPhoto(imageFileName);
+//        }
+//
+//        productRepository.save(product);
+//    }
 
-        Category category = categoryRepository.findById(product.getCategory().getId())
-                .orElseThrow(() -> new RuntimeException("Category with this id not found"));
 
-        if (imageFile != null && !imageFile.isEmpty()) {
-            String imageFileName = saveImage(imageFile, product);
-            product.setPhoto(imageFileName);
+    public ApiResponse saveMedicine(Product m, MultipartFile imageFile) throws IOException {
+        ApiResponse apiResponse = new ApiResponse();
+        try {
+            Category category = categoryRepository.findById(m.getCategory().getId())
+                    .orElseThrow(() -> new RuntimeException("Category with this id not found"));
+
+            if (imageFile != null && !imageFile.isEmpty()) {
+                String imageFileName = saveImage(imageFile, m);
+                m.setPhoto(imageFileName);
+            }
+
+            productRepository.save(m);
+            apiResponse.setSuccessful(true);
+            apiResponse.setMessage("Product saved successfully");
+            return apiResponse;
+        } catch (Exception e) {
+            apiResponse.setMessage(e.getMessage());
+            return apiResponse;
         }
-
-        productRepository.save(product);
     }
 
-
     public void deleteProductById(int id) {
+
         productRepository.deleteById(id);
     }
 

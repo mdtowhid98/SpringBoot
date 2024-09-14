@@ -96,16 +96,18 @@ export class ViewproductComponent implements OnInit {
     );
   }
 
-  deleteProduct(id: string): void {
-    this.productService.deleteProduct(id).subscribe({
-      next: () => {
-        this.getAllProducts(); // Reload products after deletion
-        this.router.navigate(['/viewproduct']);
-      },
-      error: error => {
-        console.error(error);
-      }
-    });
+  deleteMedicine(id: string) {
+    if (confirm('Are you sure you want to delete this medicine?')) {
+      this.productService.deleteProduct(id).subscribe({
+        next: () => {
+          // Refresh the generics list after successful deletion
+          this.products;
+        },
+        error: (error) => {
+          console.log('Error deleting generic', error);
+        }
+      });
+    }
   }
 
   updateProduct(id: string): void {

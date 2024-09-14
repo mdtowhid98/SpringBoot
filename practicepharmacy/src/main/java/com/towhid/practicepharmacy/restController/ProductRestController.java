@@ -2,6 +2,7 @@ package com.towhid.practicepharmacy.restController;
 
 import com.towhid.practicepharmacy.entity.Product;
 import com.towhid.practicepharmacy.service.ProductService;
+import com.towhid.practicepharmacy.util.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,16 +21,29 @@ public class ProductRestController {
     private ProductService productService;
 
 
+//    @PostMapping("/save")
+//    public ResponseEntity<String> saveProduct(
+//            @RequestPart(value = "product") Product product,
+//            @RequestParam(value = "image", required = true) MultipartFile file
+//    ) throws IOException {
+//        productService.saveProduct(product, file);
+//
+//        return new ResponseEntity<>("Product added succesfully with image", HttpStatus.OK);
+//
+//    }
+
+
     @PostMapping("/save")
-    public ResponseEntity<String> saveProduct(
+    public ApiResponse saveProduct(
             @RequestPart(value = "product") Product product,
             @RequestParam(value = "image", required = true) MultipartFile file
     ) throws IOException {
-        productService.saveProduct(product, file);
-
-        return new ResponseEntity<>("Product added succesfully with image", HttpStatus.OK);
+        ApiResponse apiResponse = productService.saveMedicine(product, file);
+        return apiResponse;
 
     }
+
+
 
 
     @GetMapping("/")
@@ -53,6 +67,12 @@ public class ProductRestController {
         catch (RuntimeException e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public void deleteProduct(@PathVariable int id) {
+
+        productService.deleteProductById(id);
     }
 
 

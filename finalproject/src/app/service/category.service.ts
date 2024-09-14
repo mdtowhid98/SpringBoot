@@ -18,7 +18,6 @@ export class CategoryService {
  
 
   getAllCategoryForProduct():Observable<CategoryModule[]>{
-
     return this.httpClient.get<CategoryModule[]>(this.baseUrl)
     .pipe(
       catchError(this.handleError)

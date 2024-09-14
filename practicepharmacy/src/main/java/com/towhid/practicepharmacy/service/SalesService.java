@@ -25,13 +25,18 @@ public class SalesService {
         return salesRepository.findAll();
     }
 
-    public void saveSales(Sales s) {
-        Product product = productRepository.findById(s.getProduct().getId())
-                .orElseThrow(
-                        () -> new RuntimeException("Product not found " + s.getProduct().getId())
-                );
-        s.setProduct(product);
-        salesRepository.save(s);
+//    public void saveSales(Sales s) {
+//        Product product = productRepository.findById(s.getProduct().getId())
+//                .orElseThrow(
+//                        () -> new RuntimeException("Product not found " + s.getProduct().getId())
+//                );
+//        s.setProduct(product);
+//        salesRepository.save(s);
+//    }
+
+    public Sales saveSales(Sales sales) {
+        return salesRepository.save(sales);
     }
+
 
 }

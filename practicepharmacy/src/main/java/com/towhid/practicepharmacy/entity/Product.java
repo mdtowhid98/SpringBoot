@@ -1,9 +1,12 @@
 package com.towhid.practicepharmacy.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -26,15 +29,10 @@ public class Product {
     private int stock;
 
     private int quantity;
+
     private int unitprice;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "categoryId")
     private Category category;
-
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "salesId")
-//    private Sales sales;
-
-    
 }

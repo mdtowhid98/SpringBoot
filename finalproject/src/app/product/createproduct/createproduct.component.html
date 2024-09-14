@@ -104,7 +104,7 @@
 
     <div class="mb-3">
       <label for="categories" class="form-label">Category:</label>
-      <select id="categories" class="form-select" formControlName="categories" required>
+      <select id="categories" class="form-select" formControlName="category" required>
         <option *ngFor="let g of categories" [ngValue]="g.id">{{ g.categoryname }}</option>
       </select>
     </div>
