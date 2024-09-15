@@ -61,57 +61,7 @@ export class CreateproductComponent implements OnInit {
     });
   }
 
-  // createProduct() {
-  //   const selectedCategory = this.formValue.value.category;
-
-  //   if (!selectedCategory) {
-  //     alert('Please select a category.');
-  //     return;
-  //   }
-
-  //   this.product.name = this.formValue.value.name;
-  //   this.product.photo = this.formValue.value.photo;
-  //   this.product.unitprice = this.formValue.value.unitprice;
-  //   this.product.stock = this.formValue.value.stock;
-  //   this.product.categories = [selectedCategory]; // Wrap in array if needed
-
-  //   this.productService.getAllProductForSales().subscribe({
-  //     next: (products) => {
-  //       const existingProduct = products.find((p: ProductModule) =>
-  //         p.name.toLowerCase() === this.product.name.toLowerCase()
-  //       );
-
-  //       if (existingProduct) {
-  //         existingProduct.stock += this.product.stock;
-  //         this.productService.updateProducts(existingProduct).subscribe({
-  //           next: (res) => {
-  //             console.log('Product updated', res);
-  //             this.formValue.reset();
-  //             this.router.navigate(['/viewproduct']);
-  //           },
-  //           error: (error) => {
-  //             console.log(error);
-  //           }
-  //         });
-  //       } else {
-  //         this.productService.createProduct(this.product).subscribe({
-  //           next: (res) => {
-  //             console.log('Product created', res);
-  //             this.formValue.reset();
-  //             this.router.navigate(['/viewproduct']);
-  //           },
-  //           error: (error) => {
-  //             console.log(error);
-  //           }
-  //         });
-  //       }
-  //     },
-  //     error: (error) => {
-  //       console.log(error);
-  //     }
-  //   });
-  // }
-
+  
 
   onSubmit() {
     if (this.image) {

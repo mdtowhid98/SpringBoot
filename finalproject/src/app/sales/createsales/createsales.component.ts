@@ -17,7 +17,7 @@ import { debounceTime } from 'rxjs/operators';
   styleUrls: ['./createsales.component.css']
 })
 export class CreatesalesComponent implements OnInit, OnDestroy {
-  
+
   products: ProductModule[] = [];
   salesForm!: FormGroup;
   sale: SalesModule = new SalesModule();
@@ -45,7 +45,7 @@ export class CreatesalesComponent implements OnInit, OnDestroy {
     private categoryService: CategoryService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private route:ActivatedRoute
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
@@ -110,29 +110,34 @@ export class CreatesalesComponent implements OnInit, OnDestroy {
 
 
   onCategoryChange(index: number) {
-  const selectedCategory = this.productsArray.at(index).get('category')?.value;
+    const selectedCategory = this.productsArray.at(index).get('category')?.value;
+  
+    if (!selectedCategory || !selectedCategory.id) {
+      console.error('No category selected or category ID is undefined');
+      return;
+    }
+  
+    const selectedCategoryName = selectedCategory.categoryname; // Assuming categoryname is the property
+  
+    // Fetch filtered products based on the selected category
+    this.productService.findProductByCategoryName(selectedCategoryName).subscribe({
+      next: (products: ProductModule[]) => {
+        this.productsArray.at(index).patchValue({
+          name: '', // Reset the selected product
+          unitprice: '',
+          stock: '',
+          filteredProducts: products // Set filtered products for the current product group
 
-  if (!selectedCategory || !selectedCategory.id) {
-    console.error('No category selected or category ID is undefined');
-    return;
+          
+        });
+        // console.log('products: '+products);
+      },
+      error: (error) => {
+        console.error('Error fetching products:', error);
+      }
+    });
   }
-
-  const selectedCategoryId = selectedCategory.id;
-
-  // Filter products by the selected category
-  const filteredProducts = this.products.filter(product =>
-    product.categories && Array.isArray(product.categories) &&
-    product.categories.some(cat => cat.id === selectedCategoryId)
-  );
-
-  // Update the form control with the filtered products
-  this.productsArray.at(index).patchValue({
-    name: '', 
-    unitprice: '', 
-    stock: '', 
-    filteredProducts: filteredProducts // Set filtered products for the current product group
-  });
-}
+  
 
 
 
@@ -178,16 +183,16 @@ export class CreatesalesComponent implements OnInit, OnDestroy {
       }
     });
 
-    productGroup.get('quantity')?.valueChanges.subscribe(quantity => {
-      const stock = productGroup.get('stock')?.value || 0;
-      const quantityValue = quantity ?? 0; // Use 0 as the default if quantity is null
-
-      if (quantityValue > stock) {
-        alert(`The selected quantity exceeds the available stock of ${stock}. Please reduce the quantity.`);
-        productGroup.patchValue({ quantity: stock }); // Set quantity to the maximum available stock
+    productGroup.get('name')?.valueChanges.subscribe(name => {
+      const selectedProduct = this.products.find(prod => prod.name === name);
+      if (selectedProduct) {
+        productGroup.patchValue({
+          id: selectedProduct.id,
+          unitprice: selectedProduct.unitprice,
+          stock: selectedProduct.stock
+        });
+        productGroup.get('quantity')?.enable(); // Enable quantity input
       }
-
-      this.calculateTotalPrice();
     });
 
     this.productsArray.push(productGroup);
@@ -230,7 +235,7 @@ export class CreatesalesComponent implements OnInit, OnDestroy {
   }
 
 
-  
+
 
 
 
