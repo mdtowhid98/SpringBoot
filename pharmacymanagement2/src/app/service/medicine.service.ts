@@ -62,5 +62,12 @@ getMedicineById(medicineId: number): Observable<any> {
   return this.httpClient.get<any>(this.baseUrl + medicineId);
 }
 
+getAllMedicineForSales():Observable<MedicineModel[]>{
+
+  return this.httpClient.get<MedicineModel[]>(this.baseUrl);
+ 
+
+}
+
 
 }

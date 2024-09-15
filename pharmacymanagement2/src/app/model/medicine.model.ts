@@ -8,6 +8,7 @@ export class MedicineModel{
     price!:number;
     quantity!:number;
     expiryDate!:Date;
+    unitPrice!:number;
     manufacturerDate!:Date;
     stock!:number;
     image!:string;

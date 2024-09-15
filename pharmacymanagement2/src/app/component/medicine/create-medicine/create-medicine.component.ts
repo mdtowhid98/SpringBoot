@@ -35,6 +35,7 @@ export class CreateMedicineComponent {
       manufacturer: [''],
       price: [''],
       quantity: [''],
+      unitPrice: [''],
       expiryDate: [''],
       manufacturerDate: [''],
       stock: [''],
@@ -86,7 +87,7 @@ export class CreateMedicineComponent {
     }
   }
 
-  
+
 
 
 }

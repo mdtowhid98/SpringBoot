@@ -26,6 +26,7 @@ public class Medicine {
     private Date manufacturerDate;
     private String image;
     private double stock;
+    private double unitPrice;
 
 
     @ManyToOne(fetch = FetchType.EAGER)

@@ -31,6 +31,7 @@ public class ProductService {
     private String uploadDir;
 
     public List<Product> getAllProduct() {
+
         return productRepository.findAll();
     }
 
@@ -48,7 +49,7 @@ public class ProductService {
 //    }
 
 
-    public ApiResponse saveMedicine(Product m, MultipartFile imageFile) throws IOException {
+    public ApiResponse saveProduct(Product m, MultipartFile imageFile) throws IOException {
         ApiResponse apiResponse = new ApiResponse();
         try {
             Category category = categoryRepository.findById(m.getCategory().getId())

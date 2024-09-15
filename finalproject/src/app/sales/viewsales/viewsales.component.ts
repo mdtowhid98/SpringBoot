@@ -55,7 +55,7 @@ export class ViewsalesComponent implements OnInit{
       });
     }
 
-    deleteSales(id:string){
+    deleteSales(id:number){
 
       this.salesService.deleteSales(id)
       .subscribe({

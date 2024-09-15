@@ -11,7 +11,7 @@ import { ProductModule } from '../product/product.module';
   ]
 })
 export class SalesModule {
-  id!: string;
+  id!: number;
   customername!: string;
   salesdate!: Date;
   totalprice!: number;

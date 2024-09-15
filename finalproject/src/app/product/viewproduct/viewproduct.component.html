@@ -18,7 +18,7 @@
     <!-- Display each category name -->
     <!-- <img [src]="product.photo" alt="{{ product.name }}" /> -->
     <p>Unit Price: {{ product.unitprice | currency }}</p>
-    <p>Quantity: {{ product.quantity }}</p>
+    <!-- <p>Quantity: {{ product.quantity }}</p> -->
     <p>Stock: {{ product.stock }}</p>
     <ng-container *ngIf="userRole === 'Admin'">
       <button (click)="updateProduct(product.id)" class="btn btn-primary">

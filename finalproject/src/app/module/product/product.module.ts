@@ -11,7 +11,7 @@ import { CategoryModule } from '../category/category.module';
   ]
 })
 export class ProductModule {
-  id!: string
+  id!: number
   name!: string
   photo!: string
   stock!: number
@@ -21,9 +21,6 @@ export class ProductModule {
     
   
  }
-//  export interface ProductWithCategory extends ProductModule {
-//   id:string;
-//   categoryname: string;
-// }
+
 
 

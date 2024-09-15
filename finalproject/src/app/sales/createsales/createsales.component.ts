@@ -17,6 +17,7 @@ import { debounceTime } from 'rxjs/operators';
   styleUrls: ['./createsales.component.css']
 })
 export class CreatesalesComponent implements OnInit, OnDestroy {
+  
   products: ProductModule[] = [];
   salesForm!: FormGroup;
   sale: SalesModule = new SalesModule();
@@ -109,32 +110,30 @@ export class CreatesalesComponent implements OnInit, OnDestroy {
 
 
   onCategoryChange(index: number) {
-    const selectedCategory = this.productsArray.at(index).get('category')?.value;
+  const selectedCategory = this.productsArray.at(index).get('category')?.value;
 
-    if (!selectedCategory || !selectedCategory.id) {
-      console.error('No category selected or category ID is undefined');
-      return; // Exit if no category ID is selected
-    }
-
-    const selectedCategoryId = selectedCategory.id;
-
-    // Filter products based on the selected category's ID
-    const filteredProducts = this.products.filter(product =>
-      product.categories && Array.isArray(product.categories) &&
-      product.categories.some(cat => cat.id === selectedCategoryId)
-    );
-
-    // Update the form controls related to the product selection
-    this.productsArray.at(index).patchValue({
-      name: '', // Reset selected product name to avoid inconsistency
-      unitprice: '', // Reset unit price when category changes
-      stock: '', // Reset stock when category changes
-      filteredProducts: filteredProducts // Update the filtered products
-    });
-
-    console.log('Selected Category ID:', selectedCategoryId);
-    console.log('Filtered Products:', filteredProducts);
+  if (!selectedCategory || !selectedCategory.id) {
+    console.error('No category selected or category ID is undefined');
+    return;
   }
+
+  const selectedCategoryId = selectedCategory.id;
+
+  // Filter products by the selected category
+  const filteredProducts = this.products.filter(product =>
+    product.categories && Array.isArray(product.categories) &&
+    product.categories.some(cat => cat.id === selectedCategoryId)
+  );
+
+  // Update the form control with the filtered products
+  this.productsArray.at(index).patchValue({
+    name: '', 
+    unitprice: '', 
+    stock: '', 
+    filteredProducts: filteredProducts // Set filtered products for the current product group
+  });
+}
+
 
 
 
@@ -145,7 +144,7 @@ export class CreatesalesComponent implements OnInit, OnDestroy {
 
   addProduct() {
     const productGroup = this.formBuilder.group({
-      id: [''],
+      id: [0],
       category: ['', Validators.required],
       name: ['', Validators.required],
       filteredProducts: [[]], // Store filtered products for each product form group
@@ -194,9 +193,7 @@ export class CreatesalesComponent implements OnInit, OnDestroy {
     this.productsArray.push(productGroup);
   }
 
-  // getFilteredProducts(index: number): ProductModule[] {
-  //   return this.productsArray.at(index).get('filteredProducts')?.value || [];
-  // }
+
 
   getFilteredProducts(index: number): ProductModule[] {
     const filteredProducts = this.productsArray.at(index).get('filteredProducts')?.value;

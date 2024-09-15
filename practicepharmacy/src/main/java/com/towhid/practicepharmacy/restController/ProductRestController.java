@@ -38,7 +38,7 @@ public class ProductRestController {
             @RequestPart(value = "product") Product product,
             @RequestParam(value = "image", required = true) MultipartFile file
     ) throws IOException {
-        ApiResponse apiResponse = productService.saveMedicine(product, file);
+        ApiResponse apiResponse = productService.saveProduct(product, file);
         return apiResponse;
 
     }

@@ -17,7 +17,7 @@ export class UpdatesalesComponent implements OnInit {
   products: ProductModule[] = [];
   salesForm!: FormGroup;
   sale: SalesModule = new SalesModule();
-  saleId!: string;
+  saleId!: number;
 
   // Font Awesome Icons
   faUser = faUser;
@@ -121,30 +121,30 @@ export class UpdatesalesComponent implements OnInit {
       stock: [{ value: 0, disabled: true }],
     });
 
-    productGroup.get('name')?.valueChanges.subscribe(name => {
-      const selectedProduct = this.products.find(prod => prod.name === name);
-      if (selectedProduct) {
-        const stock = selectedProduct.stock;
-        if (stock > 0) {
-          productGroup.patchValue({
-            id: selectedProduct.id,
-            unitprice: selectedProduct.unitprice,
-            stock: stock
-          });
-          productGroup.get('quantity')?.enable();
-        } else {
-          alert(`The product ${selectedProduct.name} is out of stock!`);
-          productGroup.patchValue({
-            id: selectedProduct.id,
-            unitprice: selectedProduct.unitprice,
-            stock: stock,
-            quantity: 0
-          });
-          productGroup.get('quantity')?.disable();
-        }
-        this.calculateTotalPrice();
-      }
-    });
+    // productGroup.get('name')?.valueChanges.subscribe(name => {
+    //   const selectedProduct = this.products.find(prod => prod.name === name);
+    //   if (selectedProduct) {
+    //     const stock = selectedProduct.stock;
+    //     if (stock > 0) {
+    //       productGroup.patchValue({
+    //         id: selectedProduct.id,
+    //         unitprice: selectedProduct.unitprice,
+    //         stock: stock
+    //       });
+    //       productGroup.get('quantity')?.enable();
+    //     } else {
+    //       alert(`The product ${selectedProduct.name} is out of stock!`);
+    //       productGroup.patchValue({
+    //         id: selectedProduct.id,
+    //         unitprice: selectedProduct.unitprice,
+    //         stock: stock,
+    //         quantity: 0
+    //       });
+    //       productGroup.get('quantity')?.disable();
+    //     }
+    //     this.calculateTotalPrice();
+    //   }
+    // });
 
     productGroup.get('quantity')?.valueChanges.subscribe(quantity => {
       const stock = productGroup.get('stock')?.value || 0;
@@ -180,14 +180,14 @@ export class UpdatesalesComponent implements OnInit {
     this.sale.customername = this.salesForm.value.customername;
     this.sale.salesdate = this.salesForm.value.salesdate;
     this.sale.totalprice = this.salesForm.value.totalprice;
-
+  
     this.sale.product = this.salesForm.value.products.map((product: any) => {
       const originalProduct = this.products.find(p => p.id === product.id);
       if (originalProduct) {
         originalProduct.stock -= product.quantity; // Adjust the stock based on the quantity sold
       }
       return {
-        id: originalProduct?.id,
+        id: originalProduct?.id?.toString(), // Convert id to string
         name: originalProduct?.name,
         photo: originalProduct?.photo,
         stock: originalProduct?.stock, // Updated stock
@@ -195,7 +195,7 @@ export class UpdatesalesComponent implements OnInit {
         quantity: product.quantity
       };
     });
-
+  
     this.salesService.updateSales(this.saleId, this.sale).subscribe({
       next: () => {
         this.sale.product.forEach(prod => {
@@ -208,7 +208,7 @@ export class UpdatesalesComponent implements OnInit {
             }
           });
         });
-
+  
         this.router.navigate(['viewsales']);
       },
       error: error => {
@@ -216,4 +216,5 @@ export class UpdatesalesComponent implements OnInit {
       }
     });
   }
+  
 }

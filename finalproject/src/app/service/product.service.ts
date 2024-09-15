@@ -67,19 +67,19 @@ export class ProductService {
     return this.httpClient.put<ProductModule>(`${this.baseUrl}/${product.id}`, product);
   }
   
-  deleteProduct(id: string): Observable<any> {
-    return this.httpClient.delete(this.baseUrl + '/' + id);
+  deleteProduct(id: number): Observable<any> {
+    return this.httpClient.delete(this.baseUrl+ "delete/"+ id);
   }
   
-  updateProduct(id: string, product: ProductModule): Observable<any> {
-    return this.httpClient.put(this.baseUrl + '/' + id, product);
+  updateProduct(id: number, product: ProductModule): Observable<any> {
+    return this.httpClient.put(this.baseUrl + 'update/' + id, product);
   
   }
   
   
-  getById(id: string): Observable<any> {
+  getById(id: number): Observable<any> {
   
-    return this.httpClient.get(this.baseUrl + "/" + id);
+    return this.httpClient.get(this.baseUrl  + id);
   }
 
 //  getCategories(): Observable<CategoryModule[]> {

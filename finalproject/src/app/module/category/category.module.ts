@@ -11,7 +11,7 @@ import { ProductModule } from '../product/product.module';
   ]
 })
 export class CategoryModule {
-  id!:string;
+  id!:number;
   categoryname!:string;
  
 

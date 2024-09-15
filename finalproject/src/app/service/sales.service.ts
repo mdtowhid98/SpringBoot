@@ -42,7 +42,7 @@ export class SalesService {
     return this.httpClient.post<SalesModule>(this.baseUrl+"save", sales);
   }
 
-  deleteSales(id: string): Observable<any> {
+  deleteSales(id: number): Observable<any> {
 
     return this.httpClient.delete(this.baseUrl + id);
   }
@@ -51,15 +51,15 @@ export class SalesService {
   //   return this.httpClient.put<SalesModule>(`${this.baseUrl}${sale.id}`, sale);
   // }
 
-  updateProductStock(productId: string, quantity: number): Observable<ProductModule> {
+  updateProductStock(productId: number, quantity: number): Observable<ProductModule> {
     return this.httpClient.patch<ProductModule>(`${this.baseUrl}/products/${productId}/reduceStock`, { quantity });
   }
 
-  updateSales(id: string, sale: SalesModule): Observable<SalesModule> {
+  updateSales(id: number, sale: SalesModule): Observable<SalesModule> {
     return this.httpClient.put<SalesModule>(this.baseUrl+id, sale);
   }
 
-  getSalesById(saleId: string): Observable<SalesModule> {
+  getSalesById(saleId: number): Observable<SalesModule> {
     
     return this.httpClient.get<SalesModule>(`${this.baseUrl}${saleId}`);
   }

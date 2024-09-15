@@ -33,9 +33,11 @@ public class CategoryService {
 //        return facultyRepository.findByName(name);
 //    };
 
-    public void updateFaculty(Category f, int id) {
-        categoryRepository.save(f);
+    public Category updateCategory(Category mc, int id) {
+
+        return categoryRepository.save(mc);
     }
+
 
 
 

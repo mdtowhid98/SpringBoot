@@ -11,7 +11,7 @@ import { faBoxes, faDollarSign, faImage, faPlusCircle, faSave, faTag } from '@fo
 })
 export class UpdateproductComponent implements OnInit{
 
-  id:string="";
+  id:number=0;
   product:ProductModule=new ProductModule();
   
   faPlusCircle = faPlusCircle;

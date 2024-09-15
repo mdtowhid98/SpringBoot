@@ -18,6 +18,7 @@ import { UpdatemedicineComponent } from './component/medicine/updatemedicine/upd
 import { UpdatePharmacistComponent } from './component/pharmacist/update-pharmacist/update-pharmacist.component';
 import { ViewSalesOrderComponent } from './component/salesOrder/view-sales-order/view-sales-order.component';
 import { CreateSalesOrderComponent } from './component/salesOrder/create-sales-order/create-sales-order.component';
+import { ViewSalesMedicineComponent } from './component/salesMedicine/view-sales-medicine/view-sales-medicine.component';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { CreateSalesOrderComponent } from './component/salesOrder/create-sales-o
     UpdatePharmacistComponent,
     ViewSalesOrderComponent,
     CreateSalesOrderComponent,
+    ViewSalesMedicineComponent,
     
   
   ],
