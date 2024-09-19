@@ -19,10 +19,10 @@ import { CreateCategoryComponent } from './create-category/create-category.compo
 
 const routes: Routes = [
   {path:"viewproduct",component:ViewproductComponent},
-  {path:"createProduct",component:CreateproductComponent, canActivate:[authGuard,RoleGuard],data: { role: 'Admin' }},
-  {path:"updateProduct/:id",component:UpdateproductComponent,canActivate:[authGuard]},
+  {path:"createProduct",component:CreateproductComponent},
+  {path:"updateProduct/:id",component:UpdateproductComponent},
   {path:"viewsales",component:ViewsalesComponent},
-  {path:"createSales",component:CreatesalesComponent,canActivate:[authGuard,RoleGuard],data: { role: 'Admin' }},
+  {path:"createSales",component:CreatesalesComponent},
 
   {path:"updateSales/:id",component:UpdatesalesComponent},
   {path:"logIn",component:LoginComponent},

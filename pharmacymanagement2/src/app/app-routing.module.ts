@@ -14,6 +14,11 @@ import { UpdatePharmacistComponent } from './component/pharmacist/update-pharmac
 import { ViewSalesOrderComponent } from './component/salesOrder/view-sales-order/view-sales-order.component';
 import { CreateSalesOrderComponent } from './component/salesOrder/create-sales-order/create-sales-order.component';
 import { ViewSalesMedicineComponent } from './component/salesMedicine/view-sales-medicine/view-sales-medicine.component';
+import { AuthGuard } from './model/auth.guard';
+import { AdminPharmacistGuard } from './model/admin-pharmacist.guard';
+import { RegisterComponent } from './component/register/register.component';
+import { LoginComponent } from './component/login/login.component';
+
 
 const routes: Routes = [
   {path:"viewgeneric",component:ViewMedicineGenericComponent},
@@ -30,6 +35,8 @@ const routes: Routes = [
   {path:"viewsalesorder",component:ViewSalesOrderComponent},
   {path:"createsalesorder",component:CreateSalesOrderComponent},
   {path:"viewSalesMedicine",component:ViewSalesMedicineComponent},
+  {path: 'register', component:RegisterComponent},
+  {path: 'login', component:LoginComponent},
 ];
 
 @NgModule({

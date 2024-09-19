@@ -23,6 +23,7 @@ public class CategoryRestController {
 
     @GetMapping("/")
     public List<Category> getAllCategory() {
+
         return categoryService.getAllCategory();
     }
 

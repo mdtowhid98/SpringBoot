@@ -3,6 +3,7 @@ package com.towhid.practicepharmacy.restController;
 import com.towhid.practicepharmacy.entity.Sales;
 import com.towhid.practicepharmacy.service.SalesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,8 +22,9 @@ public class SalesRestController {
     }
 
     @PostMapping("/save")
-    public void saveSales(@RequestBody Sales d){
-        salesService.saveSales(d);
+    public ResponseEntity<Sales> createSale(@RequestBody Sales sales) {
+        Sales savedSales = salesService.saveSales(sales);
+        return ResponseEntity.ok(savedSales);
     }
 
 

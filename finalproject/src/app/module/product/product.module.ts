@@ -11,16 +11,14 @@ import { CategoryModule } from '../category/category.module';
   ]
 })
 export class ProductModule {
-  id!: number
-  name!: string
-  photo!: string
-  stock!: number
-  unitprice!:number
-  quantity!:number
-  categories!:CategoryModule[] 
-    
-  
- }
+  id!: number; // Use `!` to indicate that it will be defined
+  name!: string;
+  photo?: string; // URL or base64 string
+  stock!: number;
+  unitprice!: number;
+  quantity!: number;
+  categories!: CategoryModule[];
+}
 
 
 

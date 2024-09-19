@@ -17,5 +17,6 @@ public interface SalesRepository extends JpaRepository<Sales,Integer> {
 //
 //    @Query("SELECT s FROM Sales s WHERE s.product.name=:productName ")
 //    List<Sales> finndSalesByProductName(@Param("productName") String productName);
+//int countByProductId(int productId);
 
 }

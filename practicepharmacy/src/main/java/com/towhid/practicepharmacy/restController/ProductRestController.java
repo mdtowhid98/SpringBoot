@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/product")
@@ -58,6 +59,12 @@ public class ProductRestController {
         return ResponseEntity.ok(products);
     }
 
+    @GetMapping("/h/searchproductname")
+    public ResponseEntity<List<Product>>findProductByName(@RequestParam(value ="productName" )String productName){
+        List<Product> products=productService.findProductByName(productName);
+        return ResponseEntity.ok(products);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Product>findProductById(@PathVariable int id){
         try {
@@ -75,6 +82,39 @@ public class ProductRestController {
         productService.deleteProductById(id);
     }
 
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Product> updateProduct(
+            @PathVariable int id,
+            @RequestPart("product") Product product,
+            @RequestParam(value = "image", required = false) MultipartFile file) throws IOException {
+        try {
+            // Call the service method to update product
+            Product updatedProduct = this.productService.updateProduct(product, id, file);
+            return new ResponseEntity<>(updatedProduct, HttpStatus.OK);
+        } catch (IOException e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
+
+
+//    @PatchMapping("/stock/{id}")
+//    public ResponseEntity<?> updateProductStock(@PathVariable int id, @RequestBody Map<String, Integer> stockUpdate) {
+//        try {
+//            int stock = stockUpdate.get("stock");
+//            productService.updateProductStock(String.valueOf(id), stock);  // Convert id to String
+//            return ResponseEntity.ok().body(new ApiResponse(true, "Stock updated successfully"));
+//        } catch (Exception e) {
+//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse(false, "Error updating stock"));
+//        }
+//    }
+
+//    @PutMapping("/{id}")
+//    public ResponseEntity<Product> updateProduct(@PathVariable int id, @RequestBody Product productDetails) {
+//        Product updatedProduct = productService.updateProducts(id, productDetails);
+//        return ResponseEntity.ok(updatedProduct);
+//    }
 
 
 }

@@ -24,13 +24,13 @@
             <fa-icon [icon]="faSignInAlt"></fa-icon> Login
           </a>
         </li>
-        <ng-container *ngIf="userRole === 'Admin'">
+        <!-- <ng-container *ngIf="userRole === 'Admin'"> -->
           <li class="nav-item">
             <a class="nav-link" href="/createCategory">
               <fa-icon [icon]="faPlus"></fa-icon> Create Category
             </a>
           </li>
-        </ng-container>
+        <!-- </ng-container> -->
 
       </ul>
       <form class="d-flex" role="search">
@@ -64,7 +64,7 @@
 
 
 
-      <ng-container *ngIf="userRole === 'Admin'">
+      <!-- <ng-container *ngIf="userRole === 'Admin'"> -->
         <a href="/viewproduct">
           <fa-icon [icon]="faEye"></fa-icon> View Products
         </a>
@@ -78,15 +78,13 @@
           <fa-icon [icon]="faChartLine"></fa-icon> View Sales
         </a>
 
-      </ng-container>
-      <ng-container *ngIf="userRole === 'User'">
-        <a class="dropdown-item" href="/viewproduct">
+      <!-- </ng-container> -->
+      <!-- <ng-container *ngIf="userRole === 'User'"> -->
+        <!-- <a class="dropdown-item" href="/viewproduct">
           <fa-icon [icon]="faEye"></fa-icon> View Products
-        </a>
-        <!-- <a class="dropdown-item" href="/viewsales">
-                            <fa-icon [icon]="faChartLine"></fa-icon> View Sales
-                        </a> -->
-      </ng-container>
+        </a> -->
+       
+      <!-- </ng-container> -->
 
     </div>
   

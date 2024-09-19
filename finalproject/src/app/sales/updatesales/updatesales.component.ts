@@ -196,25 +196,25 @@ export class UpdatesalesComponent implements OnInit {
       };
     });
   
-    this.salesService.updateSales(this.saleId, this.sale).subscribe({
-      next: () => {
-        this.sale.product.forEach(prod => {
-          this.productService.updateProducts(prod).subscribe({
-            next: () => {
-              console.log(`Stock reduced and updated for product ID ${prod.id}`);
-            },
-            error: (error) => {
-              console.error('Error updating product stock', error);
-            }
-          });
-        });
+    // this.salesService.updateSales(this.saleId, this.sale).subscribe({
+    //   next: () => {
+    //     this.sale.product.forEach(prod => {
+    //       this.productService.updateProducts(prod).subscribe({
+    //         next: () => {
+    //           console.log(`Stock reduced and updated for product ID ${prod.id}`);
+    //         },
+    //         error: (error) => {
+    //           console.error('Error updating product stock', error);
+    //         }
+    //       });
+    //     });
   
-        this.router.navigate(['viewsales']);
-      },
-      error: error => {
-        console.error('Error updating sales order', error);
-      }
-    });
+    //     this.router.navigate(['viewsales']);
+    //   },
+    //   error: error => {
+    //     console.error('Error updating sales order', error);
+    //   }
+    // });
   }
   
 }

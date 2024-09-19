@@ -103,10 +103,10 @@ export class ViewproductComponent implements OnInit {
           next: () => {
             // Refresh the generics list after successful deletion
             this.getAllProducts();
-            this.router.navigate(['/viewpharmacist'])
+            this.router.navigate(['/viewproduct'])
           },
           error: (error) => {
-            console.log('Error deleting generic', error);
+            console.log('Error deleting product', error);
           }
         });
       }

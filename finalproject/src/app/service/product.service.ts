@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { ProductModule } from '../module/product/product.module';
 import { CategoryModule } from '../module/category/category.module';
+import { ApiResponse } from '../module/api.response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class ProductService {
 
   private baseUrl: string = 'http://localhost:8087/api/product/';
 
-  // categoriesUrl: string = "http://localhost:8087/api/category/"; 
+ 
 
   constructor(private httpClient: HttpClient) { }
 
@@ -29,8 +30,16 @@ export class ProductService {
 
   findProductByCategoryName(categoryName: string): Observable<ProductModule[]> {
     const params = new HttpParams().set('categoryName', categoryName);
-    // Correctly append the endpoint to baseUrl
     return this.httpClient.get<ProductModule[]>(`${this.baseUrl}h/searchproduct`, { params });
+  }
+
+  findProductByName(name: string): Observable<ProductModule[]> {
+    const params = new HttpParams().set('name', name);
+    return this.httpClient.get<ProductModule[]>(`${this.baseUrl}h/searchproductname`, { params });
+  }
+
+  getAllProducts(): Observable<ProductModule[]> {
+    return this.httpClient.get<ProductModule[]>(this.baseUrl);
   }
 
 
@@ -48,44 +57,46 @@ export class ProductService {
   }
   
   createProduct(product: ProductModule, image: File): Observable<any> {
-
     const formData = new FormData();
-
     formData.append('product', new Blob([JSON.stringify(product)], { type: 'application/json' }));
-
-    // Append image file
     formData.append('image', image);
-
-    return this.httpClient.post<any>(this.baseUrl + "save", formData);
-
+    return this.httpClient.post<any>(`${this.baseUrl}save`, formData);
   }
 
-
+  updateProductStock(productName: string, updatedStock: number): Observable<any> {
+    return this.httpClient.patch(`${this.baseUrl}${productName}/stock/+id`, { stock: updatedStock });
+  }
   
   
   updateProducts(product: ProductModule): Observable<ProductModule> {
-    return this.httpClient.put<ProductModule>(`${this.baseUrl}/${product.id}`, product);
+    return this.httpClient.put<ProductModule>(`${this.baseUrl}"update/"${product.id}`, product);
   }
   
   deleteProduct(id: number): Observable<any> {
     return this.httpClient.delete(this.baseUrl+ "delete/"+ id);
   }
   
-  updateProduct(id: number, product: ProductModule): Observable<any> {
-    return this.httpClient.put(this.baseUrl + 'update/' + id, product);
+  // updateProduct(id: number, formData: FormData): Observable<ProductModule> {
+  //   return this.httpClient.put<ProductModule>(`${this.baseUrl}update/${id}`, formData, {
+  //     reportProgress: true,
+  //     responseType: 'json'
+  //   });
+  // }
+
+ updateProduct(id: number, product: ProductModule, image: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('product', new Blob([JSON.stringify(product)], { type: 'application/json' }));
+    formData.append('image', image);
+    console.log('FormData:', formData); // Debug line to inspect FormData
+    return this.httpClient.put<any>(`${this.baseUrl}update/${id}`, formData);
+}
+
   
-  }
-  
-  
-  getById(id: number): Observable<any> {
-  
-    return this.httpClient.get(this.baseUrl  + id);
+  getById(id: number): Observable<ProductModule> {
+    return this.httpClient.get<ProductModule>(`${this.baseUrl}${id}`);
   }
 
-//  getCategories(): Observable<CategoryModule[]> {
-//   return this.httpClient.get<CategoryModule[]>(this.categoriesUrl);
-// }
-  
+
   
   }
   

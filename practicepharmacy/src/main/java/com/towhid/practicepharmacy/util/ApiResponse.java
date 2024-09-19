@@ -10,12 +10,34 @@ import java.util.Map;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
+
 public class ApiResponse {
 
+    private boolean successful;
     private String message;
-    private Map<String, Object> data;
-    private boolean isSuccessful = false;
+
+    // Constructor
+    public ApiResponse(boolean successful, String message) {
+        this.successful = successful;
+        this.message = message;
+    }
+
+    // Getters and Setters
+    public boolean isSuccessful() {
+        return successful;
+    }
+
+    public void setSuccessful(boolean successful) {
+        this.successful = successful;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
 
 

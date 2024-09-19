@@ -44,7 +44,7 @@ export class ViewsalesComponent implements OnInit{
     }
   
     loadSales() {
-      this.salesService.getAllsales().subscribe({
+      this.salesService.getAllSales().subscribe({
         next: (res: SalesModule[]) => {
           this.sales = res;
           // console.log(this.sales); // Log the sales array

@@ -14,10 +14,12 @@ public class CategoryService {
     private CategoryRepository categoryRepository;
 
     public void saveCategory(Category c) {
+
         categoryRepository.save(c);
     }
 
     public List<Category> getAllCategory() {
+
         return categoryRepository.findAll();
     }
 
@@ -29,9 +31,7 @@ public class CategoryService {
         return categoryRepository.findById(id).get();
     }
 
-//    public List<Faculty>findByName(String name){
-//        return facultyRepository.findByName(name);
-//    };
+
 
     public Category updateCategory(Category mc, int id) {
 

@@ -35,8 +35,27 @@ public class SalesService {
 //    }
 
     public Sales saveSales(Sales sales) {
+        // Iterate over each product in the sale
+        for (Product soldProduct : sales.getProduct()) {
+            // Retrieve the product from the database
+            Product product = productRepository.findById(soldProduct.getId())
+                    .orElseThrow(() -> new RuntimeException("Product not found with ID " + soldProduct.getId()));
+
+            // Update the product's stock
+            int newStock = product.getStock() - soldProduct.getQuantity();
+            if (newStock < 0) {
+                throw new RuntimeException("Not enough stock for product " + product.getName());
+            }
+            product.setStock(newStock);
+
+            // Save the updated product
+            productRepository.save(product);
+        }
+
+        // Save the sale
         return salesRepository.save(sales);
     }
+
 
 
 }

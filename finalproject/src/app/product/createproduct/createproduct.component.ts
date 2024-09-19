@@ -30,9 +30,8 @@ export class CreateproductComponent implements OnInit {
     private productService: ProductService,
     private categoryService: CategoryService,
     private router: Router,
-    private httpClient: HttpClient,
     private formBuilder: FormBuilder
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loadCategory();
@@ -61,7 +60,7 @@ export class CreateproductComponent implements OnInit {
     });
   }
 
-  
+
 
   onSubmit() {
     if (this.image) {

@@ -18,8 +18,8 @@ export class SalesService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getAllsales(): Observable<any> {
-    return this.httpClient.get(this.baseUrl);
+  getAllSales(): Observable<any[]> {
+    return this.httpClient.get<any[]>(this.baseUrl);
   }
 
   getAllSalesForSalesProduct(): Observable<SalesModule[]> {

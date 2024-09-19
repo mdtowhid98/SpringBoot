@@ -242,41 +242,48 @@ export class CreatesalesComponent implements OnInit, OnDestroy {
 
   createSales() {
     this.calculateTotalPrice();
-
+  
     // Enable totalprice temporarily to read its value
     this.salesForm.get('totalprice')?.enable();
-
+  
     this.sale.customername = this.salesForm.value.customername;
     this.sale.salesdate = this.salesForm.value.salesdate;
     this.sale.totalprice = this.salesForm.value.totalprice;
-
+  
     // Disable totalprice again if necessary
     this.salesForm.get('totalprice')?.disable();
-
+  
     console.log(this.sale.totalprice + " Create");
+  
+    // Map the products to the sales order and reduce the stock
+   // Proceed with creating the sales order
+this.sale.product = this.salesForm.value.products.map((product: ProductModule) => {  // <-- Define 'product' type
+  const originalProduct = this.products.find(p => p.id === product.id);
+  if (originalProduct) {
+    // Adjust the stock based on the quantity sold
+    originalProduct.stock -= product.quantity;
 
-    // Proceed with creating the sale
-    this.sale.product = this.salesForm.value.products.map((product: any) => {
-      const originalProduct = this.products.find(p => p.id === product.id);
-      if (originalProduct) {
-        originalProduct.stock -= product.quantity; // Adjust the stock based on the quantity sold
-      }
-      return {
-        id: originalProduct?.id,
-        name: originalProduct?.name,
-        photo: originalProduct?.photo,
-        stock: originalProduct?.stock, // Updated stock
-        unitprice: originalProduct?.unitprice,
-        quantity: product.quantity,
-        categories: originalProduct?.categories
-      };
-    });
+    // Return the modified product data to be included in the sales order
+    return {
+      id: originalProduct.id,
+      name: originalProduct.name,
+      photo: originalProduct.photo,
+      stock: originalProduct.stock, // Updated stock
+      unitprice: originalProduct.unitprice,
+      quantity: product.quantity,
+      categories: originalProduct.categories
+    };
+  }
+  return null;
+}).filter((product: ProductModule | null) => product !== null); // <-- Explicitly define 'product' type
 
-    // Create the sales order
+
+  
+    // Proceed with creating the sales order
     this.salesService.createSales(this.sale).subscribe({
       next: res => {
         // After successful creation of the sales order, update product stock
-        this.sale.product.forEach(prod => {
+        this.sale.product.forEach((prod: ProductModule) => {  // <-- Define 'prod' type
           this.productService.updateProducts(prod).subscribe({
             next: () => {
               console.log(`Stock reduced and updated for product ID ${prod.id}`);
@@ -286,8 +293,8 @@ export class CreatesalesComponent implements OnInit, OnDestroy {
             }
           });
         });
-
-        // Navigate to invoice page with sale data
+  
+        // Navigate to the invoice page with the sale data
         this.router.navigate(['invoice'], {
           queryParams: { sale: JSON.stringify(this.sale) }
         });
@@ -297,6 +304,8 @@ export class CreatesalesComponent implements OnInit, OnDestroy {
       }
     });
   }
+  
+  
 
 
 

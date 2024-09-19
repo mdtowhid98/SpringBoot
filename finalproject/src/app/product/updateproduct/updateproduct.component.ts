@@ -11,61 +11,61 @@ import { faBoxes, faDollarSign, faImage, faPlusCircle, faSave, faTag } from '@fo
 })
 export class UpdateproductComponent implements OnInit{
 
-  id:number=0;
-  product:ProductModule=new ProductModule();
-  
+  id: number = 0;
+  product: ProductModule = new ProductModule();
+  imageFile: File | null = null;
+
   faPlusCircle = faPlusCircle;
   faTag = faTag;
   faImage = faImage;
   faDollarSign = faDollarSign;
   faBoxes = faBoxes;
-  faSave=faSave;
-  
-  constructor(private productService:ProductService,
-    private router:Router,
-    private route:ActivatedRoute
-    
-    ){
-  
-  
+  faSave = faSave;
+
+  constructor(
+    private productService: ProductService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) { }
+
+  ngOnInit(): void {
+    this.id = +this.route.snapshot.params['id'];
+    this.productService.getById(this.id).subscribe({
+      next: res => {
+        this.product = res;
+        console.log(this.product);
+      },
+      error: error => {
+        console.log('Error fetching product:', error);
+      }
+    });
   }
-  
-  
-  
-    ngOnInit(): void {
-      
-  this.product=new ProductModule();
-  this.id=this.route.snapshot.params['id'];
-  this.productService.getById(this.id)
-  .subscribe({
-  
-    next:res=>{
-      this.product=res;
-      console.log(res);
-    },
-    error:error=>{
-  
-      console.log(error);
+
+  onFileChange(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.imageFile = file;
     }
-  
-  
-  });
-  
+  }
+
+  updateProduct() {
+    if (!this.imageFile) {
+        console.error("No image file selected");
+        return; // Exit if no file is selected
     }
-  
-    updateProduct(){
-  
-      this.productService.updateProduct(this.id,this.product)
-      .subscribe({
-        next:res=>{
-          this.product=new ProductModule();
-          this.router.navigate(['/viewproduct']);
+
+    console.log('Product to update:', this.product); // Debug line to check product data
+
+    this.productService.updateProduct(this.id, this.product, this.imageFile).subscribe({
+        next: res => {
+            console.log('Product updated successfully:', res);
+            this.router.navigate(['/viewproduct']);
         },
-        error:error=>{
-          console.log(error);
+        error: error => {
+            console.error('Error updating product:', error);
         }
-  
-      });
-    }
-  
-  }
+    });
+}
+
+
+}
