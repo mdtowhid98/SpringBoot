@@ -1,0 +1,81 @@
+/* Style for the form container */
+.create-product-container {
+  background-image: url('https://i.postimg.cc/fTTxQ3N7/istockphoto-1370884809-612x612.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 20px;
+  border-radius: 8px;
+  color: #fdfafa;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+/* General form group styling */
+.create-product-container .form-group {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  width: 100%;
+  max-width: 600px;
+}
+
+/* Styling for form controls */
+.create-product-container .form-control {
+  background: rgba(248, 214, 214, 0.9);
+  border: 1px solid #ddd;
+  color: #1e10e6;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Styling for buttons */
+.create-product-container .btn {
+  background-color: #0ee43c;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  max-width: 200px;
+}
+
+.create-product-container .btn:hover {
+  background-color: #10e233;
+}
+
+/* Label styling */
+.create-product-container .form-group label {
+  color: #d0caf3;
+  display: block;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+/* Error message styling */
+.create-product-container .form-group div {
+  color: #f8d7da;
+  text-align: center;
+}
+
+/* Styling for radio button group */
+.create-product-container .category-option {
+  display: flex; /* Align radio buttons and labels horizontally */
+  align-items: center; /* Center-align items vertically */
+  margin-bottom: 10px; /* Space between each radio button option */
+}
+
+/* Style for the radio button input */
+.create-product-container .category-option input[type="radio"] {
+  margin-right: 10px; /* Space between radio button and label */
+}
+
+/* Style for the category label */
+.create-product-container .category-option label {
+  color: #d0caf3; /* Label text color */
+}

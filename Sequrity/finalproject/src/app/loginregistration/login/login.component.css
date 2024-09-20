@@ -1,0 +1,114 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #f0f4f8;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+display: flex;
+flex-wrap: wrap;
+max-width: 700px;
+margin: 0 auto;
+background: rgba(255, 255, 255, 0.9);
+border-radius: 15px;
+overflow: hidden;
+box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.row {
+display: flex;
+width: 100%;
+}
+
+.col-md-6 {
+flex: 1;
+padding: 20px;
+box-sizing: border-box;
+}
+
+.col-md-6 img {
+width: 100%;
+height: auto;
+border-radius: 15px;
+object-fit: cover;
+}
+
+h2 {
+color: #fdfbfb;
+margin-bottom: 20px;
+font-weight: 600;
+font-size: 28px;
+}
+
+.form-label {
+display: flex;
+align-items: center;
+color: #fdfafa;
+font-weight: 500;
+}
+
+.form-label .fa-icon {
+margin-right: 8px;
+}
+
+.form-control {
+border: 1px solid #ccc;
+border-radius: 5px;
+padding: 10px;
+margin-top: 5px;
+background: #fff;
+color: #333;
+width: 100%;
+}
+
+.btn-primary {
+background-color: #1feb52;
+border: none;
+color: #fff;
+border-radius: 5px;
+padding: 10px 20px;
+font-size: 16px;
+cursor: pointer;
+display: flex;
+align-items: center;
+gap: 5px;
+transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+background-color: #2b0dd4;
+}
+
+a {
+color: #18e656;
+text-decoration:none;
+display: flex;
+align-items: center;
+gap: 10px;
+margin-top: 30px;
+font-size: 25px;
+}
+
+a:hover {
+text-decoration: underline;
+}
+
+.fa-icon {
+font-size: 18px;
+}
+
+.bg-form-container {
+  background-image: url('https://i.postimg.cc/W3Hkw8d5/istockphoto-1363430976-612x612.jpg');
+  background-size: cover; /* Ensures the image covers the entire container */
+  background-position: center; /* Centers the background image */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  padding: 20px; /* Adds padding if needed for content spacing */
+  border-radius: 8px; /* Optional: adds rounded corners */
+  max-width: 1000px;
+  height: 100vh;
+}

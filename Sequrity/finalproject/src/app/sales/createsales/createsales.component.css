@@ -1,0 +1,78 @@
+/* Container styling for the form with background image */
+.container {
+  background-image: url('https://i.postimg.cc/kGPJVdfh/istockphoto-1346119741-612x612.jpg');
+  background-size: cover; /* Cover the container with the image */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Prevent repeating the image */
+  padding: 20px; /* Add some padding for spacing */
+  border-radius: 8px; /* Optional: rounded corners */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Optional: add some shadow for better separation from background */
+  color: #d0caf3;
+}
+
+/* Styling for form groups to ensure text visibility */
+.form-group {
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background for form groups */
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  color: #d0caf3;
+}
+
+/* Styling for form controls */
+.form-control {
+  background: rgba(248, 214, 214, 0.9); /* Slightly transparent background for input fields */
+  border: 1px solid #ddd;
+  color: #1e10e6;
+  width: 100%;
+}
+
+/* Styling for buttons */
+.btn-info {
+  background-color: #17a2b8;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-info:hover {
+  background-color: #138496;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.btn-success {
+  background-color: #28a745;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+}
+
+/* Label styling */
+.form-group label {
+  color: #d0caf3;
+}
+
+/* Error message styling */
+.text-danger {
+  color: #f8d7da;
+}
