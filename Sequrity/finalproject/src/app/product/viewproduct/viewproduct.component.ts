@@ -40,10 +40,10 @@ export class ViewproductComponent implements OnInit {
     this.getAllCategory();
     this.getAllProducts(); // Ensure products are loaded on initialization
 
-    this.authService.currentUser$.subscribe(user => {
-      this.currentUser = user;
-      this.userRole = user?.role || null;
-    });
+    // this.authService.currentUser$.subscribe(user => {
+    //   this.currentUser = user;
+    //   this.userRole = user?.role || null;
+    // });
   }
 
   // Method to filter or perform action based on selected category

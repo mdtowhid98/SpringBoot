@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { ProductModule } from '../module/product/product.module';
 import { CategoryModule } from '../module/category/category.module';
-import { ApiResponse } from '../module/api.response.model';
+import { ApiResponse } from '../guard/api.response.model';
 
 @Injectable({
   providedIn: 'root'

@@ -1,22 +1,27 @@
-<div class="container my-6 bg-form-container">
-  <div class="row">
-    <div class="col-md-6">
-      <img src="https://i.postimg.cc/mDYncm8F/download.png" alt="" width="350" height="">
-    </div>
-    <div class="col-md-6">
-      <h2 class="text-center">Login</h2>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+      <h2 class="text-center mb-4">Login</h2>
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="mb-3">
-          <label for="email" class="form-label"><fa-icon [icon]="faEnvelope"></fa-icon> Email</label>
-          <input type="email" id="email" formControlName="email" class="form-control">
+          <label for="email" class="form-label">Email:</label>
+          <input id="email" type="email" class="form-control" formControlName="email" />
+          <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="text-danger">
+            <small *ngIf="loginForm.get('email')?.errors?.['required']">Email is required.</small>
+            <small *ngIf="loginForm.get('email')?.errors?.['email']">Invalid email address.</small>
+          </div>
         </div>
         <div class="mb-3">
-          <label for="password" class="form-label"><fa-icon [icon]="faLock"></fa-icon> Password</label>
-          <input type="password" id="password" formControlName="password" class="form-control">
+          <label for="password" class="form-label">Password:</label>
+          <input id="password" type="password" class="form-control" formControlName="password" />
+          <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="text-danger">
+            <small *ngIf="loginForm.get('password')?.errors?.['required']">Password is required.</small>
+          </div>
         </div>
-        <button type="submit" class="btn btn-primary"><fa-icon [icon]="faSignInAlt"></fa-icon> Login</button>
+        <button type="submit" class="btn btn-primary w-100" [disabled]="loginForm.invalid">Login</button>
       </form>
-      <a href="/reg"><fa-icon [icon]="faSignInAlt"></fa-icon> Register</a>
+      <div *ngIf="errorMessage" class="alert alert-danger mt-3">{{ errorMessage }}</div>
+      <div *ngIf="successMessage" class="alert alert-success mt-3">{{ successMessage }}</div>
     </div>
   </div>
 </div>

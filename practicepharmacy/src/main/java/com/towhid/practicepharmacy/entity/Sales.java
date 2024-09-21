@@ -21,11 +21,12 @@ public class Sales {
     private String customername;
     private Date salesdate;
     private int totalprice;
-    private int quantity;
+
 
 
     @ManyToMany
     private List<Product> product;
 
+    private int quantity;
 
 }

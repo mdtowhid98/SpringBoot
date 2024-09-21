@@ -25,28 +25,28 @@ export class UserprofileComponent {
   ) { }
 
   ngOnInit(): void {
-    this.loadUserProfile();
+    // this.loadUserProfile();
 
   }
 
-  loadUserProfile(): void {
+  // loadUserProfile(): void {
 
-    this.userprofileService.getUserProfile()
-      .subscribe({
-        next:(user)=>{
-          if(user){
-            this.user=user;
+  //   this.userprofileService.getUserProfile()
+  //     .subscribe({
+  //       next:(user)=>{
+  //         if(user){
+  //           this.user=user;
             
 
-          }
-        },
-        error:error=>{
-          console.log('error user profile',error);
-        }
+  //         }
+  //       },
+  //       error:error=>{
+  //         console.log('error user profile',error);
+  //       }
 
-      });
+  //     });
 
-  }
+  // }
 
 
 

@@ -15,6 +15,6 @@ export class SalesModule {
   customername!: string;
   salesdate!: Date;
   totalprice!: number;
-  
+  quantity!:number;
   product!: ProductModule[];
 }

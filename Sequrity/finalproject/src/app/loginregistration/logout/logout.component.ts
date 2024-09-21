@@ -19,7 +19,7 @@ export class LogoutComponent {
   logout(){
 
     this.authService.logout();
-    this.authService.removeUserDetails();
+    // this.authService.removeUserDetails();
     this.router.navigate(['logIn']);
   }
 

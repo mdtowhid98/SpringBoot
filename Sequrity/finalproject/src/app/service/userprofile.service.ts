@@ -15,9 +15,9 @@ export class UserprofileService {
     private http:HttpClient
   ) { }
 
-  getUserProfile(): Observable<UserModule | null> {
-    return of(this.authService.getUserProfileFromStorage());
-  }
+  // getUserProfile(): Observable<UserModule | null> {
+  //   return of(this.authService.getUserProfileFromStorage());
+  // }
 
   updateUserProfile(user: UserModule): Observable<UserModule> {
     localStorage.setItem('userProfile', JSON.stringify(user));

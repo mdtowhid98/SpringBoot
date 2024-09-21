@@ -29,9 +29,9 @@ export class NavbarComponent implements OnInit{
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.authService.currentUser$.subscribe(user => {
-      this.currentUser = user;
-      this.userRole = user?.role || null;
-    });
+    // this.authService.currentUser$.subscribe(user => {
+    //   this.currentUser = user;
+    //   this.userRole = user?.role || null;
+    // });
   }
 }

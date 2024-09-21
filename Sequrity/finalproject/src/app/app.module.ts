@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgxPrintModule } from 'ngx-print';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withFetch } from '@angular/common/http';
 
 import { ViewproductComponent } from './product/viewproduct/viewproduct.component';
 import { CreateproductComponent } from './product/createproduct/createproduct.component';
@@ -14,7 +14,7 @@ import { UpdateproductComponent } from './product/updateproduct/updateproduct.co
 import { ViewsalesComponent } from './sales/viewsales/viewsales.component';
 import { CreatesalesComponent } from './sales/createsales/createsales.component';
 import { UpdatesalesComponent } from './sales/updatesales/updatesales.component';
-import { RegistrationComponent } from './loginregistration/registration/registration.component';
+
 import { LoginComponent } from './loginregistration/login/login.component';
 import { LogoutComponent } from './loginregistration/logout/logout.component';
 import { UserprofileComponent } from './loginregistration/userprofile/userprofile.component';
@@ -27,6 +27,8 @@ import { CreateCategoryComponent } from './create-category/create-category.compo
 import { FilterByCategoryPipe } from './filter-by-category.pipe';
 import { CategoryService } from './service/category.service';
 import { UpdateCtegoryComponent } from './category/update-ctegory/update-ctegory.component';
+import { TokenInterceptor } from './guard/TokenInterceptor';
+import { RegisterComponent } from './loginregistration/register/register.component';
 
 
 
@@ -43,7 +45,7 @@ import { UpdateCtegoryComponent } from './category/update-ctegory/update-ctegory
     ViewsalesComponent,
     CreatesalesComponent,
     UpdatesalesComponent,
-    RegistrationComponent,
+    
     LoginComponent,
     LogoutComponent,
     UserprofileComponent,
@@ -54,6 +56,7 @@ import { UpdateCtegoryComponent } from './category/update-ctegory/update-ctegory
     CreateCategoryComponent,
     FilterByCategoryPipe,
     UpdateCtegoryComponent,
+    RegisterComponent,
     
     
     
@@ -74,8 +77,7 @@ import { UpdateCtegoryComponent } from './category/update-ctegory/update-ctegory
     provideHttpClient(
       withFetch()
     ),
-    [CategoryService],
-
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
   ],
   
   
