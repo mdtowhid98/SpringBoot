@@ -7,15 +7,18 @@ import { AuthService } from "../service/auth.service";
 export class TokenInterceptor implements HttpInterceptor {
   constructor(private authService: AuthService) {}
 
-  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = this.authService.getToken();
+
     if (token) {
-      request = request.clone({
+      const cloned = req.clone({
         setHeaders: {
-          Authorization: `Bearer ${token}`,
-        },
+          Authorization: `Bearer ${token}`
+        }
       });
+      return next.handle(cloned);
+    } else {
+      return next.handle(req);
     }
-    return next.handle(request);
   }
 }

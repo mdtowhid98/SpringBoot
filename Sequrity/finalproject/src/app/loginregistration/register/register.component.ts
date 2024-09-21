@@ -29,6 +29,7 @@ export class RegisterComponent {
       address: [''],
       dob: [''],
       gender: [''],
+      role:[''],
       image: ['']
     }
     ,{ validators: this.passwordMatchValidator });
@@ -45,9 +46,9 @@ export class RegisterComponent {
       return;
     }
 
-    const { name, email, password, cell, address, dob, gender, image } = this.registerForm.value;
+    const { name, email, password, cell, address, dob, gender, image, } = this.registerForm.value;
 
-    this.authService.register({ name, email, password, cell, address, dob, gender, image }).subscribe(
+    this.authService.register({ name, email, password, cell, address, dob, gender, image, }).subscribe(
    {
 
     next: AuthResponse => {

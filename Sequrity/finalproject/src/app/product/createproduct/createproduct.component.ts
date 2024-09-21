@@ -35,6 +35,7 @@ export class CreateproductComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadCategory();
+  
     this.formValue = this.formBuilder.group({
       name: ['', Validators.required],
       photo: ['', Validators.required],
@@ -49,31 +50,31 @@ export class CreateproductComponent implements OnInit {
   }
 
   loadCategory() {
-    this.categoryService.getAllCategoryForProduct().subscribe({
+
+    this.categoryService.getAllCategory().subscribe({
       next: res => {
         this.categories = res;
-        console.log('Categories loaded:', this.categories); // Debug statement
+        console.log('Categories loaded:', this.categories);
       },
       error: error => {
-        console.log(error);
+        console.log('Error loading categories:', error);
       }
     });
   }
-
-
-
+  
   onSubmit() {
     if (this.image) {
-
+      console.log('Image selected:', this.image);
       const product: ProductModule = {
         ...this.formValue.value,
         category: { id: this.formValue.value.category } as CategoryModule
       };
-
+      console.log('Submitting product:', product);
+  
       this.productService.createProduct(product, this.image).subscribe({
         next: apiResponse => {
           if (apiResponse && apiResponse.successful) {
-            console.log(apiResponse.message);
+            console.log('Product added successfully:', apiResponse.message);
             this.formValue.reset();
             this.router.navigate(['/viewproduct']);
           }
@@ -86,5 +87,10 @@ export class CreateproductComponent implements OnInit {
       alert('Please select an image.');
     }
   }
+
+
+
+
+
 
 }

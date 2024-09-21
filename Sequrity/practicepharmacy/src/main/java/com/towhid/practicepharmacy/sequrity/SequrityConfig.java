@@ -34,16 +34,16 @@ public class SequrityConfig {
                         .authorizeHttpRequests(
 
                                 req ->
-                                        req.requestMatchers("api/medicinegeneric/{id}","/login", "/register", "api/medicine/", "api/medicinegeneric/",
+                                        req.requestMatchers("api/medicinegeneric/{id}","/login", "/register","/register/admin", "api/medicine/", "api/medicinegeneric/",
                                                         "api/pharmacist/","api/medicine/save","api/medicinegeneric/save","api/pharmacist/save","api/medicinegeneric/delete/{id}",
                                                         "api/customer/","api/customer/save","/activate/**","api/medicinegeneric/update/{id}","api/product/m/searchmedicine?genericName",
                                                         "api/medicine/delete/{id}","api/medicine/update/{id}","api/salesorder/","api/salesorder/save",
                                                         "api/pharmacist/delete/{id}","api/pharmacist/update/{id}","api/salesmedicine/","api/salesmedicine/save",
-                                                        "/api/category/","/api/category/save","/api/category/update/{id}","/api/category/delete/{id}","/api/category/{id}",
+                                                        "/api/category/","/api/category/update/{id}","/api/category/delete/{id}","/api/category/{id}",
                                                         "/api/product/","/api/product/save","/api/product/update/{id}","/api/product/delete/{id}","/api/product/{id}","/api/product/h/searchproduct",
                                                         "/api/sales/","/api/sales/save","/api/sales/delete/{id}")
                                                 .permitAll()
-                                                .requestMatchers("api/medicine/save", "api/medicinegeneric/save")
+                                                .requestMatchers("api/medicine/save", "api/medicinegeneric/save","/api/category/save")
                                                 .hasAuthority("ADMIN")
                                                 .requestMatchers( "api/medicine/{id}","api/pharmacist/all/**", "api/location/")
                                                 .hasAnyAuthority("ADMIN", "PHARMACIST")

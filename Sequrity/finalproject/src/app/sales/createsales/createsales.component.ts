@@ -239,6 +239,8 @@ export class CreatesalesComponent implements OnInit, OnDestroy {
     this.sale.customername = this.salesForm.value.customername;
     this.sale.salesdate = this.salesForm.value.salesdate;
     this.sale.totalprice = this.salesForm.value.totalprice;
+    this.sale.quantity = this.salesForm.value.quantity;
+    
 
     // Disable totalprice again if necessary
     this.salesForm.get('totalprice')?.disable();

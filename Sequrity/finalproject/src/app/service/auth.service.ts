@@ -19,7 +19,9 @@ export class AuthService {
   public userRole$: Observable<string | null> = this.userRoleSubject.asObservable();
 
   constructor(
-    @Inject(PLATFORM_ID) private platformId: Object,
+
+      @Inject(PLATFORM_ID) private platformId: Object,
+  
     private http: HttpClient,
     private router: Router
   ) {
@@ -28,12 +30,7 @@ export class AuthService {
     this.userRoleSubject.next(storedRole);
   }
 
-  // private loadInitialRole(): void {
-  //   if (this.isBrowser()) {
-  //     const role = localStorage.getItem('userRole');
-  //     this.userRoleSubject.next(role);
-  //   }
-  // }
+
 
   login(email: string, password: string): Observable<AuthResponse> {
     return this.http
@@ -64,7 +61,10 @@ export class AuthService {
   }
 
   getToken(): string | null {
-    return localStorage.getItem('authToken');
+    if (isPlatformBrowser(this.platformId)) {
+      return localStorage.getItem('token'); // Safely access localStorage only in the browser
+    }
+    return null; // Return null if not running in the browser (SSR)
   }
 
   decodeToken(token: string): any {

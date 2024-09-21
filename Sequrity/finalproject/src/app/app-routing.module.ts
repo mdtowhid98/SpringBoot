@@ -18,21 +18,23 @@ import { CategoryComponent } from './category/category.component';
 import { CreateCategoryComponent } from './create-category/create-category.component';
 import { UpdateCtegoryComponent } from './category/update-ctegory/update-ctegory.component';
 import { RegisterComponent } from './loginregistration/register/register.component';
+import { AuthGuard } from './guard/auth.guard';
+import { AdminGuard } from './guard/admin.guard';
 
 const routes: Routes = [
   {path:"viewproduct",component:ViewproductComponent},
-  {path:"createProduct",component:CreateproductComponent},
-  {path:"updateProduct/:id",component:UpdateproductComponent},
-  {path:"viewsales",component:ViewsalesComponent},
-  {path:"createSales",component:CreatesalesComponent},
-  {path:"updatecategory/:id",component:UpdateCtegoryComponent},
+  {path:"createProduct",component:CreateproductComponent, canActivate: [AdminGuard]},
+  {path:"updateProduct/:id",component:UpdateproductComponent,canActivate: [AdminGuard]},
+  {path:"viewsales",component:ViewsalesComponent,canActivate: [AdminGuard]},
+  {path:"createSales",component:CreatesalesComponent,canActivate: [AdminGuard]},
+  {path:"updatecategory/:id",component:UpdateCtegoryComponent,canActivate: [AdminGuard]},
   {path:"updateSales/:id",component:UpdatesalesComponent},
   {path:"logIn",component:LoginComponent},
   {path: 'reg', component:RegisterComponent},
   {path:"home",component:HomeComponent},
   {path:"invoice",component:InvoiceComponent},
-  {path:"viewCategory",component:CategoryComponent},
-  {path:"createCategory",component:CreateCategoryComponent},
+  {path:"viewCategory",component:CategoryComponent,canActivate: [AdminGuard]},
+  {path:"createCategory",component:CreateCategoryComponent,canActivate: [AdminGuard]},
   // {
   //   path: 'userprofile',
   //   component: UserprofileComponent,
