@@ -245,7 +245,7 @@ export class CreatesalesComponent implements OnInit, OnDestroy {
     // Disable totalprice again if necessary
     this.salesForm.get('totalprice')?.disable();
 
-    console.log(this.sale.totalprice + " Create");
+    // console.log(this.sale.totalprice + " Create");
 
     // Map the products to the sales order and reduce the stock
     // Proceed with creating the sales order
