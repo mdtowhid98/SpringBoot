@@ -76,6 +76,11 @@ export class AuthService {
     return localStorage.getItem('userRole');
   }
 
+  getUserProfileFromStorage(): UserModule | null {
+    const profile = localStorage.getItem('userProfile');
+    return profile ? JSON.parse(profile) : null;
+  }
+
   isAdmin(): boolean {
     return this.getUserRole() === 'ADMIN';
   }

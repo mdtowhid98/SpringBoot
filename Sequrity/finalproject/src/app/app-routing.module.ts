@@ -20,6 +20,7 @@ import { UpdateCtegoryComponent } from './category/update-ctegory/update-ctegory
 import { RegisterComponent } from './loginregistration/register/register.component';
 import { AuthGuard } from './guard/auth.guard';
 import { AdminGuard } from './guard/admin.guard';
+import { RoleGuard } from './guard/role.guard';
 
 const routes: Routes = [
   {path:"viewproduct",component:ViewproductComponent},
@@ -35,13 +36,13 @@ const routes: Routes = [
   {path:"invoice",component:InvoiceComponent},
   {path:"viewCategory",component:CategoryComponent,canActivate: [AdminGuard]},
   {path:"createCategory",component:CreateCategoryComponent,canActivate: [AdminGuard]},
-  // {
-  //   path: 'userprofile',
-  //   component: UserprofileComponent,
-  //   canActivate: [authGuard, RoleGuard],
-  //   data:{role: ['Admin','User']}
+  {
+    path: 'userprofile',
+    component: UserprofileComponent,
+    canActivate: [AuthGuard, RoleGuard],
+    data:{role: ['ADMIN','USER','PHARMACIST']}
     
-  // },
+  },
   { path: 'logout', component: LogoutComponent},
   { path: '**', redirectTo:'logIn',pathMatch:'full' },
 ];

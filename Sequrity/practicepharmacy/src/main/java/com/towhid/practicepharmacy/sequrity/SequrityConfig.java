@@ -34,7 +34,7 @@ public class SequrityConfig {
                         .authorizeHttpRequests(
 
                                 req ->
-                                        req.requestMatchers("api/medicinegeneric/{id}","/login", "/register","/register/admin", "api/medicine/", "api/medicinegeneric/",
+                                        req.requestMatchers("api/medicinegeneric/{id}","/login", "/register","/register/admin","/registerview", "api/medicine/", "api/medicinegeneric/",
                                                         "api/pharmacist/","api/medicine/save","api/medicinegeneric/save","api/pharmacist/save","api/medicinegeneric/delete/{id}",
                                                         "api/customer/","api/customer/save","/activate/**","api/medicinegeneric/update/{id}","api/product/m/searchmedicine?genericName",
                                                         "api/medicine/delete/{id}","api/medicine/update/{id}","api/salesorder/","api/salesorder/save",
@@ -73,6 +73,7 @@ public class SequrityConfig {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
         return configuration.getAuthenticationManager();
     }
+
 
 
 }

@@ -9,7 +9,7 @@ import { UserModule } from '../module/user/user.module';
 })
 export class UserprofileService {
 
-  baseurl="http://localhost:3000/user";
+  baseurl="http://localhost:8087/registerview";
 
   constructor(private authService:AuthService,
     private http:HttpClient
@@ -18,6 +18,10 @@ export class UserprofileService {
   // getUserProfile(): Observable<UserModule | null> {
   //   return of(this.authService.getUserProfileFromStorage());
   // }
+
+  getUserProfile(): Observable<UserModule> {
+    return this.http.get<UserModule>(`${this.baseurl}`);
+  }
 
   updateUserProfile(user: UserModule): Observable<UserModule> {
     localStorage.setItem('userProfile', JSON.stringify(user));

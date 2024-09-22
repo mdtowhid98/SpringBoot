@@ -1,16 +1,18 @@
 package com.towhid.practicepharmacy.service;
 
-import com.towhid.practicepharmacy.entity.AuthenticationResponse;
-import com.towhid.practicepharmacy.entity.Role;
-import com.towhid.practicepharmacy.entity.Token;
-import com.towhid.practicepharmacy.entity.User;
+import com.towhid.practicepharmacy.entity.*;
 import com.towhid.practicepharmacy.jwt.JwtService;
+import com.towhid.practicepharmacy.jwt.JwtTokenProvider;
 import com.towhid.practicepharmacy.repository.TokenRepository;
 import com.towhid.practicepharmacy.repository.UserRepository;
 import jakarta.mail.MessagingException;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +28,29 @@ public class AuthService {
     private final TokenRepository tokenRepository;
     private final AuthenticationManager authenticationManager;
     private final EmailService emailService;
+
+
+
+    @Autowired
+    private JwtTokenProvider jwtTokenProvider; // Your JWT utility class
+
+    @Autowired
+    private HttpServletRequest  request;
+
+//    public AuthService(UserRepository userRepository) {
+//        this.userRepository = userRepository;
+//    }
+
+    // Method to get the current logged-in user
+    public User getCurrentUser() {
+        String token = jwtTokenProvider.resolveToken(request);
+        if (token == null || !jwtTokenProvider.validateToken(token)) {
+            return null;
+        }
+
+        String username = jwtTokenProvider.getUsernameFromToken(token);
+        return userRepository.findByUsername(username).orElse(null);
+    }
 
     private void saveUserToken(String jwt, User user) {
         Token token = new Token();
@@ -201,6 +226,9 @@ public class AuthService {
     }
 
 
+    public List<User> getAllUser() {
 
+        return userRepository.findAll();
+    }
 
 }
