@@ -1,0 +1,51 @@
+<div class="container mt-4">
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" class="form-control" formControlName="name"  required>
+      </div>
+  
+      <div class="form-group">
+        <label for="manufacturer">Manufacturer:</label>
+        <input type="text" id="manufacturer" class="form-control" formControlName="manufacturer"  required>
+      </div>
+  
+      <div class="form-group">
+        <label for="price">Price:</label>
+        <input type="number" id="price" class="form-control" formControlName="price"  required>
+      </div>
+  
+      <div class="form-group">
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" class="form-control" formControlName="quantity"  required>
+      </div>
+  
+      <div class="form-group">
+        <label for="expiryDate">Expiry Date:</label>
+        <input type="date" id="expiryDate" class="form-control" formControlName="expiryDate"  required>
+      </div>
+
+
+      <div class="form-group">
+        <label for="manufacturerDate">Manufacturer Date:</label>
+        <input type="date" id="manufacturerDate" class="form-control" formControlName="manufacturerDate"  required>
+      </div>
+
+      
+  
+      <div class="mb-3">
+        <label for="generic" class="form-label">Generic:</label>
+        <select id="generic" class="form-select" formControlName="generic" required>
+          <option *ngFor="let g of generics" [ngValue]="g.id">{{ g.name }}</option>
+        </select>
+      </div>
+  
+      <div class="mb-3">
+        <label for="formFile" class="form-label">Image:</label>
+        <input class="form-control" type="file" id="formFile" (change)="onFileSelected($event)" accept="image/*" required>
+      </div>
+  
+      <button type="submit" class="btn btn-primary">Add Medicine</button>
+    </form>
+  </div>
+  

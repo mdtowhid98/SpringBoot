@@ -1,0 +1,29 @@
+<div class="container">
+
+    <div class="row">
+        <div class="card md-4 m-1" style="width: 18rem;" *ngFor="let m of customers">
+            <!-- <img [src]="'http://localhost:8087/images/medicine/' + m.image" class="card-img-top my-1" alt="{{ m.name }}"> -->
+
+            <div class="card-body">
+                <p>
+                </p>
+                <h5 class="card-title">Name: {{m.name }}</h5>
+                <p class="card-text">Phone: {{ m.phoneNumber}}</p>
+                <p class="card-text">Address: {{ m.address}}</p>
+                
+                
+
+
+              
+                
+
+                
+                <!-- <button class="btn btn-primary btn-sm" (click)="viewRooms(h.id)">View</button> -->
+                <!-- <button class="btn btn-danger btn-sm">Delete</button> -->
+            </div>
+        </div>
+    
+    
+    </div>
+
+</div>
