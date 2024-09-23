@@ -18,10 +18,11 @@ export class AuthService {
   private userRoleSubject: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
   public userRole$: Observable<string | null> = this.userRoleSubject.asObservable();
 
-  constructor(
+  private currentUserSubject: BehaviorSubject<UserModule | null> = new BehaviorSubject<UserModule | null>(null);
+  public currentUser$: Observable<UserModule | null> = this.currentUserSubject.asObservable();
 
-      @Inject(PLATFORM_ID) private platformId: Object,
-  
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
     private http: HttpClient,
     private router: Router
   ) {
@@ -30,7 +31,26 @@ export class AuthService {
     this.userRoleSubject.next(storedRole);
   }
 
+  // New methods to handle localStorage
+  private isBrowser(): boolean {
+    return isPlatformBrowser(this.platformId);
+  }
 
+  private setItem(key: string, value: string): void {
+    if (this.isBrowser()) {
+      localStorage.setItem(key, value);
+    }
+  }
+
+  private getItem(key: string): string | null {
+    return this.isBrowser() ? localStorage.getItem(key) : null;
+  }
+
+  private removeItem(key: string): void {
+    if (this.isBrowser()) {
+      localStorage.removeItem(key);
+    }
+  }
 
   login(email: string, password: string): Observable<AuthResponse> {
     return this.http
@@ -38,10 +58,11 @@ export class AuthService {
       .pipe(
         map((response: AuthResponse) => {
           if (this.isBrowser() && response.token) {
-            localStorage.setItem('authToken', response.token);
+            this.setItem('authToken', response.token);
             const decodedToken = this.decodeToken(response.token);
-            localStorage.setItem('userRole', decodedToken.role);
+            this.setItem('userRole', decodedToken.role);
             this.userRoleSubject.next(decodedToken.role); // Update role in BehaviorSubject
+            this.currentUserSubject.next(decodedToken.user); // Set current user
           }
           return response;
         })
@@ -53,7 +74,7 @@ export class AuthService {
       user, { headers: this.headers }).pipe(
         map((response: AuthResponse) => {
           if (this.isBrowser() && response.token) {
-            localStorage.setItem('authToken', response.token); // Store JWT token
+            this.setItem('authToken', response.token); // Store JWT token
           }
           return response;
         })
@@ -61,24 +82,21 @@ export class AuthService {
   }
 
   getToken(): string | null {
-    if (isPlatformBrowser(this.platformId)) {
-      return localStorage.getItem('token'); // Safely access localStorage only in the browser
-    }
-    return null; // Return null if not running in the browser (SSR)
+    return this.getItem('authToken');
   }
 
   decodeToken(token: string): any {
-    const payload = token.split('.')[1];
-    return JSON.parse(atob(payload));
+    try {
+      const payload = token.split('.')[1];
+      return JSON.parse(atob(payload));
+    } catch (e) {
+      console.error('Token decoding failed:', e);
+      return null; // Return null if decoding fails
+    }
   }
 
   getUserRole(): string | null {
-    return localStorage.getItem('userRole');
-  }
-
-  getUserProfileFromStorage(): UserModule | null {
-    const profile = localStorage.getItem('userProfile');
-    return profile ? JSON.parse(profile) : null;
+    return this.getItem('userRole');
   }
 
   isAdmin(): boolean {
@@ -90,7 +108,7 @@ export class AuthService {
     return role === 'ADMIN' || role === 'PHARMACIST';
   }
 
-  isPHARMACIST(): boolean {
+  isPharmacist(): boolean {
     return this.getUserRole() === 'PHARMACIST';
   }
 
@@ -104,6 +122,11 @@ export class AuthService {
     return Date.now() > expiry;
   }
 
+  getUserProfileFromStorage(): UserModule | null {
+    const userProfileJson = this.getItem('userProfile');
+    return userProfileJson ? JSON.parse(userProfileJson) : null;
+  }
+
   isLoggedIn(): boolean {
     const token = this.getToken();
     if (token && !this.isTokenExpired(token)) {
@@ -115,14 +138,10 @@ export class AuthService {
 
   logout(): void {
     if (isPlatformBrowser(this.platformId)) {
-      localStorage.removeItem('authToken');
-      localStorage.removeItem('userRole');
+      this.removeItem('authToken');
+      this.removeItem('userRole');
       this.userRoleSubject.next(null); // Clear role in BehaviorSubject
     }
     this.router.navigate(['/login']);
-  }
-
-  private isBrowser(): boolean {
-    return isPlatformBrowser(this.platformId);
   }
 }

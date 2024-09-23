@@ -42,7 +42,7 @@ export class UpdatesalesComponent implements OnInit {
   ngOnInit(): void {
     this.saleId = this.route.snapshot.params['id']; // Assuming 'id' is passed in the route
     this.loadProduct();
-    this.loadSale();
+    // this.loadSale();
 
     this.salesForm = this.formBuilder.group({
       customername: ['', Validators.required],
@@ -67,50 +67,50 @@ export class UpdatesalesComponent implements OnInit {
     });
   }
 
-  loadSale() {
-    this.salesService.getSalesById(this.saleId).subscribe({
-      next: res => {
-        this.sale = res;
-        this.populateForm();
-      },
-      error: error => {
-        console.error('Error fetching sale details', error);
-      }
-    });
-  }
+  // loadSale() {
+  //   this.salesService.getSalesById(this.saleId).subscribe({
+  //     next: res => {
+  //       this.sale = res;
+  //       this.populateForm();
+  //     },
+  //     error: error => {
+  //       console.error('Error fetching sale details', error);
+  //     }
+  //   });
+  // }
 
-  populateForm() {
-    this.salesForm.patchValue({
-      customername: this.sale.customername,
-      salesdate: this.sale.salesdate
-    });
+  // populateForm() {
+  //   this.salesForm.patchValue({
+  //     customername: this.sale.customername,
+  //     salesdate: this.sale.salesdate
+  //   });
 
-    this.sale.product.forEach(prod => {
-      const productGroup = this.formBuilder.group({
-        id: [prod.id],
-        name: [prod.name, Validators.required],
-        quantity: [prod.quantity, Validators.required],
-        unitprice: [{ value: prod.unitprice, disabled: true }],
-        stock: [{ value: prod.stock, disabled: true }],
-      });
+  //   this.sale.product.forEach(prod => {
+  //     const productGroup = this.formBuilder.group({
+  //       id: [prod.id],
+  //       name: [prod.name, Validators.required],
+  //       quantity: [prod.quantity, Validators.required],
+  //       unitprice: [{ value: prod.unitprice, disabled: true }],
+  //       stock: [{ value: prod.stock, disabled: true }],
+  //     });
 
-      productGroup.get('quantity')?.valueChanges.subscribe(quantity => {
-        const stock = productGroup.get('stock')?.value || 0;
-        const quantityValue = quantity || 0;
+  //     productGroup.get('quantity')?.valueChanges.subscribe(quantity => {
+  //       const stock = productGroup.get('stock')?.value || 0;
+  //       const quantityValue = quantity || 0;
 
-        if (quantityValue > stock) {
-          alert(`The selected quantity exceeds the available stock of ${stock}. Please reduce the quantity.`);
-          productGroup.patchValue({ quantity: stock });
-        }
+  //       if (quantityValue > stock) {
+  //         alert(`The selected quantity exceeds the available stock of ${stock}. Please reduce the quantity.`);
+  //         productGroup.patchValue({ quantity: stock });
+  //       }
 
-        this.calculateTotalPrice();
-      });
+  //       this.calculateTotalPrice();
+  //     });
 
-      this.productsArray.push(productGroup);
-    });
+  //     this.productsArray.push(productGroup);
+  //   });
 
-    this.calculateTotalPrice();
-  }
+  //   this.calculateTotalPrice();
+  // }
 
   addProduct() {
     const productGroup = this.formBuilder.group({
@@ -121,30 +121,30 @@ export class UpdatesalesComponent implements OnInit {
       stock: [{ value: 0, disabled: true }],
     });
 
-    // productGroup.get('name')?.valueChanges.subscribe(name => {
-    //   const selectedProduct = this.products.find(prod => prod.name === name);
-    //   if (selectedProduct) {
-    //     const stock = selectedProduct.stock;
-    //     if (stock > 0) {
-    //       productGroup.patchValue({
-    //         id: selectedProduct.id,
-    //         unitprice: selectedProduct.unitprice,
-    //         stock: stock
-    //       });
-    //       productGroup.get('quantity')?.enable();
-    //     } else {
-    //       alert(`The product ${selectedProduct.name} is out of stock!`);
-    //       productGroup.patchValue({
-    //         id: selectedProduct.id,
-    //         unitprice: selectedProduct.unitprice,
-    //         stock: stock,
-    //         quantity: 0
-    //       });
-    //       productGroup.get('quantity')?.disable();
-    //     }
-    //     this.calculateTotalPrice();
-    //   }
-    // });
+    productGroup.get('name')?.valueChanges.subscribe(name => {
+      const selectedProduct = this.products.find(prod => prod.name === name);
+      if (selectedProduct) {
+        const stock = selectedProduct.stock;
+        if (stock > 0) {
+          productGroup.patchValue({
+            // id: selectedProduct.id,
+            unitprice: selectedProduct.unitprice,
+            stock: stock
+          });
+          productGroup.get('quantity')?.enable();
+        } else {
+          alert(`The product ${selectedProduct.name} is out of stock!`);
+          productGroup.patchValue({
+            // id: selectedProduct.id,
+            unitprice: selectedProduct.unitprice,
+            stock: stock,
+            quantity: 0
+          });
+          productGroup.get('quantity')?.disable();
+        }
+        this.calculateTotalPrice();
+      }
+    });
 
     productGroup.get('quantity')?.valueChanges.subscribe(quantity => {
       const stock = productGroup.get('stock')?.value || 0;
@@ -181,7 +181,7 @@ export class UpdatesalesComponent implements OnInit {
     this.sale.salesdate = this.salesForm.value.salesdate;
     this.sale.totalprice = this.salesForm.value.totalprice;
   
-    this.sale.product = this.salesForm.value.products.map((product: any) => {
+    this.sale.salesProducts = this.salesForm.value.products.map((product: any) => {
       const originalProduct = this.products.find(p => p.id === product.id);
       if (originalProduct) {
         originalProduct.stock -= product.quantity; // Adjust the stock based on the quantity sold

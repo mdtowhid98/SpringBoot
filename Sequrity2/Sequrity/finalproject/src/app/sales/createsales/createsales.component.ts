@@ -10,6 +10,7 @@ import { SalesModule } from '../../module/sales/sales.module';
 import { CategoryModule } from '../../module/category/category.module';
 import { Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { SalesProductModel } from '../../module/salesProduct.model';
 
 @Component({
   selector: 'app-createsales',
@@ -24,8 +25,6 @@ export class CreatesalesComponent implements OnInit, OnDestroy {
   categories: CategoryModule[] = [];
   subscriptions: Subscription = new Subscription();
   filteredProducts: ProductModule[] = [];
-
-
 
   faUser = faUser;
   faCalendarAlt = faCalendarAlt;
@@ -93,7 +92,6 @@ export class CreatesalesComponent implements OnInit, OnDestroy {
   loadProduct() {
     this.productService.getAllProductForSales().subscribe({
       next: res => {
-        // Ensure that each product has a categories property initialized
         this.products = res.map(product => ({
           ...product,
           categories: product.categories || []  // Ensure categories is an array
@@ -105,10 +103,6 @@ export class CreatesalesComponent implements OnInit, OnDestroy {
     });
   }
 
-
-
-
-
   onCategoryChange(index: number) {
     const selectedCategory = this.productsArray.at(index).get('category')?.value;
 
@@ -117,9 +111,8 @@ export class CreatesalesComponent implements OnInit, OnDestroy {
       return;
     }
 
-    const selectedCategoryName = selectedCategory.categoryname; // Assuming categoryname is the property
+    const selectedCategoryName = selectedCategory.categoryname;
 
-    // Fetch filtered products based on the selected category
     this.productService.findProductByCategoryName(selectedCategoryName).subscribe({
       next: (products: ProductModule[]) => {
         this.productsArray.at(index).patchValue({
@@ -127,10 +120,7 @@ export class CreatesalesComponent implements OnInit, OnDestroy {
           unitprice: '',
           stock: '',
           filteredProducts: products // Set filtered products for the current product group
-
-
         });
-        // console.log('products: '+products);
       },
       error: (error) => {
         console.error('Error fetching products:', error);
@@ -138,46 +128,32 @@ export class CreatesalesComponent implements OnInit, OnDestroy {
     });
   }
 
-
-
-
-
-
-
-
-
-
   addProduct() {
     const productGroup = this.formBuilder.group({
       id: [0],
       category: ['', Validators.required],
       name: ['', Validators.required],
-      filteredProducts: [[]], // Store filtered products for each product form group
+      filteredProducts: [[]],
       quantity: [{ value: 0, disabled: true }, Validators.required],
       unitprice: [{ value: 0, disabled: true }],
       stock: [{ value: 0, disabled: true }]
     });
 
-    // When a product name is selected
     productGroup.get('name')?.valueChanges.subscribe(name => {
       const selectedProduct = this.products.find(prod => prod.name === name);
       if (selectedProduct) {
-        const oldStock = selectedProduct.stock;
         productGroup.patchValue({
-          id: selectedProduct.id, // Set the id here, which is a string
+          id: selectedProduct.id,
           unitprice: selectedProduct.unitprice,
-          stock: oldStock // Set the current stock
+          stock: selectedProduct.stock
         });
-
-        // Enable quantity input if stock is available
         productGroup.get('quantity')?.enable();
 
-        // Check for stock when quantity changes
         productGroup.get('quantity')?.valueChanges.subscribe(quantity => {
           const validQuantity = quantity ?? 0; // Ensure quantity is not null or undefined
+        
           if (validQuantity > selectedProduct.stock) {
             alert(`The quantity entered exceeds the available stock of ${selectedProduct.stock} for ${selectedProduct.name}.`);
-            // Reset the quantity field to the maximum stock
             productGroup.patchValue({ quantity: selectedProduct.stock });
           }
         });
@@ -187,28 +163,18 @@ export class CreatesalesComponent implements OnInit, OnDestroy {
     this.productsArray.push(productGroup);
   }
 
-
-
-
   getFilteredProducts(index: number): ProductModule[] {
     const filteredProducts = this.productsArray.at(index).get('filteredProducts')?.value;
     return Array.isArray(filteredProducts) ? filteredProducts : [];
   }
-
-
-
 
   removeProduct(index: number) {
     this.productsArray.removeAt(index);
     this.calculateTotalPrice();
   }
 
-
-
-
   calculateTotalPrice() {
     let totalprice = 0;
-
     this.productsArray.controls.forEach((control, index) => {
       const quantity = Number(control.get('quantity')?.value || 0);
       const unitprice = Number(control.get('unitprice')?.value || 0);
@@ -221,88 +187,55 @@ export class CreatesalesComponent implements OnInit, OnDestroy {
     });
 
     this.salesForm.patchValue({ totalprice });
-    console.log('Calculated Total Price:', totalprice);
   }
-
-
-
-
-
-
 
   createSales() {
     this.calculateTotalPrice();
-
-    // Enable totalprice temporarily to read its value
     this.salesForm.get('totalprice')?.enable();
 
     this.sale.customername = this.salesForm.value.customername;
     this.sale.salesdate = this.salesForm.value.salesdate;
     this.sale.totalprice = this.salesForm.value.totalprice;
-    this.sale.product.quantity = this.salesForm.value.quantity;
-    
-
-    // Disable totalprice again if necessary
     this.salesForm.get('totalprice')?.disable();
 
-    console.log(this.sale.totalprice + " Create");
-
-    // Map the products to the sales order and reduce the stock
-    // Proceed with creating the sales order
-    this.sale.product = this.salesForm.value.products.map((product: ProductModule) => {  // <-- Define 'product' type
+    this.sale.salesProducts = this.salesForm.value.products.map((product: ProductModule) => {
       const originalProduct = this.products.find(p => p.id === product.id);
       if (originalProduct) {
-        // Adjust the stock based on the quantity sold
         originalProduct.stock -= product.quantity;
 
-        // Return the modified product data to be included in the sales order
         return {
           id: originalProduct.id,
-          name: originalProduct.name,
-          photo: originalProduct.photo,
-          stock: originalProduct.stock, // Updated stock
-          unitprice: originalProduct.unitprice,
-          quantity: originalProduct.quantity,
-          categories: originalProduct.categories
+          product: originalProduct,
+          quantity: product.quantity
         };
       }
       return null;
-    }).filter((product: ProductModule | null) => product !== null); // <-- Explicitly define 'product' type
+    }).filter((product: SalesProductModel | null) => product !== null);
 
-
-
-    // Proceed with creating the sales order
     this.salesService.createSales(this.sale).subscribe({
       next: res => {
-        // After successful creation of the sales order, update product stock
-        this.sale.product.forEach((prod: ProductModule) => {  // <-- Define 'prod' type
-          this.productService.updateProducts(prod).subscribe({
-            next: () => {
-              console.log(`Stock reduced and updated for product ID ${prod.id}`);
+        this.sale.salesProducts.forEach((prod: SalesProductModel) => {
+          this.productService.getById(prod.product.id).subscribe({
+            next: (product: ProductModule) => {
+              product.stock -= prod.quantity;
+              this.productService.updateProducts(product).subscribe({
+                next: () => {
+                  console.log(`Stock reduced and updated for product ID ${prod.product.id}`);
+                },
+                error: (error) => {
+                  console.error(`Error updating product ID ${prod.product.id}:`, error);
+                }
+              });
             },
             error: (error) => {
-              console.log(error);
+              console.error(`Error fetching product ID ${prod.product.id}:`, error);
             }
           });
         });
-
-        // Navigate to the invoice page with the sale data
-        this.router.navigate(['invoice'], {
-          queryParams: { sale: JSON.stringify(this.sale) }
-        });
       },
-      error: error => {
-        console.log(error);
+      error: (error) => {
+        console.error('Error creating sales order:', error);
       }
     });
   }
-
-
-
-
-
-
-
-
-
 }
