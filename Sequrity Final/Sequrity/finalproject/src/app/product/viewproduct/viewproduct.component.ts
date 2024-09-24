@@ -8,9 +8,7 @@ import { AuthService } from '../../service/auth.service';
 import { CategoryService } from '../../service/category.service';
 import { CategoryModule } from '../../module/category/category.module';
 
-interface ProductWithCategory extends ProductModule {
-  categoryname: string;
-}
+
 
 @Component({
   selector: 'app-viewproduct',
@@ -31,7 +29,7 @@ export class ViewproductComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
-    private authService: AuthService,
+    protected authService: AuthService,
     private router: Router,
     private categoryService: CategoryService
   ) { }
@@ -40,10 +38,9 @@ export class ViewproductComponent implements OnInit {
     this.getAllCategory();
     this.getAllProducts(); // Ensure products are loaded on initialization
 
-    // this.authService.currentUser$.subscribe(user => {
-    //   this.currentUser = user;
-    //   this.userRole = user?.role || null;
-    // });
+    this.authService.currentUser$.subscribe(user => {
+      this.currentUser = user;
+    });
   }
 
   // Method to filter or perform action based on selected category

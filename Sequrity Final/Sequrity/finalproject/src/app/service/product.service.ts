@@ -1,9 +1,10 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { ProductModule } from '../module/product/product.module';
 import { CategoryModule } from '../module/category/category.module';
 import { ApiResponse } from '../guard/api.response.model';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,19 @@ export class ProductService {
 
  
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient,
+    private authService: AuthService 
+  ) { }
+
+    // Get Bearer token
+    private getAuthHeaders(): HttpHeaders {
+      const token = this.authService.getToken();
+      console.log(token);
+      return new HttpHeaders({
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      });
+    }
 
   // getProduct(): Observable<ProductModule[]> {
   //   return this.httpClient.get<ProductModule[]>(this.baseUrl+"h/searchproduct").pipe(
@@ -56,11 +69,23 @@ export class ProductService {
   
   }
   
-  createProduct(product: ProductModule, image: File): Observable<any> {
+  createProduct(product: ProductModule, image: File): Observable<ProductModule> {
     const formData = new FormData();
     formData.append('product', new Blob([JSON.stringify(product)], { type: 'application/json' }));
     formData.append('image', image);
-    return this.httpClient.post<any>(`${this.baseUrl}save`, formData);
+
+    const token = this.authService.getToken();
+    console.log('Token:', token); // Verify token
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+      // 'Content-Type' is not needed here
+    });
+
+console.log(headers);
+    return this.httpClient.post<ProductModule>(`${this.baseUrl}save`, formData, { headers })
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
   updateProductStock(productName: string, updatedStock: number): Observable<any> {
@@ -73,7 +98,8 @@ export class ProductService {
   }
   
   deleteProduct(id: number): Observable<any> {
-    return this.httpClient.delete(this.baseUrl+ "delete/"+ id);
+    const headers = this.getAuthHeaders();
+    return this.httpClient.delete(this.baseUrl+ "delete/"+ id,{ headers });
   }
   
   // updateProduct(id: number, formData: FormData): Observable<ProductModule> {
@@ -95,6 +121,14 @@ export class ProductService {
   getById(id: number): Observable<ProductModule> {
     return this.httpClient.get<ProductModule>(`${this.baseUrl}${id}`);
   }
+
+  // getProductById(productId: number): Observable<any> {
+  //   const headers = this.getAuthHeaders();
+  //   return this.httpClient.get<any>(`${this.baseUrl}${productId}`, { headers })
+  //     .pipe(
+  //       catchError(this.handleError)
+  //     );
+  // }
 
 
   

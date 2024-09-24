@@ -20,6 +20,7 @@
     <p>Stock: {{ product.stock }}</p>
     
     <!-- Only show buttons if product.id is defined -->
+    <ng-container *ngIf="this.authService.getUserRole() === 'ADMIN'">
     <ng-container *ngIf="product.id">
       <button (click)="updateProduct(product.id)" class="btn btn-primary">
         <fa-icon [icon]="faEdit"></fa-icon> Edit
@@ -28,5 +29,6 @@
         <fa-icon [icon]="faTrash"></fa-icon> Delete
       </button>
     </ng-container>
+  </ng-container>
   </div>
 </div>

@@ -74,8 +74,8 @@ export class CreateproductComponent implements OnInit {
   
       this.productService.createProduct(product, this.image).subscribe({
         next: apiResponse => {
-          if (apiResponse && apiResponse.successful) {
-            console.log('Product added successfully:', apiResponse.message);
+          if (apiResponse && apiResponse) {
+            console.log('Product added successfully:', apiResponse);
             this.formValue.reset();
             this.router.navigate(['/viewproduct']);
           }

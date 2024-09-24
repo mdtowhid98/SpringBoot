@@ -26,9 +26,11 @@ export class AuthService {
     private http: HttpClient,
     private router: Router
   ) {
-    // Initialize the role from localStorage
-    const storedRole = this.isBrowser() ? localStorage.getItem('userRole') : null;
-    this.userRoleSubject.next(storedRole);
+    // Initialize the role from localStorage only if it's a browser
+    if (this.isBrowser()) {
+      const storedRole = localStorage.getItem('userRole');
+      this.userRoleSubject.next(storedRole);
+    }
   }
 
   // New methods to handle localStorage
@@ -82,7 +84,10 @@ export class AuthService {
   }
 
   getToken(): string | null {
-    return this.getItem('authToken');
+    if (this.isBrowser()) {
+      return localStorage.getItem('authToken');
+    }
+    return null;
   }
 
   decodeToken(token: string): any {
@@ -96,7 +101,10 @@ export class AuthService {
   }
 
   getUserRole(): string | null {
-    return this.getItem('userRole');
+    if (this.isBrowser()) {
+      return localStorage.getItem('userRole');
+    }
+    return null;
   }
 
   isAdmin(): boolean {
@@ -144,4 +152,11 @@ export class AuthService {
     }
     this.router.navigate(['/login']);
   }
+
+  hasRole(roles: string[]): boolean {
+    const userRole = this.getUserRole();
+    return userRole ? roles.includes(userRole) : false;
+  }
+
+ 
 }
