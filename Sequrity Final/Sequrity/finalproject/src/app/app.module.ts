@@ -29,6 +29,9 @@ import { CategoryService } from './service/category.service';
 import { UpdateCtegoryComponent } from './category/update-ctegory/update-ctegory.component';
 import { TokenInterceptor } from './guard/TokenInterceptor';
 import { RegisterComponent } from './loginregistration/register/register.component';
+import { ViewSupplierComponent } from './supplier/view-supplier/view-supplier.component';
+import { CreatesupplierComponent } from './supplier/createsupplier/createsupplier.component';
+import { UpdatesupplierComponent } from './supplier/updatesupplier/updatesupplier.component';
 
 
 
@@ -57,6 +60,9 @@ import { RegisterComponent } from './loginregistration/register/register.compone
     FilterByCategoryPipe,
     UpdateCtegoryComponent,
     RegisterComponent,
+    ViewSupplierComponent,
+    CreatesupplierComponent,
+    UpdatesupplierComponent,
     
     
     

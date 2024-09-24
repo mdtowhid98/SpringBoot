@@ -21,21 +21,27 @@ import { RegisterComponent } from './loginregistration/register/register.compone
 import { AuthGuard } from './guard/auth.guard';
 import { AdminGuard } from './guard/admin.guard';
 import { RoleGuard } from './guard/role.guard';
+import { ViewSupplierComponent } from './supplier/view-supplier/view-supplier.component';
+import { CreatesupplierComponent } from './supplier/createsupplier/createsupplier.component';
+import { UpdatesupplierComponent } from './supplier/updatesupplier/updatesupplier.component';
 
 const routes: Routes = [
   {path:"viewproduct",component:ViewproductComponent},
-  {path:"createProduct",component:CreateproductComponent, canActivate: [AdminGuard]},
-  {path:"updateProduct/:id",component:UpdateproductComponent,canActivate: [AdminGuard]},
-  {path:"viewsales",component:ViewsalesComponent,canActivate: [AdminGuard]},
-  {path:"createSales",component:CreatesalesComponent,canActivate: [AdminGuard]},
-  {path:"updatecategory/:id",component:UpdateCtegoryComponent,canActivate: [AdminGuard]},
+  {path:"createProduct",component:CreateproductComponent},
+  {path:"updateProduct/:id",component:UpdateproductComponent},
+  {path:"viewsales",component:ViewsalesComponent},
+  {path:"createSales",component:CreatesalesComponent},
+  {path:"updatecategory/:id",component:UpdateCtegoryComponent},
   {path:"updateSales/:id",component:UpdatesalesComponent},
   {path:"logIn",component:LoginComponent},
   {path: 'reg', component:RegisterComponent},
   {path:"home",component:HomeComponent},
   {path:"invoice",component:InvoiceComponent},
-  {path:"viewCategory",component:CategoryComponent,canActivate: [AdminGuard]},
-  {path:"createCategory",component:CreateCategoryComponent,canActivate: [AdminGuard]},
+  {path:"viewCategory",component:CategoryComponent},
+  {path:"createCategory",component:CreateCategoryComponent},
+  {path:"viewsupplier",component:ViewSupplierComponent},
+  {path:"createsupplier",component:CreatesupplierComponent},
+  {path:"updatesupplier/:id",component:UpdatesupplierComponent},
   {
     path: 'userprofile',
     component: UserprofileComponent,

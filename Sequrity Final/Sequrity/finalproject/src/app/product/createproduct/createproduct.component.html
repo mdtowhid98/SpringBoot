@@ -32,6 +32,15 @@
     </div>
 
     <div class="mb-3">
+      <label for="suppliers" class="form-label">
+        <fa-icon [icon]="faTags"></fa-icon>Supplier:
+      </label>
+      <select id="supplier" class="form-select" formControlName="supplier" required>
+        <option *ngFor="let g of suppliers" [ngValue]="g.id">{{ g.name }}</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
       <label for="formFile" class="form-label">
         <fa-icon [icon]="faImage"></fa-icon> Image:
       </label>

@@ -25,16 +25,28 @@
           </a>
         </li>
         <!-- <ng-container *ngIf="userRole === 'Admin'"> -->
-          <li class="nav-item">
-            <a class="nav-link" href="/createCategory">
-              <fa-icon [icon]="faPlus"></fa-icon> Create Category
-            </a>
-          </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/createCategory">
+            <fa-icon [icon]="faPlus"></fa-icon> Create Category
+          </a>
+        </li>
         <!-- </ng-container> -->
+
+        <li class="nav-item">
+          <a class="nav-link" href="/viewsupplier">
+            <fa-icon [icon]="faPlus"></fa-icon> View Supplier
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/createsupplier">
+            <fa-icon [icon]="faPlus"></fa-icon> Create Supplier
+          </a>
+        </li>
 
       </ul>
       <form class="d-flex" role="search">
-        
+
         <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-success" type="submit">
             <fa-icon [icon]="faSearch"></fa-icon> Search
@@ -64,31 +76,35 @@
 
 
 
-      <!-- <ng-container *ngIf="userRole === 'Admin'"> -->
+      <ng-container *ngIf="this.authService.getUserRole() === 'ADMIN'">
         <a href="/viewproduct">
           <fa-icon [icon]="faEye"></fa-icon> View Products
         </a>
-        <!-- <li  *ngIf="isAdmin"> -->
-        <a class="dropdown-item" href="/createProduct">
-          <fa-icon [icon]="faPlus"></fa-icon> Create Products
-        </a>
-        <!-- </li> -->
-        <a class="dropdown-item" href="/createSales">
-          <fa-icon [icon]="faShoppingCart"></fa-icon> Create Sales
-        </a>
-        <a class="dropdown-item" href="/viewsales">
-          <fa-icon [icon]="faChartLine"></fa-icon> View Sales
+
+       
+          <a class="nav-link" href="/createProduct">
+            <fa-icon [icon]="faPlus"></fa-icon> Create Product
+          </a>
+       
+      
+
+
+      <a class="dropdown-item" href="/createSales">
+        <fa-icon [icon]="faShoppingCart"></fa-icon> Create Sales
+      </a>
+      <a class="dropdown-item" href="/viewsales">
+        <fa-icon [icon]="faChartLine"></fa-icon> View Sales
+      </a>
+
+      </ng-container>
+      <ng-container *ngIf="this.authService.getUserRole() === 'USER'">
+      <a class="dropdown-item" href="/viewproduct">
+          <fa-icon [icon]="faEye"></fa-icon> View Products
         </a>
 
-      <!-- </ng-container> -->
-      <!-- <ng-container *ngIf="userRole === 'User'"> -->
-        <!-- <a class="dropdown-item" href="/viewproduct">
-          <fa-icon [icon]="faEye"></fa-icon> View Products
-        </a> -->
-       
-      <!-- </ng-container> -->
+      </ng-container>
 
     </div>
-  
+
   </div>
 </div>

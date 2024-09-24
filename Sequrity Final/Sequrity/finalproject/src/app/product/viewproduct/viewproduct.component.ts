@@ -7,10 +7,8 @@ import { UserModule } from '../../module/user/user.module';
 import { AuthService } from '../../service/auth.service';
 import { CategoryService } from '../../service/category.service';
 import { CategoryModule } from '../../module/category/category.module';
-
-interface ProductWithCategory extends ProductModule {
-  categoryname: string;
-}
+import { SupplierService } from '../../service/supplier.service';
+import { SupplierModule } from '../../module/supplier/supplier.module';
 
 @Component({
   selector: 'app-viewproduct',
@@ -19,31 +17,36 @@ interface ProductWithCategory extends ProductModule {
 })
 export class ViewproductComponent implements OnInit {
 
-
   userRole: string | null = '';
   currentUser: UserModule | null = null;
   categories: CategoryModule[] = [];
+  suppliers: SupplierModule[] = [];
   products: ProductModule[] = [];
   selectedCategory: string = '';
 
   faEdit = faEdit;
   faTrash = faTrash;
 
+  // Change access modifier from private to public or protected
+  public authService: AuthService;
+
   constructor(
     private productService: ProductService,
-    private authService: AuthService,
+    authService: AuthService, // Inject AuthService here
     private router: Router,
-    private categoryService: CategoryService
-  ) { }
+    private categoryService: CategoryService,
+    private supplierService: SupplierService,
+  ) { 
+    this.authService = authService; // Assign it to the property
+  }
 
   ngOnInit(): void {
     this.getAllCategory();
     this.getAllProducts(); // Ensure products are loaded on initialization
-
-    // this.authService.currentUser$.subscribe(user => {
-    //   this.currentUser = user;
-    //   this.userRole = user?.role || null;
-    // });
+    this.getAllSupplier();
+    this.authService.currentUser$.subscribe(user => {
+      this.currentUser = user;
+    });
   }
 
   // Method to filter or perform action based on selected category
@@ -96,26 +99,35 @@ export class ViewproductComponent implements OnInit {
     );
   }
 
-     // Delete method
-     deleteProduct(id: number) {
-      if (confirm('Are you sure you want to delete this pharmacist?')) {
-        this.productService.deleteProduct(id).subscribe({
-          next: () => {
-            // Refresh the generics list after successful deletion
-            this.getAllProducts();
-            this.router.navigate(['/viewproduct'])
-          },
-          error: (error) => {
-            console.log('Error deleting product', error);
-          }
-        });
+  getAllSupplier() {
+    this.supplierService.getAllSupplier().subscribe(
+      res => {
+        this.suppliers = res;
+        console.log(this.suppliers);
+      },
+      err => {
+        console.log(err);
       }
+    );
+  }
+
+  // Delete method
+  deleteProduct(id: number) {
+    if (confirm('Are you sure you want to delete this pharmacist?')) {
+      this.productService.deleteProduct(id).subscribe({
+        next: () => {
+          // Refresh the generics list after successful deletion
+          this.getAllProducts();
+          this.router.navigate(['/viewproduct']);
+        },
+        error: (error) => {
+          console.log('Error deleting product', error);
+        }
+      });
     }
+  }
 
   updateProduct(id: number): void {
     this.router.navigate(['updateProduct', id]);
   }
-
-
-
 }

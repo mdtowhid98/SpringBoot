@@ -1,6 +1,7 @@
 import { NgModule, PipeTransform } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CategoryModule } from '../category/category.module';
+import { SupplierModule } from '../supplier/supplier.module';
 
 
 
@@ -18,6 +19,7 @@ export class ProductModule {
   unitprice!: number;
   quantity!: number;
   categories!: CategoryModule[];
+  supplier!: SupplierModule;
 }
 
 

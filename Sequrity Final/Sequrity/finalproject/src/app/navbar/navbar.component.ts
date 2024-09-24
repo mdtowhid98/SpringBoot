@@ -26,12 +26,11 @@ export class NavbarComponent implements OnInit{
   faShoppingCart = faShoppingCart;
   faChartLine = faChartLine;
 
-  constructor(private authService: AuthService) { }
+  constructor(protected authService: AuthService) { }
 
   ngOnInit(): void {
-    // this.authService.currentUser$.subscribe(user => {
-    //   this.currentUser = user;
-    //   this.userRole = user?.role || null;
-    // });
+    this.authService.currentUser$.subscribe(user => {
+      this.currentUser = user;
+    });
   }
 }

@@ -2,8 +2,10 @@ package com.towhid.practicepharmacy.service;
 
 import com.towhid.practicepharmacy.entity.Category;
 import com.towhid.practicepharmacy.entity.Product;
+import com.towhid.practicepharmacy.entity.Supplier;
 import com.towhid.practicepharmacy.repository.CategoryRepository;
 import com.towhid.practicepharmacy.repository.ProductRepository;
+import com.towhid.practicepharmacy.repository.SupplierRepository;
 import com.towhid.practicepharmacy.util.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,6 +29,9 @@ public class ProductService {
 
     @Autowired
     private CategoryRepository categoryRepository;
+
+    @Autowired
+    private SupplierRepository supplierRepository;
 
     @Value("src/main/resources/static/images")
     private String uploadDir;
@@ -55,28 +60,30 @@ public class ProductService {
         try {
             // Validate product data
             if (product.getName() == null || product.getCategory() == null) {
-                throw new RuntimeException("Product name and category are required");
+                throw new RuntimeException("Product name and category are required.");
             }
 
             // Check if category exists
             Category category = categoryRepository.findById(product.getCategory().getId())
-                    .orElseThrow(() -> new RuntimeException("Category with this id not found"));
+                    .orElseThrow(() -> new RuntimeException("Category with this id not found."));
             product.setCategory(category);
+
+            // Check if supplier exists
+            Supplier supplier = supplierRepository.findById(product.getSupplier().getId())
+                    .orElseThrow(() -> new RuntimeException("Supplier with this id not found."));
+            product.setSupplier(supplier);
 
             // Check if a product with the same name already exists
             List<Product> existingProducts = productRepository.findProductByName(product.getName());
             if (!existingProducts.isEmpty()) {
-                // Assuming there is only one product with the same name
+                // Assuming there's only one product with the same name
                 Product existingProduct = existingProducts.get(0);
 
-                // Update the stock by adding the new stock to the existing stock
-                int updatedStock = existingProduct.getStock() + product.getStock();
-                existingProduct.setStock(updatedStock);
-
-                // Update other product details if needed (e.g., price, category)
+                // Update stock and unit price
+                existingProduct.setStock(existingProduct.getStock() + product.getStock());
                 existingProduct.setUnitprice(product.getUnitprice());
 
-                // Handle image file (update photo if new image is provided)
+                // Handle image file (update photo if a new image is provided)
                 if (imageFile != null && !imageFile.isEmpty()) {
                     String imageFileName = saveImage(imageFile, existingProduct);
                     existingProduct.setPhoto(imageFileName);
@@ -84,7 +91,6 @@ public class ProductService {
 
                 // Save the updated product
                 productRepository.save(existingProduct);
-
                 apiResponse.setSuccessful(true);
                 apiResponse.setMessage("Product already exists. Stock updated.");
             } else {
@@ -97,10 +103,13 @@ public class ProductService {
                 // Save the new product
                 productRepository.save(product);
                 apiResponse.setSuccessful(true);
-                apiResponse.setMessage("Product saved successfully");
+                apiResponse.setMessage("Product saved successfully.");
             }
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             apiResponse.setMessage(e.getMessage());
+            apiResponse.setSuccessful(false);
+        } catch (Exception e) {
+            apiResponse.setMessage("An unexpected error occurred: " + e.getMessage());
             apiResponse.setSuccessful(false);
         }
         return apiResponse;
@@ -157,6 +166,7 @@ public class ProductService {
         existingProduct.setCategory(product.getCategory());
         existingProduct.setUnitprice(product.getUnitprice());
         existingProduct.setQuantity(product.getQuantity());
+        existingProduct.setSupplier(product.getSupplier());
 
         // Update the stock: Add the incoming stock to the existing stock
         int updatedStock = existingProduct.getStock() + product.getStock(); // Assuming you're adding stock

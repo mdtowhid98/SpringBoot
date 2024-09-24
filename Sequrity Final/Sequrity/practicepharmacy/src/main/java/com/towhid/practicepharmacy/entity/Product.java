@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Date;
 import java.util.List;
 
 @Entity
@@ -32,11 +33,21 @@ public class Product {
 
     private int unitprice;
 
+    private Date manufactureDate;
+
+    private Date expiryDate;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "categoryId")
     private Category category;
 
-//    @JsonIgnore
-//    @ManyToMany(mappedBy = "product", cascade = CascadeType.ALL)
-//    private Sales sales;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "supplierId")
+    private Supplier supplier;
+
+//    @ManyToOne
+//    @JoinColumn(name = "supplier_id")
+//    private Supplier supplier;
+
+
 }
