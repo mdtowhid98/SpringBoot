@@ -7,6 +7,8 @@ import { HttpClient } from '@angular/common/http';
 import { faPlusCircle, faTag, faImage, faDollarSign, faBoxes, faUser, faBox, faTags, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { CategoryModule } from '../../module/category/category.module';
 import { CategoryService } from '../../service/category.service';
+import { SupplierModule } from '../../module/supplier/supplier.module';
+import { SupplierService } from '../../service/supplier.service';
 
 @Component({
   selector: 'app-createproduct',
@@ -17,6 +19,7 @@ export class CreateproductComponent implements OnInit {
 
   image: File | null = null;
   categories: CategoryModule[] = [];
+  suppliers: SupplierModule[] = [];
   product: ProductModule = new ProductModule();
   formValue!: FormGroup;
 
@@ -30,19 +33,22 @@ export class CreateproductComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private categoryService: CategoryService,
+    private supplierService: SupplierService,
     private router: Router,
     private formBuilder: FormBuilder
   ) { }
 
   ngOnInit(): void {
     this.loadCategory();
+    this.loadSupplier();
   
     this.formValue = this.formBuilder.group({
       name: ['', Validators.required],
       photo: ['', Validators.required],
       stock: [0, [Validators.required, Validators.min(0)]],
       unitprice: [0, [Validators.required, Validators.min(0)]],
-      category: [null, Validators.required], // Updated to be a single value
+      category: [null, Validators.required], 
+      supplier: [null, Validators.required], 
     });
   }
 
@@ -63,6 +69,21 @@ export class CreateproductComponent implements OnInit {
     });
   }
   
+  loadSupplier() {
+
+    this.supplierService.getAllSupplier().subscribe({
+      next: res => {
+        this.suppliers = res;
+        console.log('Suppliers loaded:', this.suppliers);
+      },
+      error: error => {
+        console.log('Error loading suppliers:', error);
+      }
+    });
+  }
+
+
+
   onSubmit() {
     if (this.image) {
       console.log('Image selected:', this.image);
