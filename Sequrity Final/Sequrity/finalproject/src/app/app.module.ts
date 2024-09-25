@@ -32,6 +32,9 @@ import { RegisterComponent } from './loginregistration/register/register.compone
 import { ViewSupplierComponent } from './supplier/view-supplier/view-supplier.component';
 import { CreatesupplierComponent } from './supplier/createsupplier/createsupplier.component';
 import { UpdatesupplierComponent } from './supplier/updatesupplier/updatesupplier.component';
+import { ViewCustomerComponent } from './customer/view-customer/view-customer.component';
+import { CreateCustomerComponent } from './customer/create-customer/create-customer.component';
+import { UpdateCustomerComponent } from './customer/update-customer/update-customer.component';
 
 
 
@@ -63,6 +66,9 @@ import { UpdatesupplierComponent } from './supplier/updatesupplier/updatesupplie
     ViewSupplierComponent,
     CreatesupplierComponent,
     UpdatesupplierComponent,
+    ViewCustomerComponent,
+    CreateCustomerComponent,
+    UpdateCustomerComponent,
     
     
     

@@ -45,6 +45,8 @@ export class CreateproductComponent implements OnInit {
     this.formValue = this.formBuilder.group({
       name: ['', Validators.required],
       photo: ['', Validators.required],
+      manufactureDate: ['', Validators.required],
+      expiryDate: ['', Validators.required],
       stock: [0, [Validators.required, Validators.min(0)]],
       unitprice: [0, [Validators.required, Validators.min(0)]],
       category: [null, Validators.required], 

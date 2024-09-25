@@ -7,13 +7,8 @@ import { UserModule } from '../../module/user/user.module';
 import { AuthService } from '../../service/auth.service';
 import { CategoryService } from '../../service/category.service';
 import { CategoryModule } from '../../module/category/category.module';
-<<<<<<< HEAD
-
-
-=======
 import { SupplierService } from '../../service/supplier.service';
 import { SupplierModule } from '../../module/supplier/supplier.module';
->>>>>>> 11ea44ecb6114b84bc03486dd27c5a8782d3de66
 
 @Component({
   selector: 'app-viewproduct',
@@ -37,11 +32,7 @@ export class ViewproductComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
-<<<<<<< HEAD
-    protected authService: AuthService,
-=======
     authService: AuthService, // Inject AuthService here
->>>>>>> 11ea44ecb6114b84bc03486dd27c5a8782d3de66
     private router: Router,
     private categoryService: CategoryService,
     private supplierService: SupplierService,
@@ -52,11 +43,7 @@ export class ViewproductComponent implements OnInit {
   ngOnInit(): void {
     this.getAllCategory();
     this.getAllProducts(); // Ensure products are loaded on initialization
-<<<<<<< HEAD
-
-=======
     this.getAllSupplier();
->>>>>>> 11ea44ecb6114b84bc03486dd27c5a8782d3de66
     this.authService.currentUser$.subscribe(user => {
       this.currentUser = user;
     });

@@ -48,11 +48,7 @@ public class SequrityConfig {
                                                         "api/pharmacist/delete/{id}","api/pharmacist/update/{id}","api/salesmedicine/","api/salesmedicine/save",
                                                         "/api/category/","/api/category/update/{id}","/api/category/delete/{id}","/api/category/{id}",
                                                         "/api/product/","/api/product/save","/api/product/update/{id}","/api/product/delete/{id}","/api/product/{id}","/api/product/h/searchproduct",
-<<<<<<< HEAD
-                                                        "/api/sales/","/api/sales/save","/api/sales/delete/{id}","/images/**")
-=======
-                                                        "/api/sales/","/api/sales/save","/api/sales/delete/{id}","/images/**","/api/supplier/**")
->>>>>>> 11ea44ecb6114b84bc03486dd27c5a8782d3de66
+                                                        "/api/sales/","/api/sales/save","/api/sales/delete/{id}","/images/**","/api/supplier/**","/api/customer/**","/api/salesorder/**")
                                                 .permitAll()
                                                 .requestMatchers("api/medicine/save", "api/medicinegeneric/save","/api/category/save")
                                                 .hasAuthority("ADMIN")

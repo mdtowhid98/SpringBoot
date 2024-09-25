@@ -18,6 +18,8 @@ export class ProductModule {
   stock!: number;
   unitprice!: number;
   quantity!: number;
+  manufactureDate!:Date;
+  expiryDate!:Date;
   categories!: CategoryModule[];
   supplier!: SupplierModule;
 }

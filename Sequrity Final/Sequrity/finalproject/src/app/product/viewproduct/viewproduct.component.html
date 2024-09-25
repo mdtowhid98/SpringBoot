@@ -17,19 +17,10 @@
     <p *ngFor="let category of product.categories">Category: {{ category.categoryname }}</p>
     <p>Unit Price: {{ product.unitprice | currency }}</p>
     <p>Stock: {{ product.stock }}</p>
+    <p>Manufacture Date: {{ product.manufactureDate }}</p>
+    <p>Expiry Date: {{ product.expiryDate }}</p>
     <p>Supplier: {{ product.supplier.name }}</p>
     
-<<<<<<< HEAD
-    <!-- Only show buttons if product.id is defined -->
-    <ng-container *ngIf="this.authService.getUserRole() === 'ADMIN'">
-    <ng-container *ngIf="product.id">
-      <button (click)="updateProduct(product.id)" class="btn btn-primary">
-        <fa-icon [icon]="faEdit"></fa-icon> Edit
-      </button>
-      <button (click)="deleteProduct(product.id)" class="btn btn-danger">
-        <fa-icon [icon]="faTrash"></fa-icon> Delete
-      </button>
-=======
     
     <!-- Admin role controls -->
     <ng-container *ngIf="authService.getUserRole() === 'ADMIN'">
@@ -41,8 +32,6 @@
           <fa-icon [icon]="faTrash"></fa-icon> Delete
         </button>
       </ng-container>
->>>>>>> 11ea44ecb6114b84bc03486dd27c5a8782d3de66
     </ng-container>
-  </ng-container>
   </div>
 </div>

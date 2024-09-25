@@ -24,6 +24,9 @@ import { RoleGuard } from './guard/role.guard';
 import { ViewSupplierComponent } from './supplier/view-supplier/view-supplier.component';
 import { CreatesupplierComponent } from './supplier/createsupplier/createsupplier.component';
 import { UpdatesupplierComponent } from './supplier/updatesupplier/updatesupplier.component';
+import { ViewCustomerComponent } from './customer/view-customer/view-customer.component';
+import { CreateCustomerComponent } from './customer/create-customer/create-customer.component';
+import { UpdateCustomerComponent } from './customer/update-customer/update-customer.component';
 
 const routes: Routes = [
   {path:"viewproduct",component:ViewproductComponent},
@@ -39,12 +42,12 @@ const routes: Routes = [
   {path:"invoice",component:InvoiceComponent},
   {path:"viewCategory",component:CategoryComponent},
   {path:"createCategory",component:CreateCategoryComponent},
-<<<<<<< HEAD
-=======
   {path:"viewsupplier",component:ViewSupplierComponent},
   {path:"createsupplier",component:CreatesupplierComponent},
   {path:"updatesupplier/:id",component:UpdatesupplierComponent},
->>>>>>> 11ea44ecb6114b84bc03486dd27c5a8782d3de66
+  {path:"viewcustomer",component:ViewCustomerComponent},
+  {path:"createcustomer",component:CreateCustomerComponent},
+  {path:"updatecustomer/:id",component:UpdateCustomerComponent},
   {
     path: 'userprofile',
     component: UserprofileComponent,
