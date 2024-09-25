@@ -1,5 +1,6 @@
 package com.towhid.practicepharmacy.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,33 +13,42 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "SalesOrders")
-public class SalesOrder {
+@Table(name = "Products")
+
+
+public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private int id;
 
-    private Date orderDate;
+    private String name;
 
-    private double totalAmount;
+    private String photo;
+
+    private int stock;
+
+    private int quantity;
+
+    private int unitprice;
+
+    private Date manufactureDate;
+
+    private Date expiryDate;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "customerId")
-    private Customer customer;
-    
+    @JoinColumn(name = "categoryId")
+    private Category category;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "supplierId")
     private Supplier supplier;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "sales_order_products",
-            joinColumns = @JoinColumn(name = "salesOrder_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id")
-    )
-    private List<Product> products;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "salesOrderId")
+//    private SalesOrder salesOrder;
+
+
 
 }
-
