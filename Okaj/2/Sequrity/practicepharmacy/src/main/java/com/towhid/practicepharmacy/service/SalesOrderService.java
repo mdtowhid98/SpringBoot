@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SalesOrderService {
@@ -70,6 +71,10 @@ public class SalesOrderService {
         // Save the sales order (now the products are attached to the persistence context)
         salesOrderRepository.save(salesOrder);
     }
+    public Optional<SalesOrder> getSalesOrderById(int id) {
+        return salesOrderRepository.findById(id);
+    }
+
 
 }
 

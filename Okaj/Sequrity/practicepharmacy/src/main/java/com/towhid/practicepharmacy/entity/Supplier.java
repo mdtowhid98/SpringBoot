@@ -26,7 +26,9 @@ public class Supplier {
     @OneToMany(mappedBy = "supplier", cascade = CascadeType.ALL)
     private List<Product> products;
 
+
     public Supplier(int id) {
+
         this.id = id;
     }
 }

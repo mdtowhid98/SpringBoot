@@ -35,6 +35,8 @@ import { UpdatesupplierComponent } from './supplier/updatesupplier/updatesupplie
 import { ViewCustomerComponent } from './customer/view-customer/view-customer.component';
 import { CreateCustomerComponent } from './customer/create-customer/create-customer.component';
 import { UpdateCustomerComponent } from './customer/update-customer/update-customer.component';
+import { ViewOrderComponent } from './order/view-order/view-order.component';
+import { CreateOrderComponent } from './order/create-order/create-order.component';
 
 
 
@@ -69,6 +71,8 @@ import { UpdateCustomerComponent } from './customer/update-customer/update-custo
     ViewCustomerComponent,
     CreateCustomerComponent,
     UpdateCustomerComponent,
+    ViewOrderComponent,
+    CreateOrderComponent,
     
     
     

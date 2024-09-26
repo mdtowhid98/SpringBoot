@@ -1,0 +1,54 @@
+<form [formGroup]="formValue" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="orderDate">Order Date:</label>
+    <input type="date" id="orderDate" formControlName="orderDate" class="form-control" required>
+    <div *ngIf="formValue.get('orderDate')?.invalid && formValue.get('orderDate')?.touched" class="text-danger">
+      Order date is required.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="totalAmount">Total Amount:</label>
+    <input type="number" id="totalAmount" formControlName="totalAmount" class="form-control" required>
+    <div *ngIf="formValue.get('totalAmount')?.invalid && formValue.get('totalAmount')?.touched" class="text-danger">
+      Total amount is required.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="customer">Customer:</label>
+    <select id="customer" formControlName="customer" class="form-control" required>
+      <option value="">Select Customer</option>
+      <option *ngFor="let customer of customers" [value]="customer.id">{{ customer.name }}</option>
+    </select>
+    <div *ngIf="formValue.get('customer')?.invalid && formValue.get('customer')?.touched" class="text-danger">
+      Customer selection is required.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="supplier">Supplier:</label>
+    <select id="supplier" formControlName="supplier" class="form-control" required>
+      <option value="">Select Supplier</option>
+      <option *ngFor="let supplier of suppliers" [value]="supplier.id">{{ supplier.name }}</option>
+    </select>
+    <div *ngIf="formValue.get('supplier')?.invalid && formValue.get('supplier')?.touched" class="text-danger">
+      Supplier selection is required.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Products:</label>
+    <div formArrayName="products">
+      <div *ngFor="let product of products; let i = index">
+        <input type="checkbox" [formControlName]="i" />
+        <label>{{ product.name }}</label>
+      </div>
+    </div>
+    <div *ngIf="formValue.controls['products'].invalid && formValue.controls['products'].touched" class="text-danger">
+      At least one product is required.
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="formValue.invalid">Submit</button>
+</form>
