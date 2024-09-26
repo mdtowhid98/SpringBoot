@@ -21,16 +21,16 @@ public class SalesOrder {
 
     private Date orderDate;
 
-    private double totalAmount;
+//    private double totalAmount;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customerId")
     private Customer customer;
     
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "supplierId")
-    private Supplier supplier;
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "supplierId")
+//    private Supplier supplier;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(

@@ -8,18 +8,20 @@ import { SalesOrderModule } from '../module/sales-order/sales-order.module';
 })
 export class SalesOrderService {
 
-  baseUrl: string = "http://localhost:8087/api/salesorder/";
+  private baseUrl: string = 'http://localhost:8087/api/salesorder/';
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(
+    private httpClient:HttpClient
+    ) { }
 
-  // Fetch all sales orders
-  getAllSalesOrder(): Observable<SalesOrderModule[]> {
-    return this.httpClient.get<SalesOrderModule[]>(this.baseUrl);
+  getAllSalesOrder(): Observable<any[]> {
+    return this.httpClient.get<any[]>(this.baseUrl);
   }
 
-  // Create a new sales order
-  createSalesOrder(order: SalesOrderModule): Observable<any> {
-    return this.httpClient.post(this.baseUrl + "save", order);
+  createSalesOrder(order: SalesOrderModule): Observable<SalesOrderModule> {
+
+    return this.httpClient.post<SalesOrderModule>(this.baseUrl+"save", order);
   }
+
 
 }

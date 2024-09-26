@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CustomerModule } from '../customer/customer.module';
 import { ProductModule } from '../product/product.module';
+import { CustomerModule } from '../customer/customer.module';
 
 
 
@@ -11,10 +11,13 @@ import { ProductModule } from '../product/product.module';
     CommonModule
   ]
 })
-export class SalesOrderModule { 
+export class OrderModule { 
 
   id!:number;
+  product!:ProductModule;
+  quantity!:number;
   orderDate!:Date;
   customer!:CustomerModule;
-  products!:ProductModule[];
+
+
 }

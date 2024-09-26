@@ -1,59 +1,58 @@
 import { Component, OnInit } from '@angular/core';
-import { SalesOrderModule } from '../../module/sales-order/sales-order.module';
+import { OrderModule } from '../../module/order/order.module';
 import { ProductModule } from '../../module/product/product.module';
 import { CustomerModule } from '../../module/customer/customer.module';
+import { faEdit, faEye, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { ProductService } from '../../service/product.service';
-import { SalesOrderService } from '../../service/sales-order.service';
-import { CustomerService } from '../../service/customer.service';
 import { Router } from '@angular/router';
+import { CustomerService } from '../../service/customer.service';
+import { OrderService } from '../../service/order.service';
 
 @Component({
-  selector: 'app-view-sales-order',
-  templateUrl: './view-sales-order.component.html',
-  styleUrl: './view-sales-order.component.css'
+  selector: 'app-view-order',
+  templateUrl: './view-order.component.html',
+  styleUrl: './view-order.component.css'
 })
-export class ViewSalesOrderComponent implements OnInit{
+export class ViewOrderComponent implements OnInit{
 
-  order: SalesOrderModule[] = [];
+
+  order: OrderModule[] = [];
   products: ProductModule[] = [];
-  customer:CustomerModule[]=[];
+  customer: CustomerModule[] = [];
   
-  
-  // faEdit = faEdit;
-  // faTrash = faTrash;
-  // faEye = faEye;
+  faEdit = faEdit;
+  faTrash = faTrash;
+  faEye = faEye;
 
   constructor(private productService:ProductService,
-    private orderService:SalesOrderService,
     private customerService:CustomerService,
-    
+    private orderService:OrderService,
     private router:Router
   ){}
   
     ngOnInit(): void {
       this.loadProducts();
-      this.loadSalesOrder();
       this.loadCustomer();
-      
+      this.loadOrder();
     }
 
     loadProducts() {
       this.productService.getAllProductForSales().subscribe({
         next: (res: ProductModule[]) => {
           this.products = res;
-          // console.log(this.products); // Log the products array
+          
         },
         error: error => {
           console.error(error);
         }
       });
     }
-
+  
     loadCustomer() {
       this.customerService.getAllCustomer().subscribe({
         next: (res: CustomerModule[]) => {
           this.customer = res;
-          // console.log(this.products); // Log the products array
+          
         },
         error: error => {
           console.error(error);
@@ -61,23 +60,18 @@ export class ViewSalesOrderComponent implements OnInit{
       });
     }
 
-   
 
-  
-    loadSalesOrder() {
-      this.orderService.getAllSalesOrder().subscribe({
-        next: (res: SalesOrderModule[]) => {
+    loadOrder() {
+      this.orderService.getAllOrder().subscribe({
+        next: (res: OrderModule[]) => {
           this.order = res;
-          // console.log(this.sales); // Log the sales array
+         
         },
         error: error => {
           console.error(error);
         }
       });
     }
-
-    
-
 
     // deleteSales(id:number){
 

@@ -25,8 +25,8 @@ public class SalesOrderService {
     @Autowired
     private CustomerRepository customerRepository;
 
-    @Autowired
-    private SupplierRepository supplierRepository;
+//    @Autowired
+//    private SupplierRepository supplierRepository;
 
 
     public List<SalesOrder> getAllSalesOrder() {
@@ -41,9 +41,9 @@ public class SalesOrderService {
         salesOrder.setCustomer(customer);
 
         // Check if supplier exists
-        Supplier supplier = supplierRepository.findById(salesOrder.getSupplier().getId())
-                .orElseThrow(() -> new RuntimeException("Supplier not found with ID: " + salesOrder.getSupplier().getId()));
-        salesOrder.setSupplier(supplier);
+//        Supplier supplier = supplierRepository.findById(salesOrder.getSupplier().getId())
+//                .orElseThrow(() -> new RuntimeException("Supplier not found with ID: " + salesOrder.getSupplier().getId()));
+//        salesOrder.setSupplier(supplier);
 
         // Iterate over products and verify them
         List<Product> attachedProducts = new ArrayList<>();

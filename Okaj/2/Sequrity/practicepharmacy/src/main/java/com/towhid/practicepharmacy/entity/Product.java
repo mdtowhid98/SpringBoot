@@ -1,6 +1,8 @@
 package com.towhid.practicepharmacy.entity;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,7 +15,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "Products")
+@Table(name = "product")
 
 
 public class Product {
@@ -45,10 +47,18 @@ public class Product {
     @JoinColumn(name = "supplierId")
     private Supplier supplier;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
+    //    @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "salesOrderId")
 //    private SalesOrder salesOrder;
+//    @JsonIgnore
+//    @OneToMany(mappedBy = "products", cascade = CascadeType.ALL)
+//    private List<SalesOrder> salesOrders;
 
+    public Product(int id) {
+        this.id = id;
+    }
 
+//    @ManyToOne
+//    private SalesDetails salesDetails;
 
 }

@@ -30,7 +30,7 @@ public class Supplier {
         this.id = id;
     }
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "supplier", cascade = CascadeType.ALL)
-    private List<SalesOrder> salesOrders;
+//    @JsonIgnore
+//    @OneToMany(mappedBy = "supplier", cascade = CascadeType.ALL)
+//    private List<SalesOrder> salesOrders;
 }
