@@ -26,6 +26,7 @@ public class SupplierService {
     }
 
     public void deleteSupplierById(int id) {
+
         supplierRepository.deleteById(id);
     }
 

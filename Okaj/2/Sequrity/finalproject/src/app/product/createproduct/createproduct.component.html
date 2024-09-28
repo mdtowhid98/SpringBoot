@@ -1,4 +1,5 @@
-<div class="container mt-4">
+<div class="container mt-4 product-form">
+  <h1 class="text-center">Add Product</h1>
   <form [formGroup]="formValue" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
     
     <div class="form-group">
@@ -15,17 +16,16 @@
       <input type="number" id="stock" class="form-control" formControlName="stock" required>
     </div>
 
-
     <div class="form-group">
       <label for="manufactureDate">
-        <fa-icon [icon]="faBox"></fa-icon> Manufacture Date:
+        <fa-icon [icon]="faCalendarAlt"></fa-icon> Manufacture Date:
       </label>
       <input type="date" id="manufactureDate" class="form-control" formControlName="manufactureDate" required>
     </div>
 
     <div class="form-group">
       <label for="expiryDate">
-        <fa-icon [icon]="faBox"></fa-icon> Expiry Date:
+        <fa-icon [icon]="faCalendarAlt"></fa-icon> Expiry Date:
       </label>
       <input type="date" id="expiryDate" class="form-control" formControlName="expiryDate" required>
     </div>
@@ -48,7 +48,7 @@
 
     <div class="mb-3">
       <label for="suppliers" class="form-label">
-        <fa-icon [icon]="faTags"></fa-icon>Supplier:
+        <fa-icon [icon]="faUserTie"></fa-icon> Supplier:
       </label>
       <select id="supplier" class="form-select" formControlName="supplier" required>
         <option *ngFor="let g of suppliers" [ngValue]="g.id">{{ g.name }}</option>
@@ -65,5 +65,4 @@
     <button type="submit" class="btn btn-primary">
       <fa-icon [icon]="faPlus"></fa-icon> Add Product
     </button>
-  </form>
-</div>
+     

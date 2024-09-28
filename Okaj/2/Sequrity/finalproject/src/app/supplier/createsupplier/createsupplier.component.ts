@@ -31,7 +31,9 @@ export class CreatesupplierComponent implements OnInit{
 
       name: [''],
       
-      contactInfo: [''],
+      email: [''],
+      cell: [''],
+      address: [''],
       
 
     });
@@ -42,7 +44,9 @@ export class CreatesupplierComponent implements OnInit{
   createSupplier() {
 
     this.supplier.name = this.formValue.value.name;
-    this.supplier.contactInfo = this.formValue.value.contactInfo;
+    this.supplier.email = this.formValue.value.email;
+    this.supplier.cell = this.formValue.value.cell;
+    this.supplier.address = this.formValue.value.address;
     
 
 

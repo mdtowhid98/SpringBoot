@@ -24,6 +24,7 @@ public class SalesDetailsController {
 
     @GetMapping("/")
     public List<SalesDetails> getAllSales(){
+
         return salesDetailsService.getAllSalesDetails();
     }
 

@@ -25,8 +25,7 @@ export class CreatesalesComponent implements OnInit, OnDestroy {
   subscriptions: Subscription = new Subscription();
   filteredProducts: ProductModule[] = [];
 
-
-
+  // FontAwesome icons
   faUser = faUser;
   faCalendarAlt = faCalendarAlt;
   faBox = faBox;
@@ -64,7 +63,8 @@ export class CreatesalesComponent implements OnInit, OnDestroy {
       customername: ['', Validators.required],
       salesdate: [currentDate, Validators.required],
       products: this.formBuilder.array([]),
-      totalprice: [{ value: '', disabled: true }]
+      totalprice: [{ value: '', disabled: true }],
+      discount: ['', Validators.required],
     });
 
     this.addProduct(); // Add initial product form group
@@ -81,228 +81,126 @@ export class CreatesalesComponent implements OnInit, OnDestroy {
 
   loadCategories() {
     this.categoryService.getAllCategory().subscribe({
-      next: res => {
-        this.categories = res;
-      },
-      error: error => {
-        console.log(error);
-      }
+      next: res => { this.categories = res; },
+      error: error => { console.log(error); }
     });
   }
 
   loadProduct() {
     this.productService.getAllProductForSales().subscribe({
       next: res => {
-        // Ensure that each product has a categories property initialized
-        this.products = res.map(product => ({
-          ...product,
-          categories: product.categories || []  // Ensure categories is an array
-        }));
+        this.products = res.map(product => ({ ...product, categories: product.categories || [] }));
       },
-      error: error => {
-        console.log(error);
-      }
+      error: error => { console.log(error); }
     });
   }
-
-
-
-
 
   onCategoryChange(index: number) {
     const selectedCategory = this.productsArray.at(index).get('category')?.value;
+    if (!selectedCategory || !selectedCategory.id) return;
 
-    if (!selectedCategory || !selectedCategory.id) {
-      console.error('No category selected or category ID is undefined');
-      return;
-    }
-
-    const selectedCategoryName = selectedCategory.categoryname; // Assuming categoryname is the property
-
-    // Fetch filtered products based on the selected category
+    const selectedCategoryName = selectedCategory.categoryname;
     this.productService.findProductByCategoryName(selectedCategoryName).subscribe({
       next: (products: ProductModule[]) => {
         this.productsArray.at(index).patchValue({
-          name: '', // Reset the selected product
+          name: '', 
           unitprice: '',
           stock: '',
-          filteredProducts: products // Set filtered products for the current product group
-
-
+        
+          filteredProducts: products 
         });
-        // console.log('products: '+products);
       },
-      error: (error) => {
-        console.error('Error fetching products:', error);
-      }
+      error: (error) => { console.error('Error fetching products:', error); }
     });
   }
-
-
-
-
-
-
-
-
-
 
   addProduct() {
     const productGroup = this.formBuilder.group({
       id: [0],
       category: ['', Validators.required],
       name: ['', Validators.required],
-      filteredProducts: [[]], // Store filtered products for each product form group
+      filteredProducts: [[]],
       quantity: [{ value: 0, disabled: true }, Validators.required],
       unitprice: [{ value: 0, disabled: true }],
+      discount: [0, Validators.required],  // Add the discount field here
       stock: [{ value: 0, disabled: true }]
     });
-
-    // When a product name is selected
+  
     productGroup.get('name')?.valueChanges.subscribe(name => {
       const selectedProduct = this.products.find(prod => prod.name === name);
       if (selectedProduct) {
-        const oldStock = selectedProduct.stock;
         productGroup.patchValue({
-          id: selectedProduct.id, // Set the id here, which is a string
+          id: selectedProduct.id, 
           unitprice: selectedProduct.unitprice,
-          stock: oldStock // Set the current stock
+          stock: selectedProduct.stock
         });
-
-        // Enable quantity input if stock is available
         productGroup.get('quantity')?.enable();
-
-        // Check for stock when quantity changes
+  
         productGroup.get('quantity')?.valueChanges.subscribe(quantity => {
-          const validQuantity = quantity ?? 0; // Ensure quantity is not null or undefined
+          const validQuantity = quantity ?? 0;
           if (validQuantity > selectedProduct.stock) {
-            alert(`The quantity entered exceeds the available stock of ${selectedProduct.stock} for ${selectedProduct.name}.`);
-            // Reset the quantity field to the maximum stock
+            alert(`The quantity exceeds stock (${selectedProduct.stock}) for ${selectedProduct.name}.`);
             productGroup.patchValue({ quantity: selectedProduct.stock });
           }
         });
       }
     });
-
     this.productsArray.push(productGroup);
   }
-
-
-
+  
 
   getFilteredProducts(index: number): ProductModule[] {
     const filteredProducts = this.productsArray.at(index).get('filteredProducts')?.value;
     return Array.isArray(filteredProducts) ? filteredProducts : [];
   }
 
-
-
-
   removeProduct(index: number) {
     this.productsArray.removeAt(index);
     this.calculateTotalPrice();
   }
 
-
-
-
   calculateTotalPrice() {
     let totalprice = 0;
-
-    this.productsArray.controls.forEach((control, index) => {
+    this.productsArray.controls.forEach((control) => {
       const quantity = Number(control.get('quantity')?.value || 0);
       const unitprice = Number(control.get('unitprice')?.value || 0);
-
-      if (quantity >= 0 && unitprice >= 0) {
-        totalprice += quantity * unitprice;
-      } else {
-        console.warn(`Unexpected values at index ${index}: Quantity = ${quantity}, Unit Price = ${unitprice}`);
+      const discount = Number(control.get('discount')?.value || 0);
+      if (quantity >= 0 && unitprice >= 0 && discount >= 0) {
+        totalprice += quantity * unitprice * (1 - discount / 100);  // Apply discount correctly
       }
     });
-
     this.salesForm.patchValue({ totalprice });
-    console.log('Calculated Total Price:', totalprice);
   }
-
-
-
-
-
-
 
   createSales() {
     this.calculateTotalPrice();
-
-    // Enable totalprice temporarily to read its value
     this.salesForm.get('totalprice')?.enable();
-
     this.sale.customername = this.salesForm.value.customername;
     this.sale.salesdate = this.salesForm.value.salesdate;
+    this.sale.discount = this.salesForm.value.discount;
     this.sale.totalprice = this.salesForm.value.totalprice;
-    this.sale.quantity = this.salesForm.value.quantity;
-    
-
-    // Disable totalprice again if necessary
     this.salesForm.get('totalprice')?.disable();
 
-    // console.log(this.sale.totalprice + " Create");
-
-    // Map the products to the sales order and reduce the stock
-    // Proceed with creating the sales order
-    this.sale.product = this.salesForm.value.products.map((product: ProductModule) => {  // <-- Define 'product' type
+    this.sale.product = this.salesForm.value.products.map((product: ProductModule) => {
       const originalProduct = this.products.find(p => p.id === product.id);
       if (originalProduct) {
-        // Adjust the stock based on the quantity sold
         originalProduct.stock -= product.quantity;
-
-        // Return the modified product data to be included in the sales order
-        return {
-          id: originalProduct.id,
-          name: originalProduct.name,
-          photo: originalProduct.photo,
-          stock: originalProduct.stock, // Updated stock
-          unitprice: originalProduct.unitprice,
-          quantity: product.quantity,
-          categories: originalProduct.categories
-        };
+        return { ...originalProduct, quantity: product.quantity };
       }
       return null;
-    }).filter((product: ProductModule | null) => product !== null); // <-- Explicitly define 'product' type
+    }).filter((product: ProductModule | null) => product !== null);
 
-
-
-    // Proceed with creating the sales order
     this.salesService.createSales(this.sale).subscribe({
       next: res => {
-        // After successful creation of the sales order, update product stock
-        this.sale.product.forEach((prod: ProductModule) => {  // <-- Define 'prod' type
+        this.sale.product.forEach((prod: ProductModule) => {
           this.productService.updateProducts(prod).subscribe({
-            next: () => {
-              console.log(`Stock reduced and updated for product ID ${prod.id}`);
-            },
-            error: (error) => {
-              console.log(error);
-            }
+            next: () => { console.log(`Stock updated for product ID ${prod.id}`); },
+            error: (error) => { console.log(error); }
           });
         });
-
-        // Navigate to the invoice page with the sale data
-        this.router.navigate(['invoice'], {
-          queryParams: { sale: JSON.stringify(this.sale) }
-        });
+        this.router.navigate(['invoice'], { queryParams: { sale: JSON.stringify(this.sale) } });
       },
-      error: error => {
-        console.log(error);
-      }
+      error: error => { console.log(error); }
     });
   }
-
-
-
-
-
-
-
-
-
 }

@@ -26,9 +26,9 @@ public class Customer {
 
     private String address;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-    private List<SalesOrder> salesOrders;
+//    @JsonIgnore
+//    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+//    private List<SalesOrder> salesOrders;
 
     public Customer(int id) {
         this.id = id;

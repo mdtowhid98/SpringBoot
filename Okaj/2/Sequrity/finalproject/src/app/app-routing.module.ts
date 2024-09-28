@@ -27,9 +27,9 @@ import { UpdatesupplierComponent } from './supplier/updatesupplier/updatesupplie
 import { ViewCustomerComponent } from './customer/view-customer/view-customer.component';
 import { CreateCustomerComponent } from './customer/create-customer/create-customer.component';
 import { UpdateCustomerComponent } from './customer/update-customer/update-customer.component';
-import { ViewOrderComponent } from './order/view-order/view-order.component';
-import { CreateOrderComponent } from './order/create-order/create-order.component';
+
 import { ViewSalesOrderComponent } from './salesOrder/view-sales-order/view-sales-order.component';
+import { ViewsalesDetailsComponent } from './salesDetails/viewsales-details/viewsales-details.component';
 
 const routes: Routes = [
   {path:"viewproduct",component:ViewproductComponent},
@@ -52,7 +52,7 @@ const routes: Routes = [
   {path:"createcustomer",component:CreateCustomerComponent},
   {path:"updatecustomer/:id",component:UpdateCustomerComponent},
   {path:"vieworder",component:ViewSalesOrderComponent},
-  // {path:"createorder",component:CreateOrderComponent},
+  {path:"salesdetails",component:ViewsalesDetailsComponent},
   {
     path: 'userprofile',
     component: UserprofileComponent,

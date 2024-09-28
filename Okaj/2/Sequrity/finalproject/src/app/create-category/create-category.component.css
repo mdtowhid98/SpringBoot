@@ -1,11 +1,11 @@
 .bg-category-form {
-  background-image: url('https://i.postimg.cc/c49LgC8c/istockphoto-1334840476-640x640.jpg');
+  background-image: url('https://i.postimg.cc/9QJXRMgD/abstract-dark-blurred-background-smooth-gradient-texture-color-shiny-bright-website-pattern-banner-h.avif');
   background-size: cover; /* Ensures the image covers the entire container */
   background-position: center; /* Centers the background image */
   background-repeat: no-repeat; /* Prevents the image from repeating */
   padding: 20px; /* Adds padding inside the container */
   border-radius: 8px; /* Optional: adds rounded corners */
-  color: rgb(23, 241, 42); /* Optional: makes text color stand out against the background */
+  color: rgb(70, 23, 241); /* Optional: makes text color stand out against the background */
   height: 100vh; /* Full viewport height */
   display: flex; /* Enables Flexbox layout */
   flex-direction: column; /* Aligns children elements in a column */
@@ -35,7 +35,7 @@
 }
 
 .bg-category-form .view-category-link {
-  color: #e1f016; /* Adjust link color if needed */
+  color: #0c0c0a; /* Adjust link color if needed */
   display: block; /* Makes the link block-level for better alignment */
   margin-top: 15px; /* Adds space above the link */
 }

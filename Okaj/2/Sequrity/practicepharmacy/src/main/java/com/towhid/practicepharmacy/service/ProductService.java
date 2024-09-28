@@ -126,28 +126,7 @@ public class ProductService {
                 .orElseThrow(() -> new RuntimeException("Product With This Id Not Found"));
     }
 
-//    @Transactional
-//    public void updateProduct(int id, Product updateProduct, MultipartFile imageFile) throws IOException {
-//        Product existingProduct = productRepository.findById(id)
-//                .orElseThrow(() -> new RuntimeException("Product With This Id Not Found"));
-//
-//        existingProduct.setName(updateProduct.getName());
-//        existingProduct.setPhoto(updateProduct.getPhoto());
-//        existingProduct.setStock(updateProduct.getStock());
-//        existingProduct.setQuantity(updateProduct.getQuantity());
-//
-//
-//        Category category = categoryRepository.findById(updateProduct.getCategory().getId())
-//                .orElseThrow(() -> new RuntimeException("Category with this id not found"));
-//        existingProduct.setCategory(category);
-//
-//        if (imageFile != null && !imageFile.isEmpty()) {
-//            String imageFilename = saveImage(imageFile, existingProduct);
-//            existingProduct.setPhoto(imageFilename);
-//        }
-//        productRepository.save(existingProduct);
-//
-//    }
+
 
     public List<Product>findProductByCategoryName(String categoryName){
         return productRepository.finndProductByCategoryName(categoryName);
@@ -202,39 +181,7 @@ public class ProductService {
         return filename;
     }
 
-//    @Transactional
-//    public void updateProductStock(String name, int newStock) {
-//        List<Product> products = productRepository.findProductByName(name);
-//
-//        if (products.isEmpty()) {
-//            throw new RuntimeException("Product with name " + name + " not found");
-//        } else if (products.size() == 1) {
-//            Product product = products.get(0);
-//            product.setStock(product.getStock() + newStock);
-//            productRepository.save(product);
-//        } else {
-//            // Handle multiple products with the same name (display warning or prompt user for selection)
-//            // Implement logic based on your specific requirements
-//        }
-//    }
 
-//    public Product updateProducts(int productId, Product updatedProduct) {
-//        return productRepository.findById(productId)
-//                .map(product -> {
-//                    // Update product details (except stock)
-//                    product.setName(updatedProduct.getName());
-//                    product.setUnitprice(updatedProduct.getUnitprice());
-//                    product.setCategory(updatedProduct.getCategory());
-//
-//                    // Update stock: Add new stock to existing stock
-//                    int updatedStock = product.getStock() + updatedProduct.getStock(); // Assuming you're adding stock
-//                    product.setStock(updatedStock);
-//
-//                    // Save the updated product
-//                    return productRepository.save(product);
-//                })
-//                .orElseThrow(() -> new RuntimeException("Product not found with id " + productId));
-//    }
 
 
 }

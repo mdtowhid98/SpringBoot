@@ -25,14 +25,14 @@
           </a>
         </li>
         <!-- <ng-container *ngIf="userRole === 'Admin'"> -->
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link" href="/createCategory">
             <fa-icon [icon]="faPlus"></fa-icon> Create Category
           </a>
-        </li>
+        </li> -->
         <!-- </ng-container> -->
 
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link" href="/viewsupplier">
             <fa-icon [icon]="faPlus"></fa-icon> View Supplier
           </a>
@@ -54,7 +54,7 @@
           <a class="nav-link" href="/createcustomer">
             <fa-icon [icon]="faPlus"></fa-icon>Create Customer
           </a>
-        </li>
+        </li> -->
 
       </ul>
       <form class="d-flex" role="search">
@@ -89,40 +89,131 @@
 
 
       <ng-container *ngIf="this.authService.getUserRole() === 'ADMIN'">
-        <a href="/viewproduct">
-          <fa-icon [icon]="faEye"></fa-icon> View Products
-        </a>
-
-       
-          <a class="nav-link" href="/createProduct">
-            <fa-icon [icon]="faPlus"></fa-icon> Create Product
+        <div class="dropdown">
+          <a class="nav-link dropdown-toggle text-white" href="#" id="productDropdown" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            Products
           </a>
-       
-      
+          <ul class="dropdown-menu" aria-labelledby="productDropdown">
+            <li>
+              <a class="dropdown-item" href="/viewproduct">
+                View Products
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="/createProduct">
+                Create Product
+              </a>
+            </li>
+          </ul>
+        </div>
 
 
-      <a class="dropdown-item" href="/createSales">
-        <fa-icon [icon]="faShoppingCart"></fa-icon> Create Sales
-      </a>
-      <a class="dropdown-item" href="/viewsales">
-        <fa-icon [icon]="faChartLine"></fa-icon> View Sales
-      </a>
+
+        <div class="dropdown">
+          <a class="nav-link dropdown-toggle text-white" href="#" id="productDropdown" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            Sales
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="productDropdown">
+            <li>
+              <a class="dropdown-item" href="/salesdetails">
+                Sales Details
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="/createSales">
+                Create Sales
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="dropdown">
+          <a class="nav-link dropdown-toggle text-white" href="#" id="productDropdown" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            Generics
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="productDropdown">
+            <li>
+              <a class="dropdown-item" href="/viewCategory">
+                Generics
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="/createCategory">
+                Create Generics
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="dropdown">
+          <a class="nav-link dropdown-toggle text-white" href="#" id="productDropdown" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            Supplier
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="productDropdown">
+            <li>
+              <a class="dropdown-item" href="/viewsupplier">
+                Supplier
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="/createsupplier">
+                Create Supplier
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="dropdown">
+          <a class="nav-link dropdown-toggle text-white" href="#" id="productDropdown" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            Customer
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="productDropdown">
+            <li>
+              <a class="dropdown-item" href="/viewcutomer">
+                Customer
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="/createcustomer">
+                Create Customer
+              </a>
+            </li>
+          </ul>
+        </div>
+
+
+
+        <!-- <a class="dropdown-item" href="/createSales">
+          <fa-icon [icon]="faShoppingCart"></fa-icon> Create Sales
+        </a>
+        <a class="dropdown-item" href="/viewsales">
+          <fa-icon [icon]="faChartLine"></fa-icon> View Sales
+        </a> -->
 
       </ng-container>
       <ng-container *ngIf="this.authService.getUserRole() === 'USER'">
-      <a class="dropdown-item" href="/viewproduct">
+        <a class="dropdown-item" href="/viewproduct">
           <fa-icon [icon]="faEye"></fa-icon> View Products
         </a>
 
       </ng-container>
 
-      <a class="dropdown-item" href="/vieworder">
+      <!-- <a class="dropdown-item" href="/vieworder">
         <fa-icon [icon]="faEye"></fa-icon> View Order
       </a>
 
       <a class="dropdown-item" href="/createorder">
         <fa-icon [icon]="faEye"></fa-icon> Create Order
       </a>
+
+      <a class="dropdown-item" href="/salesdetails">
+        <fa-icon [icon]="faEye"></fa-icon> Sales Details
+      </a> -->
 
     </div>
 

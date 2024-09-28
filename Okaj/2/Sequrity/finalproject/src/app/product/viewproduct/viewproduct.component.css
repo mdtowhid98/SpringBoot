@@ -1,6 +1,6 @@
 /* Apply background image to the entire page */
 .category-section, .product-container {
-  background-image: url('https://i.postimg.cc/C573Fyt8/istockphoto-1360927961-612x612.jpg');
+  background-image: url('https://i.postimg.cc/9QJXRMgD/abstract-dark-blurred-background-smooth-gradient-texture-color-shiny-bright-website-pattern-banner-h.avif');
   background-size: cover; /* Ensure the image covers the entire container */
   background-position: center; /* Center the background image */
   background-repeat: no-repeat; /* Prevent repeating of the image */
@@ -64,7 +64,7 @@
 
 /* Product card styles */
 .product-card {
-  background-color: rgba(253, 255, 255, 0.7); /* Semi-transparent background for cards */
+  background-color: rgba(253, 255, 255, 0.979); /* Semi-transparent background for cards */
   border-radius: 8px;
   padding: 15px;
   width: calc(25% - 20px); /* Adjust width with gap for a responsive layout */

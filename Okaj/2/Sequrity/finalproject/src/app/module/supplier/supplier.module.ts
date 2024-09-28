@@ -13,6 +13,8 @@ export class SupplierModule {
 
   id!:number;
   name!:string;
-  contactInfo!:string;
+  email!:string;
+  cell!:number;
+  address!:string;
 
 }

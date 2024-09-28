@@ -1,11 +1,11 @@
 .bg-category-table {
-  background-image: url('https://i.postimg.cc/zXh6fgg7/istockphoto-1481129687-640x640.jpg');
+  background-image: url('https://i.postimg.cc/SszmvGS9/images.jpg');
   background-size: cover; /* Ensures the image covers the entire container */
   background-position: center; /* Centers the background image */
   background-repeat: no-repeat; /* Prevents the image from repeating */
   padding: 20px; /* Adds padding inside the container */
   border-radius: 8px; /* Optional: adds rounded corners */
-  color: white; /* Optional: makes text color stand out against the background */
+  color: rgb(13, 14, 13); /* Optional: makes text color stand out against the background */
   min-height: 100vh; /* Ensures the container takes at least the full viewport height */
 }
 

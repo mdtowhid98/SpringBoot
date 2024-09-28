@@ -34,6 +34,7 @@ public class Product {
     private int quantity;
 
     private int unitprice;
+//    private float discount;
 
     private Date manufactureDate;
 

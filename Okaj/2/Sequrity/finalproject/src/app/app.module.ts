@@ -39,6 +39,7 @@ import { ViewOrderComponent } from './order/view-order/view-order.component';
 import { CreateOrderComponent } from './order/create-order/create-order.component';
 import { ViewSalesOrderComponent } from './salesOrder/view-sales-order/view-sales-order.component';
 import { CreateSalesOrderComponent } from './salesOrder/create-sales-order/create-sales-order.component';
+import { ViewsalesDetailsComponent } from './salesDetails/viewsales-details/viewsales-details.component';
 
 
 
@@ -77,6 +78,7 @@ import { CreateSalesOrderComponent } from './salesOrder/create-sales-order/creat
     CreateOrderComponent,
     ViewSalesOrderComponent,
     CreateSalesOrderComponent,
+    ViewsalesDetailsComponent,
     
     
     

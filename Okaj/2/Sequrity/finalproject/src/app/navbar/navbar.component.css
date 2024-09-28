@@ -53,8 +53,8 @@
 
 /* Dropdown Styles in Sidebar */
 .horizontal-sidebar .dropdown-menu {
-    background-color: #2e2e2e; /* Match sidebar background */
-    color: white; /* White text color for contrast */
+    background-color: #fcf9f9; /* Match sidebar background */
+    color: rgb(14, 1, 1); /* White text color for contrast */
     border: none; /* Remove border for a flat design */
     border-radius: 0; /* Flat design */
     text-align: center;
@@ -62,7 +62,7 @@
 
 .horizontal-sidebar .dropdown-item {
     padding: 10px;
-    color: white;
+    color: rgb(15, 1, 1);
 }
 
 .horizontal-sidebar .dropdown-item:hover {
@@ -77,7 +77,7 @@
     border-top: .2em solid;
     border-right: .3em solid transparent;
     border-left: .3em solid transparent;
-    color: rgb(250, 24, 24);
+    color: rgb(249, 249, 252);
 }
 
 /* Additional Dropdown Specific Styles */
@@ -86,7 +86,7 @@
 }
 
 .horizontal-sidebar .dropdown-item:hover {
-    background-color: rgba(255, 255, 255, 0.1); /* Light hover effect */
+    background-color: rgba(147, 238, 245, 0.884); /* Light hover effect */
 }
 
 /* For the main navbar */

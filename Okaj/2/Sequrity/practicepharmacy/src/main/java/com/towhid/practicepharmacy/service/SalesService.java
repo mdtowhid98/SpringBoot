@@ -39,64 +39,48 @@ public class SalesService {
 //        salesRepository.save(s);
 //    }
 
-//    public Sales saveSales(Sales sales) {
-//        // Iterate over each product in the sale
-//        for (Product soldProduct : sales.getProduct()) {
-//            // Retrieve the product from the database
-//            Product product = productRepository.findById(soldProduct.getId())
-//                    .orElseThrow(() -> new RuntimeException("Product not found with ID " + soldProduct.getId()));
-//
-//            // Update the product's stock
-//            int newStock = product.getStock() - soldProduct.getQuantity();
-//            if (newStock < 0) {
-//                throw new RuntimeException("Not enough stock for product " + product.getName());
-//            }
-//            product.setStock(newStock);
-//
-//            // Save the updated product
-//            productRepository.save(product);
-//        }
-//
-//        // Save the sale
-//        return salesRepository.save(sales);
-//    }
 
 
     public Sales saveSales(Sales sales) {
-        // First, save the sale to the database so it gets a generated ID
+        // Save the sale first to get the generated ID
         Sales savedSales = salesRepository.save(sales);
 
-        // Iterate over each product in the sale
         for (Product soldProduct : savedSales.getProduct()) {
-            // Retrieve the product from the database
             Product product = productRepository.findById(soldProduct.getId())
                     .orElseThrow(() -> new RuntimeException("Product not found with ID " + soldProduct.getId()));
 
-            // Update the product's stock
             int newStock = product.getStock() - soldProduct.getQuantity();
             if (newStock < 0) {
                 throw new RuntimeException("Not enough stock for product " + product.getName());
             }
             product.setStock(newStock);
-
-            // Save the updated product
             productRepository.save(product);
 
-            // Create a new SalesDetails entry for this product in the sale
+            // Create SalesDetails for each product
             SalesDetails salesDetails = new SalesDetails();
-            salesDetails.setSale(savedSales); // Set the saved Sales entity reference
-            salesDetails.setProduct(product); // Set the product reference
-            salesDetails.setQuantity(soldProduct.getQuantity()); // Set the quantity sold
-            salesDetails.setUnitPrice(product.getUnitprice()); // Assuming the price is set in the product
-            salesDetails.setTotalPrice(soldProduct.getQuantity() * product.getUnitprice()); // Total price
+            salesDetails.setSale(savedSales);
+            salesDetails.setProduct(product);
+            salesDetails.setQuantity(soldProduct.getQuantity());
+            salesDetails.setUnitPrice(product.getUnitprice());
+            salesDetails.setDiscount(sales.getDiscount());
+            // Apply discount (if any) to calculate total price
+            float discount = sales.getDiscount();  // Discount from Product
+            float unitPrice = product.getUnitprice();
+            int quantity = soldProduct.getQuantity();
 
-            // Save the SalesDetails entry to the database
+            // Calculate total price after discount
+            float totalPrice = quantity * unitPrice * (1 - discount / 100);
+            salesDetails.setTotalPrice(totalPrice);
+
+            // Optional: if you want to store the discount per sale
+            salesDetails.setDiscount(discount);  // Set discount if needed
+
+            // Save the sales details
             salesDetailsRepository.save(salesDetails);
         }
-
-        // Return the saved sale
         return savedSales;
     }
+
 
 
 

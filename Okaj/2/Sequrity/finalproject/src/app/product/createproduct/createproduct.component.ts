@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProductService } from '../../service/product.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { faPlusCircle, faTag, faImage, faDollarSign, faBoxes, faUser, faBox, faTags, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPlusCircle, faTag, faImage, faDollarSign, faBoxes, faUser, faBox, faTags, faPlus, faCalendarAlt, faUserTie } from '@fortawesome/free-solid-svg-icons';
 import { CategoryModule } from '../../module/category/category.module';
 import { CategoryService } from '../../service/category.service';
 import { SupplierModule } from '../../module/supplier/supplier.module';
@@ -29,6 +29,8 @@ export class CreateproductComponent implements OnInit {
   faTags = faTags;
   faImage = faImage;
   faPlus = faPlus;
+  faCalendarAlt=faCalendarAlt;
+  faUserTie=faUserTie
 
   constructor(
     private productService: ProductService,

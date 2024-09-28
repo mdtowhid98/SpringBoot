@@ -1,78 +1,61 @@
-/* Container styling for the form with background image */
+/* Container for the sales creation form */
 .container {
-  background-image: url('https://i.postimg.cc/kGPJVdfh/istockphoto-1346119741-612x612.jpg');
-  background-size: cover; /* Cover the container with the image */
-  background-position: center; /* Center the image */
-  background-repeat: no-repeat; /* Prevent repeating the image */
-  padding: 20px; /* Add some padding for spacing */
-  border-radius: 8px; /* Optional: rounded corners */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Optional: add some shadow for better separation from background */
-  color: #d0caf3;
+  background-image: url('https://i.postimg.cc/9QJXRMgD/abstract-dark-blurred-background-smooth-gradient-texture-color-shiny-bright-website-pattern-banner-h.avif');
+  background-size: cover; /* Make the background cover the container */
+  background-position: center; /* Center the background image */
+  padding: 20px; /* Add padding for better spacing */
+  border-radius: 8px; /* Round the corners */
+  color: rgb(14, 1, 1); /* Change text color for better contrast */
 }
 
-/* Styling for form groups to ensure text visibility */
+/* Form Group Styles */
 .form-group {
-  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background for form groups */
-  padding: 15px;
-  border-radius: 5px;
-  margin-bottom: 15px;
-  color: #d0caf3;
+  margin-bottom: 1.5rem; /* Space between form groups */
 }
 
-/* Styling for form controls */
-.form-control {
-  background: rgba(248, 214, 214, 0.9); /* Slightly transparent background for input fields */
-  border: 1px solid #ddd;
-  color: #1e10e6;
-  width: 100%;
+/* Input and Select Styles */
+input.form-control, select.form-control {
+  background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent white background for inputs */
+  border: 1px solid #ced4da; /* Border color */
+  border-radius: 0.25rem; /* Rounded corners */
+  color: #333; /* Text color */
 }
 
-/* Styling for buttons */
+/* Placeholder text style */
+input::placeholder, select::placeholder {
+  color: #aaa; /* Placeholder text color */
+}
+
+/* Error Message Styles */
+.text-danger {
+  font-size: 0.875rem; /* Smaller font size for error messages */
+}
+
+/* Button Styles */
+.btn {
+  border-radius: 0.25rem; /* Rounded corners for buttons */
+}
+
+/* Button Colors */
 .btn-info {
-  background-color: #17a2b8;
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.btn-info:hover {
-  background-color: #138496;
+  background-color: #17a2b8; /* Info button color */
 }
 
 .btn-primary {
-  background-color: #007bff;
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.btn-primary:hover {
-  background-color: #0056b3;
+  background-color: #007bff; /* Primary button color */
 }
 
 .btn-success {
-  background-color: #28a745;
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
+  background-color: #28a745; /* Success button color */
 }
 
-.btn-success:hover {
-  background-color: #218838;
-}
+/* Responsive Design Adjustments */
+@media (max-width: 576px) {
+  .small-input {
+    width: 100%; /* Full width for small devices */
+  }
 
-/* Label styling */
-.form-group label {
-  color: #d0caf3;
-}
-
-/* Error message styling */
-.text-danger {
-  color: #f8d7da;
+  .form-group {
+    margin-bottom: 1rem; /* Reduced space on smaller screens */
+  }
 }

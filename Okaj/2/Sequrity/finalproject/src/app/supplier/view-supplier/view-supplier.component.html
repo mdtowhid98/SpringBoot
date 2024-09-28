@@ -5,7 +5,9 @@
             <tr>
                 <th>Id</th>
                 <th>Name</th>
-                <th>Contact Info</th>
+                <th>Email</th>
+                <th>Cell No</th>
+                <th>Address</th>
                 <th>Update</th>
                 <th>Delete</th>
             </tr>
@@ -14,7 +16,9 @@
             <tr *ngFor="let supplier of suppliers ">
                 <td>{{supplier.id}}</td>
                 <td>{{supplier.name}}</td>
-                <td>{{supplier.contactInfo}}</td>
+                <td>{{supplier.email}}</td>
+                <td>{{supplier.cell}}</td>
+                <td>{{supplier.address}}</td>
                 <td>
                     <button class="btn btn-warning" (click)="updateSupplier(supplier.id)">Edit</button>
                 </td>

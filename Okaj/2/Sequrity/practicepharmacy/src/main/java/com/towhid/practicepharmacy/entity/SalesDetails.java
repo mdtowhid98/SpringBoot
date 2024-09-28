@@ -28,6 +28,7 @@ public class SalesDetails {
 
     private float unitPrice;
     private float totalPrice;
+    private float discount;
 
 
 

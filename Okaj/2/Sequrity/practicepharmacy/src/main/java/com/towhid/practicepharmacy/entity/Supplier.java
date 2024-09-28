@@ -20,13 +20,16 @@ public class Supplier {
     private int id;
 
     private String name;
-    private String contactInfo;
+    private String email;
+    private int cell;
+    private String address;
 
     @JsonIgnore
     @OneToMany(mappedBy = "supplier", cascade = CascadeType.ALL)
     private List<Product> products;
 
     public Supplier(int id) {
+
         this.id = id;
     }
 
