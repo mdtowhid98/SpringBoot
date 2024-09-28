@@ -15,6 +15,13 @@ import { Router } from '@angular/router';
 export class ViewsalesDetailsComponent {
 
   salesDetails: SalesDetailsModule[] = [];
+
+  filteredCustomerNameAndId: SalesDetailsModule[] = []; 
+  searchTerm: string = '';            
+  sortBy: 'customername' | 'id' | 'id' = 'customername'; 
+
+
+
   groupedSalesDetails: Map<number, SalesDetailsModule[]> = new Map();
 
   constructor(private salesDetailsService: SalesDetailsService) {}
@@ -28,6 +35,7 @@ export class ViewsalesDetailsComponent {
     this.salesDetailsService.getAllSalesDetails().subscribe({
       next: (data: SalesDetailsModule[]) => {
         this.salesDetails = data;
+        this.filteredCustomerNameAndId = data; // Initialize with all data
       },
       error: (err) => {
         console.error('Error fetching sales details', err);
@@ -45,4 +53,16 @@ export class ViewsalesDetailsComponent {
       }
     });
   }
+
+  searchCustomerNameAndId(): void {
+    const lowerCaseSearchTerm = this.searchTerm.toLowerCase();
+  
+    this.filteredCustomerNameAndId = this.salesDetails.filter(item =>
+      (item.sale.customername?.toLowerCase().includes(lowerCaseSearchTerm) ||
+      item.sale.id?.toString().includes(lowerCaseSearchTerm)
+    )
+    );
+  }
+
+
 }

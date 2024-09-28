@@ -21,4 +21,16 @@ export class SalesDetailsService {
     return this.httpClient.get<Map<number, SalesDetailsModule[]>>(`${this.baseUrl}grouped`);
   }
 
+
+  searchByCustomerNameAndId(sales: SalesDetailsModule[], searchTerm: string): SalesDetailsModule[] {
+    const lowerCaseSearchTerm = searchTerm.toLowerCase();
+
+    return sales.filter(item =>
+    (item.sale.customername?.toLowerCase().includes(lowerCaseSearchTerm) ||
+      item.sale.id?.toString().includes(lowerCaseSearchTerm)
+    )
+    );
+  }
+
+
 }
