@@ -9,6 +9,8 @@ import { CategoryModule } from '../../module/category/category.module';
 import { CategoryService } from '../../service/category.service';
 import { SupplierModule } from '../../module/supplier/supplier.module';
 import { SupplierService } from '../../service/supplier.service';
+import { BranchModule } from '../../module/branch/branch.module';
+import { BranchService } from '../../service/branch.service';
 
 @Component({
   selector: 'app-createproduct',
@@ -20,6 +22,7 @@ export class CreateproductComponent implements OnInit {
   image: File | null = null;
   categories: CategoryModule[] = [];
   suppliers: SupplierModule[] = [];
+  branches: BranchModule[] = [];
   product: ProductModule = new ProductModule();
   formValue!: FormGroup;
 
@@ -36,6 +39,7 @@ export class CreateproductComponent implements OnInit {
     private productService: ProductService,
     private categoryService: CategoryService,
     private supplierService: SupplierService,
+    private branchService: BranchService,
     private router: Router,
     private formBuilder: FormBuilder
   ) { }
@@ -43,6 +47,7 @@ export class CreateproductComponent implements OnInit {
   ngOnInit(): void {
     this.loadCategory();
     this.loadSupplier();
+    this.loadBranch();
   
     this.formValue = this.formBuilder.group({
       name: ['', Validators.required],
@@ -53,6 +58,7 @@ export class CreateproductComponent implements OnInit {
       unitprice: [0, [Validators.required, Validators.min(0)]],
       category: [null, Validators.required], 
       supplier: [null, Validators.required], 
+      branch: [null, Validators.required], 
     });
   }
 
@@ -86,6 +92,19 @@ export class CreateproductComponent implements OnInit {
     });
   }
 
+  loadBranch() {
+
+    this.branchService.getAllBranch().subscribe({
+      next: res => {
+        this.branches = res;
+        console.log('Branch loaded:', this.branches);
+      },
+      error: error => {
+        console.log('Error loading Branches:', error);
+      }
+    });
+  }
+
 
 
   onSubmit() {
@@ -113,10 +132,6 @@ export class CreateproductComponent implements OnInit {
       alert('Please select an image.');
     }
   }
-
-
-
-
 
 
 }

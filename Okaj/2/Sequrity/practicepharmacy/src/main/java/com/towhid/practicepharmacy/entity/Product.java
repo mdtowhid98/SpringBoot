@@ -48,6 +48,10 @@ public class Product {
     @JoinColumn(name = "supplierId")
     private Supplier supplier;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "branchId")
+    private Branch branch;
+
     //    @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "salesOrderId")
 //    private SalesOrder salesOrder;
@@ -56,6 +60,7 @@ public class Product {
 //    private List<SalesOrder> salesOrders;
 
     public Product(int id) {
+
         this.id = id;
     }
 

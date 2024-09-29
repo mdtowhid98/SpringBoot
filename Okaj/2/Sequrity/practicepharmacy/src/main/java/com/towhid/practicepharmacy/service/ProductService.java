@@ -1,8 +1,10 @@
 package com.towhid.practicepharmacy.service;
 
+import com.towhid.practicepharmacy.entity.Branch;
 import com.towhid.practicepharmacy.entity.Category;
 import com.towhid.practicepharmacy.entity.Product;
 import com.towhid.practicepharmacy.entity.Supplier;
+import com.towhid.practicepharmacy.repository.BranchRepository;
 import com.towhid.practicepharmacy.repository.CategoryRepository;
 import com.towhid.practicepharmacy.repository.ProductRepository;
 import com.towhid.practicepharmacy.repository.SupplierRepository;
@@ -33,8 +35,14 @@ public class ProductService {
     @Autowired
     private SupplierRepository supplierRepository;
 
+    @Autowired
+    private BranchRepository branchRepository;
+
+
+
     @Value("src/main/resources/static/images")
     private String uploadDir;
+
 
     public List<Product> getAllProduct() {
 
@@ -57,50 +65,50 @@ public class ProductService {
 
     public ApiResponse saveProduct(Product product, MultipartFile imageFile) throws IOException {
         ApiResponse apiResponse = new ApiResponse();
+
         try {
-            // Validate product data
-            if (product.getName() == null || product.getCategory() == null) {
-                throw new RuntimeException("Product name and category are required.");
+            // Validate essential fields
+            if (product.getName() == null || product.getCategory() == null || product.getBranch() == null) {
+                throw new RuntimeException("Product name, category, and branch are required.");
             }
 
-            // Check if category exists
+            // Validate and set Category, Supplier, and Branch
             Category category = categoryRepository.findById(product.getCategory().getId())
                     .orElseThrow(() -> new RuntimeException("Category with this id not found."));
             product.setCategory(category);
 
-            // Check if supplier exists
             Supplier supplier = supplierRepository.findById(product.getSupplier().getId())
                     .orElseThrow(() -> new RuntimeException("Supplier with this id not found."));
             product.setSupplier(supplier);
 
-            // Check if a product with the same name already exists
-            List<Product> existingProducts = productRepository.findProductByName(product.getName());
-            if (!existingProducts.isEmpty()) {
-                // Assuming there's only one product with the same name
-                Product existingProduct = existingProducts.get(0);
+            Branch branch = branchRepository.findById(product.getBranch().getId())
+                    .orElseThrow(() -> new RuntimeException("Branch with this id not found."));
+            product.setBranch(branch);
 
-                // Update stock and unit price
+            // Check for existing products with the same name and branch
+            List<Product> existingProducts = productRepository.findProductByNameAndBranch(product.getName(), product.getBranch().getBranchName());
+            if (!existingProducts.isEmpty()) {
+                // Update stock and unit price for existing product
+                Product existingProduct = existingProducts.get(0);
                 existingProduct.setStock(existingProduct.getStock() + product.getStock());
                 existingProduct.setUnitprice(product.getUnitprice());
 
-                // Handle image file (update photo if a new image is provided)
+                // Update image if provided
                 if (imageFile != null && !imageFile.isEmpty()) {
                     String imageFileName = saveImage(imageFile, existingProduct);
                     existingProduct.setPhoto(imageFileName);
                 }
 
-                // Save the updated product
                 productRepository.save(existingProduct);
                 apiResponse.setSuccessful(true);
-                apiResponse.setMessage("Product already exists. Stock updated.");
+                apiResponse.setMessage("Product already exists in the same branch. Stock updated.");
             } else {
-                // Handle image file for new product
+                // Save a new product
                 if (imageFile != null && !imageFile.isEmpty()) {
                     String imageFileName = saveImage(imageFile, product);
                     product.setPhoto(imageFileName);
                 }
 
-                // Save the new product
                 productRepository.save(product);
                 apiResponse.setSuccessful(true);
                 apiResponse.setMessage("Product saved successfully.");
@@ -112,6 +120,7 @@ public class ProductService {
             apiResponse.setMessage("An unexpected error occurred: " + e.getMessage());
             apiResponse.setSuccessful(false);
         }
+
         return apiResponse;
     }
 
@@ -136,6 +145,15 @@ public class ProductService {
         return productRepository.findProductByName(productName);
     }
 
+    public List<Product> findProductByNameAndBranch(String productName, String branchName) {
+        return productRepository.findProductByNameAndBranch(productName, branchName);
+    }
+
+    public List<Product>findProductByBranchName(String branchName){
+        return productRepository.findProductByBranchName(branchName);
+    }
+
+
     public Product updateProduct(Product product, int id, MultipartFile file) throws IOException {
         Product existingProduct = this.productRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Product Not Found"));
@@ -146,6 +164,8 @@ public class ProductService {
         existingProduct.setUnitprice(product.getUnitprice());
         existingProduct.setQuantity(product.getQuantity());
         existingProduct.setSupplier(product.getSupplier());
+        existingProduct.setManufactureDate(product.getManufactureDate());
+        existingProduct.setExpiryDate(product.getExpiryDate());
 
         // Update the stock: Add the incoming stock to the existing stock
         int updatedStock = existingProduct.getStock() + product.getStock(); // Assuming you're adding stock

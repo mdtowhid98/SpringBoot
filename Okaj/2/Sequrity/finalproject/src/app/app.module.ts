@@ -40,6 +40,9 @@ import { CreateOrderComponent } from './order/create-order/create-order.componen
 import { ViewSalesOrderComponent } from './salesOrder/view-sales-order/view-sales-order.component';
 import { CreateSalesOrderComponent } from './salesOrder/create-sales-order/create-sales-order.component';
 import { ViewsalesDetailsComponent } from './salesDetails/viewsales-details/viewsales-details.component';
+import { ViewBranchComponent } from './branch/view-branch/view-branch.component';
+import { CreateBranchComponent } from './branch/create-branch/create-branch.component';
+import { UpdateBranchComponent } from './branch/update-branch/update-branch.component';
 
 
 
@@ -79,6 +82,9 @@ import { ViewsalesDetailsComponent } from './salesDetails/viewsales-details/view
     ViewSalesOrderComponent,
     CreateSalesOrderComponent,
     ViewsalesDetailsComponent,
+    ViewBranchComponent,
+    CreateBranchComponent,
+    UpdateBranchComponent,
     
     
     

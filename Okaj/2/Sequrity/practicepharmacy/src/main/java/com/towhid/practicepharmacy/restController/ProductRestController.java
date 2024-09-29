@@ -65,6 +65,26 @@ public class ProductRestController {
         return ResponseEntity.ok(products);
     }
 
+    @GetMapping("/h/searchbrancenameandproductname")
+    public ResponseEntity<List<Product>> findProductByNameAndBranch(
+            @RequestParam("productName") String productName,
+            @RequestParam("branchName") String branchName) {
+
+        List<Product> products = productService.findProductByNameAndBranch(productName, branchName);
+
+        if (products.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        } else {
+            return ResponseEntity.ok(products);
+        }
+    }
+
+    @GetMapping("/h/searchbranchname")
+    public ResponseEntity<List<Product>>findProductByBranchName(@RequestParam(value ="branchName" )String branchName){
+        List<Product> products=productService.findProductByBranchName(branchName);
+        return ResponseEntity.ok(products);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Product>findProductById(@PathVariable int id){
         try {

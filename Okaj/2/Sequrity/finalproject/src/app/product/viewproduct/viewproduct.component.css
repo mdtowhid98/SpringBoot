@@ -13,6 +13,12 @@
 /* Category section styles */
 .category-section {
   position: relative; /* To position the overlay */
+  background-color: rgba(77, 211, 235, 0.5); /* Match background with the category section */
+  color: rgb(19, 1, 1);
+  padding: 20px;
+  border-radius: 8px; /* Rounded corners for a softer look */
+  box-shadow: 0 4px 8px rgba(182, 178, 178, 0.2); /* Add subtle shadow for depth */
+  margin-bottom: 20px;
 }
 
 .category-section h6 {
@@ -21,28 +27,20 @@
   margin-bottom: 15px;
 }
 
-.category-section button {
-  background-color: white; /* Semi-transparent background for button */
-  color: rgb(8, 8, 8);
-  border: none;
-  border-radius: 4px;
-  padding: 10px 15px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s ease;
-}
-
-.category-section button:hover {
-  background-color: white; /* Darker shade on hover */
-}
-
 .category-section select {
-  background-color: rgba(0, 0, 0, 0.5); /* Match background with the container */
-  color: white;
+  background-color: rgba(255, 255, 255, 0.1); /* Match background with the container */
+  color: rgb(14, 0, 0);
   border: 1px solid rgba(255, 255, 255, 0.5); /* Semi-transparent border */
   border-radius: 4px;
   padding: 10px;
   font-size: 16px;
+  width: 100%;
+}
+
+/* Hover effect on dropdowns */
+.branch-section select:hover,
+.category-section select:hover {
+  border-color: rgba(255, 255, 255, 0.8); /* Brighter border on hover */
 }
 
 /* Product container styles */
@@ -143,4 +141,39 @@
       width: 100%; /* Full width on very small screens */
   }
 }
+
+
+/* Branch section styles */
+.branch-section {
+  position: relative; /* To position the overlay */
+  background-color: rgba(77, 211, 235, 0.5); /* Match background with the category section */
+  color: rgb(19, 1, 1);
+  padding: 20px;
+  border-radius: 8px; /* Rounded corners for a softer look */
+  box-shadow: 0 4px 8px rgba(182, 178, 178, 0.2); /* Add subtle shadow for depth */
+  margin-bottom: 20px;
+}
+
+.branch-section h6 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.branch-section select {
+  background-color: rgba(255, 255, 255, 0.1); /* Match background with the container */
+  color: rgb(14, 0, 0);
+  border: 1px solid rgba(255, 255, 255, 0.5); /* Semi-transparent border */
+  border-radius: 4px;
+  padding: 10px;
+  font-size: 16px;
+  width: 100%;
+}
+
+/* Hover effect on dropdowns */
+.branch-section select:hover,
+.category-section select:hover {
+  border-color: rgba(255, 255, 255, 0.8); /* Brighter border on hover */
+}
+
 

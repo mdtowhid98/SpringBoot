@@ -30,6 +30,9 @@ import { UpdateCustomerComponent } from './customer/update-customer/update-custo
 
 import { ViewSalesOrderComponent } from './salesOrder/view-sales-order/view-sales-order.component';
 import { ViewsalesDetailsComponent } from './salesDetails/viewsales-details/viewsales-details.component';
+import { ViewBranchComponent } from './branch/view-branch/view-branch.component';
+import { CreateBranchComponent } from './branch/create-branch/create-branch.component';
+import { UpdateBranchComponent } from './branch/update-branch/update-branch.component';
 
 const routes: Routes = [
   {path:"viewproduct",component:ViewproductComponent},
@@ -53,6 +56,9 @@ const routes: Routes = [
   {path:"updatecustomer/:id",component:UpdateCustomerComponent},
   {path:"vieworder",component:ViewSalesOrderComponent},
   {path:"salesdetails",component:ViewsalesDetailsComponent},
+  {path:"viewbranch",component:ViewBranchComponent},
+  {path:"createbranch",component:CreateBranchComponent},
+  {path:"updatebranch/:id",component:UpdateBranchComponent},
   {
     path: 'userprofile',
     component: UserprofileComponent,

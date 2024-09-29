@@ -34,5 +34,9 @@ public class Sales {
     @ManyToOne
     private SalesDetails salesDetails;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "branchId")
+    private Branch branch;
+
 }
 

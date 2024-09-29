@@ -2,6 +2,7 @@ import { NgModule, PipeTransform } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CategoryModule } from '../category/category.module';
 import { SupplierModule } from '../supplier/supplier.module';
+import { BranchModule } from '../branch/branch.module';
 
 
 
@@ -23,6 +24,7 @@ export class ProductModule {
   // discount!:number;
   categories!: CategoryModule[];
   supplier!: SupplierModule;
+  branch!: BranchModule;
 }
 
 

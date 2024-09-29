@@ -8,6 +8,16 @@
         </div>
 
         <div class="mb-3">
+            <label for="manufactureDate" class="form-label"><fa-icon [icon]="faTag"></fa-icon> Manufacture Date</label>
+            <input type="date" class="form-control" id="manufactureDate" name="manufactureDate" [(ngModel)]="product.manufactureDate" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="expiryDate" class="form-label"><fa-icon [icon]="faTag"></fa-icon> Expiry Date</label>
+            <input type="date" class="form-control" id="expiryDate" name="expiryDate" [(ngModel)]="product.expiryDate" required>
+        </div>
+
+        <div class="mb-3">
             <label for="photo" class="form-label"><fa-icon [icon]="faImage"></fa-icon> Photo</label>
             <input type="file" id="productImage" (change)="onFileChange($event)">
         </div>

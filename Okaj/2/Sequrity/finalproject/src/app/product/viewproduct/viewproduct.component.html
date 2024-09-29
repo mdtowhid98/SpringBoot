@@ -8,6 +8,16 @@
   </select>
 </div>
 
+<div class="branch-section">
+  <h6>Search Branch</h6>
+  <!-- Dropdown to select branch -->
+  <select (change)="filterByBranch($event)">
+    <option value="">All Branch</option>
+    <!-- Dynamically populate branches -->
+    <option *ngFor="let b of branch" [value]="b.branchName">{{ b.branchName }}</option>
+  </select>
+</div>
+
 <div class="product-container">
   <div *ngFor="let product of products" class="product-card">
     
@@ -20,6 +30,7 @@
     <p>Manufacture Date: {{ product.manufactureDate }}</p>
     <p>Expiry Date: {{ product.expiryDate }}</p>
     <p>Supplier: {{ product.supplier.name }}</p>
+    <p>Branch: {{ product.branch.branchName }}</p>
     
     
     <!-- Admin role controls -->

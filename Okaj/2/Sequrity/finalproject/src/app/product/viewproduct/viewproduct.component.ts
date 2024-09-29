@@ -9,6 +9,8 @@ import { CategoryService } from '../../service/category.service';
 import { CategoryModule } from '../../module/category/category.module';
 import { SupplierService } from '../../service/supplier.service';
 import { SupplierModule } from '../../module/supplier/supplier.module';
+import { BranchModule } from '../../module/branch/branch.module';
+import { BranchService } from '../../service/branch.service';
 
 @Component({
   selector: 'app-viewproduct',
@@ -19,10 +21,14 @@ export class ViewproductComponent implements OnInit {
 
   userRole: string | null = '';
   currentUser: UserModule | null = null;
+
   categories: CategoryModule[] = [];
   suppliers: SupplierModule[] = [];
+  branch: BranchModule[] = [];
   products: ProductModule[] = [];
+
   selectedCategory: string = '';
+  selectedBranch: string = '';
 
   faEdit = faEdit;
   faTrash = faTrash;
@@ -36,6 +42,7 @@ export class ViewproductComponent implements OnInit {
     private router: Router,
     private categoryService: CategoryService,
     private supplierService: SupplierService,
+    private branchService: BranchService,
   ) { 
     this.authService = authService; // Assign it to the property
   }
@@ -44,6 +51,7 @@ export class ViewproductComponent implements OnInit {
     this.getAllCategory();
     this.getAllProducts(); // Ensure products are loaded on initialization
     this.getAllSupplier();
+    this.getAllBranch();
     this.authService.currentUser$.subscribe(user => {
       this.currentUser = user;
     });
@@ -63,8 +71,33 @@ export class ViewproductComponent implements OnInit {
     }
   }
 
+  filterByBranch(event: Event) {
+    const target = event.target as HTMLSelectElement; // Cast event.target to HTMLSelectElement
+    const selectedValue = target.value; // Access the value property
+    this.selectedBranch = selectedValue; // Set the selected category
+
+    // Call appropriate method based on category selection
+    if (this.selectedBranch) {
+      this.loadProductsByBranch(this.selectedBranch); // Load products for selected category
+    } else {
+      this.getAllProducts(); // Load all products if no category is selected
+    }
+  }
+
   loadProductsByCategory(categoryName: string) {
     this.productService.findProductByCategoryName(categoryName).subscribe(
+      res => {
+        this.products = res;
+        console.log(this.products);
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
+
+  loadProductsByBranch(branchName: string) {
+    this.productService.findProductByBranchName(branchName).subscribe(
       res => {
         this.products = res;
         console.log(this.products);
@@ -110,6 +143,19 @@ export class ViewproductComponent implements OnInit {
       }
     );
   }
+
+ getAllBranch() {
+  this.branchService.getAllBranch().subscribe(
+    res => {
+      this.branch = res; // Corrected: assign response to `branch` array
+      console.log(this.branch); // Log to check if branches are fetched correctly
+    },
+    err => {
+      console.log(err);
+    }
+  );
+}
+
 
   // Delete method
   deleteProduct(id: number) {

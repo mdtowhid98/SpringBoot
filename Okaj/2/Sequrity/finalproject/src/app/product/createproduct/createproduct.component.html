@@ -56,6 +56,16 @@
     </div>
 
     <div class="mb-3">
+      <label for="branch" class="form-label">
+        <fa-icon [icon]="faUserTie"></fa-icon> Branch:
+      </label>
+      <select id="branch" class="form-select" formControlName="branch" required>
+        <option *ngFor="let g of branches" [ngValue]="g.id">{{ g.branchName }}</option>
+      </select>
+    </div>
+
+
+    <div class="mb-3">
       <label for="formFile" class="form-label">
         <fa-icon [icon]="faImage"></fa-icon> Image:
       </label>

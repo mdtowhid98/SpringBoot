@@ -51,6 +51,11 @@ export class ProductService {
     return this.httpClient.get<ProductModule[]>(`${this.baseUrl}h/searchproductname`, { params });
   }
 
+  findProductByBranchName(branchName: string): Observable<ProductModule[]> {
+    const params = new HttpParams().set('branchName', branchName);
+    return this.httpClient.get<ProductModule[]>(`${this.baseUrl}h/searchbranchname`, { params });
+  }
+
   getAllProducts(): Observable<ProductModule[]> {
     return this.httpClient.get<ProductModule[]>(this.baseUrl);
   }
