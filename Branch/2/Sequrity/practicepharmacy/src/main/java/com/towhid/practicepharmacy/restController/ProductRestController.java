@@ -121,12 +121,18 @@ public class ProductRestController {
     }
 
     // Get all products from the "Banani" branch
-    @GetMapping("/bonani")
+    @GetMapping("/banani")
     public ResponseEntity<List<Product>> getBananiBranchProducts() {
         List<Product> products = salesService.getBananiBranchProducts();
         return ResponseEntity.ok(products);
     }
 
+
+    @GetMapping("/gulshan")
+    public ResponseEntity<List<Product>> getGulshanBranchProducts() {
+        List<Product> products = salesService.getGulshanBranchProducts();
+        return ResponseEntity.ok(products);
+    }
 
 
 }

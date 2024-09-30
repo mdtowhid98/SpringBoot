@@ -34,7 +34,4 @@ public class SalesDetails {
     private float totalPrice;
     private float discount;
 
-
-
-
 }

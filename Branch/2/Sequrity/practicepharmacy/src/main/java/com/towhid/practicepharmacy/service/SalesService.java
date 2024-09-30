@@ -31,7 +31,11 @@ public class SalesService {
 
     // Fetch products from "Banani" branch
     public List<Product> getBananiBranchProducts() {
-        return productRepository.findByBranch_BranchName("Bonani");
+        return productRepository.findByBranch_BranchName("Banani");
+    }
+
+    public List<Product> getGulshanBranchProducts() {
+        return productRepository.findByBranch_BranchName("Gulshan");
     }
 
     // Save sales and manage product stock for "Dhanmondi" branch
@@ -41,7 +45,11 @@ public class SalesService {
 
     // Save sales and manage product stock for "Banani" branch
     public Sales saveSalesForBanani(Sales sales) {
-        return saveSalesForBranch(sales, "Bonani");
+        return saveSalesForBranch(sales, "Banani");
+    }
+
+    public Sales saveSalesForGulshan(Sales sales) {
+        return saveSalesForBranch(sales, "Gulshan");
     }
 
     // General method to handle sales for any branch

@@ -34,6 +34,7 @@ import { ViewBranchComponent } from './branch/view-branch/view-branch.component'
 import { CreateBranchComponent } from './branch/create-branch/create-branch.component';
 import { UpdateBranchComponent } from './branch/update-branch/update-branch.component';
 import { CreateSalesComponent } from './bananiBranch/create-sales/create-sales.component';
+import { CreateSalesGulshanBranceComponent } from './gulshanBrance/create-sales-gulshan-brance/create-sales-gulshan-brance.component';
 
 const routes: Routes = [
   {path:"viewproduct",component:ViewproductComponent},
@@ -61,6 +62,7 @@ const routes: Routes = [
   {path:"createbranch",component:CreateBranchComponent},
   {path:"updatebranch/:id",component:UpdateBranchComponent},
   {path:"salesbananibranch",component:CreateSalesComponent},
+  {path:"salesgulshanbranch",component:CreateSalesGulshanBranceComponent},
   {
     path: 'userprofile',
     component: UserprofileComponent,

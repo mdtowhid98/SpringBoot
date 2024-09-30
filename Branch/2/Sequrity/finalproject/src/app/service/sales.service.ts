@@ -44,7 +44,12 @@ export class SalesService {
 
   createSalesBonaniBranch(sales: SalesModule): Observable<SalesModule> {
 
-    return this.httpClient.post<SalesModule>(this.baseUrl+"bonani", sales);
+    return this.httpClient.post<SalesModule>(this.baseUrl+"banani", sales);
+  }
+
+  createSalesGulshanBranch(sales: SalesModule): Observable<SalesModule> {
+
+    return this.httpClient.post<SalesModule>(this.baseUrl+"gulshan", sales);
   }
 
 
@@ -53,10 +58,7 @@ export class SalesService {
     return this.httpClient.delete(this.baseUrl+ "delete/"+ id);
   }
 
-  // updateSales(sale: SalesModule): Observable<SalesModule> {
-  //   return this.httpClient.put<SalesModule>(`${this.baseUrl}${sale.id}`, sale);
-  // }
-
+ 
   updateProductStock(productId: number, quantity: number): Observable<ProductModule> {
     return this.httpClient.patch<ProductModule>(`${this.baseUrl}/products/${productId}/reduceStock`, { quantity });
   }

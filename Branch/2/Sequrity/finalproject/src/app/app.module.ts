@@ -44,6 +44,7 @@ import { ViewBranchComponent } from './branch/view-branch/view-branch.component'
 import { CreateBranchComponent } from './branch/create-branch/create-branch.component';
 import { UpdateBranchComponent } from './branch/update-branch/update-branch.component';
 import { CreateSalesComponent } from './bananiBranch/create-sales/create-sales.component';
+import { CreateSalesGulshanBranceComponent } from './gulshanBrance/create-sales-gulshan-brance/create-sales-gulshan-brance.component';
 
 
 
@@ -87,6 +88,7 @@ import { CreateSalesComponent } from './bananiBranch/create-sales/create-sales.c
     CreateBranchComponent,
     UpdateBranchComponent,
     CreateSalesComponent,
+    CreateSalesGulshanBranceComponent,
     
     
     

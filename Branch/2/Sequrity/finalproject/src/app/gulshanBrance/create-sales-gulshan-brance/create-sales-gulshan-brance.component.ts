@@ -11,11 +11,11 @@ import { CategoryService } from '../../service/category.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-create-sales',
-  templateUrl: './create-sales.component.html',
-  styleUrl: './create-sales.component.css'
+  selector: 'app-create-sales-gulshan-brance',
+  templateUrl: './create-sales-gulshan-brance.component.html',
+  styleUrl: './create-sales-gulshan-brance.component.css'
 })
-export class CreateSalesComponent implements OnInit, OnDestroy {
+export class CreateSalesGulshanBranceComponent implements OnInit, OnDestroy{
 
   products: ProductModule[] = [];
   salesForm!: FormGroup;
@@ -48,7 +48,7 @@ export class CreateSalesComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loadCategories();
-    this.loadBananiBranchProducts();  // Load only Dhanmondi branch products
+    this.loadGulshanBranchProducts();  // Load only Dhanmondi branch products
     this.initSalesForm();
   }
 
@@ -85,8 +85,8 @@ export class CreateSalesComponent implements OnInit, OnDestroy {
     });
   }
 
-  loadBananiBranchProducts() {
-    this.productService.getAllBonaniBrancesProduct().subscribe({
+  loadGulshanBranchProducts() {
+    this.productService.getAllGulshanBrancesProduct().subscribe({
       next: res => {
         this.products = res.map(product => ({ ...product, categories: product.categories || [] }));
       },
@@ -101,13 +101,13 @@ export class CreateSalesComponent implements OnInit, OnDestroy {
     const selectedCategoryName = selectedCategory.categoryname;
     this.productService.findProductByCategoryName(selectedCategoryName).subscribe({
       next: (products: ProductModule[]) => {
-        // Filter products specifically for Dhanmondi branch if needed
-        const bananiProducts = products.filter(product => product.branch.branchName === 'Banani');
+        
+        const gulshanProducts = products.filter(product => product.branch.branchName === 'Gulshan');
         this.productsArray.at(index).patchValue({
           name: '', 
           unitprice: '',
           stock: '',
-          filteredProducts: bananiProducts  // Only show Banani branch products
+          filteredProducts: gulshanProducts 
         });
       },
       error: (error) => { console.error('Error fetching products:', error); }
@@ -189,7 +189,7 @@ export class CreateSalesComponent implements OnInit, OnDestroy {
       return null;
     }).filter((product: ProductModule | null) => product !== null);
 
-    this.salesService.createSalesBonaniBranch(this.sale).subscribe({
+    this.salesService.createSalesGulshanBranch(this.sale).subscribe({
       next: res => {
         this.sale.product.forEach((prod: ProductModule) => {
           this.productService.updateProducts(prod).subscribe({
@@ -203,3 +203,4 @@ export class CreateSalesComponent implements OnInit, OnDestroy {
     });
   }
 }
+

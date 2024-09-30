@@ -66,7 +66,11 @@ export class ProductService {
 
 
   getAllBonaniBrancesProduct(): Observable<ProductModule[]> {
-    return this.httpClient.get<ProductModule[]>(this.baseUrl+"bonani");
+    return this.httpClient.get<ProductModule[]>(this.baseUrl+"banani");
+  }
+
+  getAllGulshanBrancesProduct(): Observable<ProductModule[]> {
+    return this.httpClient.get<ProductModule[]>(this.baseUrl+"gulshan");
   }
 
   getAllProductForSales():Observable<ProductModule[]>{
