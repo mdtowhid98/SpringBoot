@@ -62,7 +62,7 @@
 
 .horizontal-sidebar .dropdown-item {
     padding: 10px;
-    color: rgb(15, 1, 1);
+    color: rgb(14, 0, 0);
 }
 
 .horizontal-sidebar .dropdown-item:hover {
@@ -168,4 +168,18 @@ img.rounded-circle {
     margin: 0; /* Removes default margins */
     padding: 0; /* Removes default padding */
     animation: dance 1s ease-in-out infinite; /* Applies the dance animation */
+}
+/* Specific style for sales branch links */
+.horizontal-sidebar .dropdown-item[href*="/createSales"],
+.horizontal-sidebar .dropdown-item[href*="/salesgulshanbranch"],
+.horizontal-sidebar .dropdown-item[href*="/salesbananibranch"],
+.horizontal-sidebar .dropdown-item[href*="/salesdetails"]
+ {
+    color: rgb(248, 243, 243); /* Change font color to black */
+}
+
+/* Optional: Change hover effect to maintain visibility */
+.horizontal-sidebar .dropdown-item:hover {
+    background-color: rgba(147, 238, 245, 0.884); /* Keep the hover effect */
+    color: rgb(10, 1, 1); /* Change text color on hover if desired */
 }

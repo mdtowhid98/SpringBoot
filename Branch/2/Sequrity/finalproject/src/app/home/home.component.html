@@ -1,63 +1,43 @@
-<div class="homepage">
-    <div class="overlay">
-        <div class="container text-center">
-            <div class="row text-center mb-4">
-                <div class="col">
-                    <h2 class="text-light">Manage Your Products and Sales Efficiently</h2>
-                    <h3 class="text-light">Streamline Your Business Operations</h3>
-                </div>
-            </div>
-            <div class="row">
-                <img src="https://i.postimg.cc/RZ8Qz1pF/240-F-163131613-n0-ZXu-Skx-VBs-Lu-Hl19-JV9we7-Eq3-C4g-Mn-K.jpg" alt="">
-            </div>
-
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="card btn-custom btn-green text-center">
-                        <!-- <img src="path-to-your-image/view-products.jpg" class="card-img-top" alt="View Products"> -->
-                        <div class="card-body">
-                            <fa-icon [icon]="faEye" size="3x"></fa-icon>
-                            <h5 class="card-title mt-3">View Products</h5>
-                            <p class="card-text">Browse, search, and manage your entire product inventory.</p>
-                            <a href="/viewproduct" class="btn btn-light">View Products</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card btn-custom btn-blue text-center">
-                        <!-- <img src="path-to-your-image/create-product.jpg" class="card-img-top" alt="Create Products"> -->
-                        <div class="card-body">
-                            <fa-icon [icon]="faPlus" size="3x"></fa-icon>
-                            <h5 class="card-title mt-3">Create Products</h5>
-                            <p class="card-text">Add new products to your inventory with ease.</p>
-                            <a href="/createProduct" class="btn btn-light">Create Products</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card btn-custom btn-purple text-center">
-                        <!-- <img src="path-to-your-image/view-sales.jpg" class="card-img-top" alt="View Sales"> -->
-                        <div class="card-body">
-                            <fa-icon [icon]="faShoppingCart" size="3x"></fa-icon>
-                            <h5 class="card-title mt-3">View Sales</h5>
-                            <p class="card-text">Track and analyze all your sales transactions.</p>
-                            <a href="/viewsales" class="btn btn-light">View Sales</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card btn-custom btn-orange text-center">
-                        <!-- <img src="path-to-your-image/create-sales.jpg" class="card-img-top" alt="Create Sales"> -->
-                        <div class="card-body">
-                            <fa-icon [icon]="faChartLine" size="3x"></fa-icon>
-                            <h5 class="card-title mt-3">Create Sales</h5>
-                            <p class="card-text">Record new sales transactions and manage them efficiently.</p>
-                            <a href="/createSales" class="btn btn-light">Create Sales</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<div class="container mt-4">
+    
+  
+    <div class="text-center mt-5">
+      <h1>Welcome to My Pharmacy</h1>
+      <p>Your one-stop solution for all your medicinal needs.</p>
+      <a class="btn btn-primary" routerLink="/viewproduct">Browse Products</a>
     </div>
-</div>
-
+  
+    <div class="row mt-5">
+      <div class="col-md-4">
+        <div class="card">
+          <img src="https://i.postimg.cc/XJTHm3h9/download-11.jpg" class="card-img-top" alt="Medicine">
+          <div class="card-body">
+            <h5 class="card-title">Featured Product</h5>
+            <p class="card-text">Discover our top-selling medicine.</p>
+            <a href="/featuredproducts" class="btn btn-info">Learn More</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <img src="https://i.postimg.cc/vH7qqJv6/download-12.jpg" class="card-img-top" alt="Offers">
+          <div class="card-body">
+            <h5 class="card-title">Latest Offers</h5>
+            <p class="card-text">Check out our latest discounts and promotions.</p>
+            <a href="/offers" class="btn btn-info">View Offers</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <img src="https://i.postimg.cc/CK5cKzpj/download-13.jpg" class="card-img-top" alt="Health Tips">
+          <div class="card-body">
+            <h5 class="card-title">Health Tips</h5>
+            <p class="card-text">Get the best health tips from our experts.</p>
+            <a href="/helthtips" class="btn btn-info">Read Tips</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

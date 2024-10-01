@@ -1,6 +1,6 @@
 /* Main container for the product form with background settings */
 .product-form {
-  /* background-image: url('https://i.postimg.cc/9QJXRMgD/abstract-dark-blurred-background-smooth-gradient-texture-color-shiny-bright-website-pattern-banner-h.avif'); */
+  background-image: url('https://i.postimg.cc/xd6n0rdM/pexels-pixabay-139398.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -18,7 +18,7 @@
 /* Form layout adjustments */
 .product-form form {
   width: 100%; /* Full-width form within its parent container */
-  max-width: 400px; /* Limits the maximum width of the form */
+  max-width: 550px; /* Limits the maximum width of the form */
   padding: 20px; /* Adds padding inside the form */
   background: rgba(255, 255, 255, 0.9); /* Semi-transparent background for contrast */
   border-radius: 8px; /* Soft rounded corners for the form */
@@ -42,3 +42,12 @@ body {
   margin: 0; /* Reset body margin to prevent extra space */
   padding: 0; /* Reset body padding */
 }
+
+.product-form h1 {
+  
+  color: rgb(9, 250, 129); /* Optional: Change text color for better contrast */
+  padding: 10px; /* Optional: Add some padding */
+  border-radius: 5px; /* Optional: Add rounded corners */
+  text-align: center; /* Center the text */
+}
+

@@ -1,45 +1,45 @@
 <div class="container mt-4 product-form">
-  <h1 class="text-center">Add Product</h1>
+  <h1 class="text-center">Add Medicine</h1>
   <form [formGroup]="formValue" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
     
     <div class="form-group">
       <label for="name">
-        <fa-icon [icon]="faUser"></fa-icon> Name:
+         Name:
       </label>
       <input type="text" id="name" class="form-control" formControlName="name" required>
     </div>
 
     <div class="form-group">
       <label for="stock">
-        <fa-icon [icon]="faBox"></fa-icon> Stock:
+         Stock:
       </label>
       <input type="number" id="stock" class="form-control" formControlName="stock" required>
     </div>
 
     <div class="form-group">
       <label for="manufactureDate">
-        <fa-icon [icon]="faCalendarAlt"></fa-icon> Manufacture Date:
+         Manufacture Date:
       </label>
       <input type="date" id="manufactureDate" class="form-control" formControlName="manufactureDate" required>
     </div>
 
     <div class="form-group">
       <label for="expiryDate">
-        <fa-icon [icon]="faCalendarAlt"></fa-icon> Expiry Date:
+         Expiry Date:
       </label>
       <input type="date" id="expiryDate" class="form-control" formControlName="expiryDate" required>
     </div>
 
     <div class="form-group">
       <label for="unitprice">
-        <fa-icon [icon]="faDollarSign"></fa-icon> Unit Price:
+        Unit Price:
       </label>
       <input type="number" id="unitprice" class="form-control" formControlName="unitprice" required>
     </div>
 
     <div class="mb-3">
       <label for="categories" class="form-label">
-        <fa-icon [icon]="faTags"></fa-icon> Category:
+        Category:
       </label>
       <select id="categories" class="form-select" formControlName="category" required>
         <option *ngFor="let g of categories" [ngValue]="g.id">{{ g.categoryname }}</option>
@@ -48,7 +48,7 @@
 
     <div class="mb-3">
       <label for="suppliers" class="form-label">
-        <fa-icon [icon]="faUserTie"></fa-icon> Supplier:
+        Supplier:
       </label>
       <select id="supplier" class="form-select" formControlName="supplier" required>
         <option *ngFor="let g of suppliers" [ngValue]="g.id">{{ g.name }}</option>
@@ -57,7 +57,7 @@
 
     <div class="mb-3">
       <label for="branch" class="form-label">
-        <fa-icon [icon]="faUserTie"></fa-icon> Branch:
+       Branch:
       </label>
       <select id="branch" class="form-select" formControlName="branch" required>
         <option *ngFor="let g of branches" [ngValue]="g.id">{{ g.branchName }}</option>
@@ -67,12 +67,12 @@
 
     <div class="mb-3">
       <label for="formFile" class="form-label">
-        <fa-icon [icon]="faImage"></fa-icon> Image:
+         Image:
       </label>
       <input class="form-control" type="file" id="formFile" (change)="onFileSelected($event)" accept="image/*" required>
     </div>
 
     <button type="submit" class="btn btn-primary">
-      <fa-icon [icon]="faPlus"></fa-icon> Add Product
+       Add Medicine
     </button>
      
