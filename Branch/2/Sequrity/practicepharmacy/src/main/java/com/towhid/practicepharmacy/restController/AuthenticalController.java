@@ -1,6 +1,7 @@
 package com.towhid.practicepharmacy.restController;
 
 import com.towhid.practicepharmacy.entity.AuthenticationResponse;
+import com.towhid.practicepharmacy.entity.Branch;
 import com.towhid.practicepharmacy.entity.Category;
 import com.towhid.practicepharmacy.entity.User;
 import com.towhid.practicepharmacy.service.AuthService;
@@ -34,7 +35,7 @@ public class AuthenticalController {
         return ResponseEntity.ok(authService.registerAdmin(request));
     }
 
-    @PostMapping("/register/pharmacisat")
+    @PostMapping("/register/pharmacist")
     public ResponseEntity<AuthenticationResponse> registerPharmacist(
             @RequestBody User request
     ) {
