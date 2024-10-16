@@ -25,9 +25,7 @@ public class Branch {
     private String branchName;
     private String location;
 
-//    @JsonIgnore
-//    @OneToMany(mappedBy = "branch", cascade = CascadeType.ALL)
-//    private List<Sales> sales;
+
 
     @JsonIgnore
     @OneToMany(mappedBy = "branch", cascade = CascadeType.ALL)
@@ -39,7 +37,5 @@ public class Branch {
     }
 
 
-    // Additional relationship examples
-    // @OneToMany(mappedBy = "branch", cascade = CascadeType.ALL)
-    // private List<Supplier> suppliers;
+
 }
