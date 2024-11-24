@@ -17,6 +17,11 @@ public class SalesRestController {
     @Autowired
     private SalesService salesService;
 
+    @GetMapping("/")
+    public List<Sales> getAllSales(){
+        return salesService.getAllSales();
+    }
+
     // Create sales for "Dhanmondi" branch
     @PostMapping("/dhanmondi")
     public ResponseEntity<Sales> createSalesForDhanmondi(@RequestBody Sales sales) {
