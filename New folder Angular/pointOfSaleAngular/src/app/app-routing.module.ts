@@ -40,6 +40,9 @@ import { LatestOffersComponent } from './latest-offers/latest-offers.component';
 import { HealthtipsComponent } from './healthtips/healthtips.component';
 import { BananiBranceInvoiceComponent } from './invoice/banani-brance-invoice/banani-brance-invoice.component';
 import { GulshanBranceInvoiceComponent } from './invoice/gulshan-brance-invoice/gulshan-brance-invoice.component';
+import { DhanmondibranchstockComponent } from './stockList/dhanmondibranchstock/dhanmondibranchstock.component';
+import { BananibranchstockComponent } from './stockList/bananibranchstock/bananibranchstock.component';
+import { GulshanbranchstockComponent } from './stockList/gulshanbranchstock/gulshanbranchstock.component';
 
 const routes: Routes = [
   {path:"viewproduct",component:ViewproductComponent},
@@ -73,6 +76,9 @@ const routes: Routes = [
   {path:"helthtips",component:HealthtipsComponent},
   {path:"bananiinvoice",component:BananiBranceInvoiceComponent},
   {path:"gulshaninvoice",component:GulshanBranceInvoiceComponent},
+  { path: "dhanmondistock", component: DhanmondibranchstockComponent},
+  { path: "bananistock", component: BananibranchstockComponent},
+  { path: "gulshanstock", component: GulshanbranchstockComponent},
   {
     path: 'userprofile',
     component: UserprofileComponent,

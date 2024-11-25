@@ -1,0 +1,21 @@
+<div class="chart-container">
+    <canvas #barChart></canvas>
+  </div>
+  
+  <div class="product-table-container">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Stock</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products">
+          <td>{{ product.name }}</td>
+          <td>{{ product.stock }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
