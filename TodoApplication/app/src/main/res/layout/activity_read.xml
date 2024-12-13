@@ -6,6 +6,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_color"
     tools:context=".ReadActivity">
 
     <!-- Page Header -->
@@ -15,7 +16,7 @@
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:text="Todo List"
-        android:textColor="@color/black"
+        android:textColor="@color/text_color"
         android:textStyle="bold"
         android:textSize="20sp"
         android:gravity="center"
@@ -23,7 +24,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- Switch to Toggle Night/Day Mode -->
+
     <!-- RecyclerView -->
+
+    <Switch
+        android:id="@+id/switchMode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Night Mode"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/noticeList"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/todoListHeader"
+        app:layout_constraintVertical_bias="0.042" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/noticeList"
         android:layout_width="match_parent"

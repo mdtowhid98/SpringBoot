@@ -2,9 +2,12 @@ package com.towhid.todoapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -33,48 +36,64 @@ public class ReadActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_read);
+
+        // Set up window insets for edge-to-edge display
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-        todoList =findViewById(R.id.noticeList);
-
+        // Set up RecyclerView
+        todoList = findViewById(R.id.noticeList);
         todoList.setLayoutManager(new LinearLayoutManager(this));
 
+        // API Call to fetch Todo List
         ReadApi todoApi = ApiClient.getRetrofit().create(ReadApi.class);
-
         Call<List<TodoModel>> call = todoApi.getTodo();
-
-
         call.enqueue(new Callback<List<TodoModel>>() {
             @Override
             public void onResponse(Call<List<TodoModel>> call, Response<List<TodoModel>> response) {
-
                 if (response.isSuccessful()) {
                     List<TodoModel> noticeList = response.body();
-
                     // Set up RecyclerView with the adapter
-                    notificationAdapter = new TodoAdapter(noticeList, getApplicationContext() );
+                    notificationAdapter = new TodoAdapter(noticeList, getApplicationContext());
                     todoList.setAdapter(notificationAdapter);
                 }
-
             }
 
             @Override
             public void onFailure(Call<List<TodoModel>> call, Throwable t) {
-
+                // Handle failure
             }
         });
 
-        // FloatingActionButton click listener
+        // Floating Action Button for navigation to WriteActivity
         FloatingActionButton fabPost = findViewById(R.id.fabPost);
         fabPost.setOnClickListener(view -> {
-            // Navigate to PostActivity when FAB is clicked
             Intent intent = new Intent(ReadActivity.this, WriteActivity.class);
             startActivity(intent);
         });
 
+        // Night/Day Mode Switch Setup
+        Switch switchMode = findViewById(R.id.switchMode);
+
+        // Check current theme mode and set the switch accordingly
+        int currentMode = AppCompatDelegate.getDefaultNightMode();
+        switchMode.setChecked(currentMode == AppCompatDelegate.MODE_NIGHT_YES);
+
+        // Set listener for the switch to toggle between Night and Day mode
+        switchMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    // If checked, set Night Mode
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                } else {
+                    // If unchecked, set Day Mode
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                }
+            }
+        });
     }
 }

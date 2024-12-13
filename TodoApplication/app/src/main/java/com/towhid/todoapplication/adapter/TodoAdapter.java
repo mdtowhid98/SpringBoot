@@ -1,6 +1,7 @@
 package com.towhid.todoapplication.adapter;
 
 import android.content.Context;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,15 +40,16 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull TodoAdapter.ViewHolder holder, int position) {
         TodoModel todo = todoList.get(position);
 
-        holder.textTitle.setText("Title: " + todo.getTitle());
-        holder.textDescription.setText("Description: " + todo.getDescription());
+        // Updated for modern API support (API 24 and above)
+        holder.textTitle.setText(Html.fromHtml("<b>Title:</b> " + todo.getTitle(), Html.FROM_HTML_MODE_LEGACY));
+        holder.textDescription.setText(Html.fromHtml("<b>Description:</b> " + todo.getDescription(), Html.FROM_HTML_MODE_LEGACY));
 
         // Format date to "11 Dec 2024"
         String formattedDate = formatDate(todo.getDate());
-        holder.textDate.setText("Date: " + formattedDate);
+        holder.textDate.setText(Html.fromHtml("<b>Date:</b> " + formattedDate, Html.FROM_HTML_MODE_LEGACY));
 
-        holder.textTodotype.setText("Todo Type: " + todo.getTodotype());
-        holder.textPriority.setText("Priority: " + todo.getPriority());
+        holder.textTodotype.setText(Html.fromHtml("<b>Todo Type:</b> " + todo.getTodotype(), Html.FROM_HTML_MODE_LEGACY));
+        holder.textPriority.setText(Html.fromHtml("<b>Priority:</b> " + todo.getPriority(), Html.FROM_HTML_MODE_LEGACY));
     }
 
     @Override
