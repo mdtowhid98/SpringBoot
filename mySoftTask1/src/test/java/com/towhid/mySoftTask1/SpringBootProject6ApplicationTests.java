@@ -1,4 +1,4 @@
-package com.towhid.springBootProject6;
+package com.towhid.mySoftTask1;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
