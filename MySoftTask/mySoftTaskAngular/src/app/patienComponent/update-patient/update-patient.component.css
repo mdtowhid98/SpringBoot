@@ -1,0 +1,77 @@
+/* General form styles */
+.container {
+    max-width: 600px;
+  }
+  
+  .card {
+    border-radius: 10px;
+    border: none;
+  }
+  
+  h1 {
+    font-weight: bold;
+  }
+  
+  label {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  input[type="text"], 
+  input[type="date"], 
+  input[type="tel"] {
+    border-radius: 8px;
+  }
+  
+  input::placeholder {
+    color: #bbb;
+  }
+  
+  .form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    border: none;
+    border-radius: 8px;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3;
+  }
+  
+  .btn:focus {
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+  }
+  
+  .form-check-input:checked {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  
+  .form-check-label {
+    margin-left: 5px;
+    font-size: 16px;
+  }
+  
+  .d-grid button {
+    border-radius: 8px;
+  }
+  
+  @media (max-width: 576px) {
+    .card {
+      padding: 20px;
+    }
+  
+    .btn-lg {
+      font-size: 16px;
+    }
+  
+    h1 {
+      font-size: 24px;
+    }
+  }
+  

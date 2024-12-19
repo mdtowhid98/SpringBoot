@@ -1,0 +1,118 @@
+<div class="container mt-5">
+    <div class="card shadow-lg p-4">
+      <h1 class="text-center mb-4 text-primary">Update Patient</h1>
+      
+      <form (ngSubmit)="updateRegister()">
+        
+        <!-- Name Field -->
+        <div class="mb-3">
+          <label for="name" class="form-label fw-bold">Full Name</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            id="name" 
+            name="name" 
+            [(ngModel)]="registrations.name" 
+            placeholder="Enter patient's full name" 
+            required>
+        </div>
+  
+        <!-- Date of Birth Field -->
+        <div class="mb-3">
+          <label for="dob" class="form-label fw-bold">Date of Birth</label>
+          <input 
+            type="date" 
+            class="form-control" 
+            id="dob" 
+            name="dob" 
+            [(ngModel)]="registrations.dob" 
+            required>
+        </div>
+  
+        <!-- Mobile Number Field -->
+        <div class="mb-3">
+          <label for="mobile" class="form-label fw-bold">Mobile Number</label>
+          <input 
+            type="tel" 
+            class="form-control" 
+            id="mobile" 
+            name="mobile" 
+            [(ngModel)]="registrations.mobile" 
+            placeholder="Enter mobile number" 
+            required>
+        </div>
+  
+        <!-- Gender Field -->
+        <div class="mb-3">
+          <label class="form-label fw-bold">Gender</label>
+          <div class="form-check form-check-inline">
+            <input 
+              class="form-check-input" 
+              type="radio" 
+              id="male" 
+              name="gender" 
+              value="Male" 
+              [(ngModel)]="registrations.gender" 
+              required>
+            <label class="form-check-label" for="male">Male</label>
+          </div>
+          
+          <div class="form-check form-check-inline">
+            <input 
+              class="form-check-input" 
+              type="radio" 
+              id="female" 
+              name="gender" 
+              value="Female" 
+              [(ngModel)]="registrations.gender" 
+              required>
+            <label class="form-check-label" for="female">Female</label>
+          </div>
+  
+          <div class="form-check form-check-inline">
+            <input 
+              class="form-check-input" 
+              type="radio" 
+              id="others" 
+              name="gender" 
+              value="Others" 
+              [(ngModel)]="registrations.gender" 
+              required>
+            <label class="form-check-label" for="others">Others</label>
+          </div>
+        </div>
+  
+        <!-- Present Address Field -->
+        <div class="mb-3">
+          <label for="presentAddress" class="form-label fw-bold">Present Address</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            id="presentAddress" 
+            name="presentAddress" 
+            [(ngModel)]="registrations.presentAddress" 
+            placeholder="Enter present address" 
+            required>
+        </div>
+  
+        <!-- Permanent Address Field -->
+        <div class="mb-3">
+          <label for="permanentAddress" class="form-label fw-bold">Permanent Address</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            id="permanentAddress" 
+            name="permanentAddress" 
+            [(ngModel)]="registrations.permanentAddress" 
+            placeholder="Enter permanent address" 
+            required>
+        </div>
+  
+        <!-- Submit Button -->
+        <div class="d-grid">
+          <button type="submit" class="btn btn-primary btn-lg">Update Patient</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  

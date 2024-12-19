@@ -1,0 +1,74 @@
+<div class="container bg-supplier-form p-4">
+    <h1 class="text-center mb-4">Add Patient</h1>
+  
+    <form [formGroup]="formValue" (ngSubmit)="createRegister()">
+      <!-- Name Field -->
+      <div class="form-group mb-3">
+        <label for="name">Name</label>
+        <input type="text" id="name" class="form-control" formControlName="name" placeholder="Enter Name">
+        <div *ngIf="formValue.controls['name'].invalid && formValue.controls['name'].touched">
+          <small class="text-danger">Name is required (minimum 3 characters)</small>
+        </div>
+      </div>
+  
+      <!-- Date of Birth Field (col-md-4 applied here) -->
+      <div class="form-group mb-3 col-md-4">
+        <label for="dob">Date of Birth</label>
+        <input type="date" id="dob" class="form-control" formControlName="dob">
+        <div *ngIf="formValue.controls['dob'].invalid && formValue.controls['dob'].touched">
+          <small class="text-danger">Date of Birth is required</small>
+        </div>
+      </div>
+  
+      <!-- Age Display -->
+      <div *ngIf="age" class="form-group mb-3">
+        <label>Age</label>
+        <p><strong>{{ age.years }}</strong> Years, <strong>{{ age.months }}</strong> Months, <strong>{{ age.days }}</strong> Days</p>
+      </div>
+  
+       <!-- Mobile Field -->
+       <div class="form-group mb-3">
+        <label for="mobile">Mobile</label>
+        <input type="text" id="mobile" class="form-control" formControlName="mobile" placeholder="Enter Mobile Number">
+        <div *ngIf="formValue.controls['mobile'].invalid && formValue.controls['mobile'].touched">
+          <small class="text-danger">Mobile number must be exactly 11 digits</small>
+        </div>
+      </div>
+  
+      <!-- Gender Field -->
+      <div class="form-group mb-3">
+        <label>Gender</label><br>
+        <input type="radio" formControlName="gender" value="Male"> Male
+        <input type="radio" formControlName="gender" value="Female"> Female
+        <input type="radio" formControlName="gender" value="Others"> Others
+        <div *ngIf="formValue.controls['gender'].invalid && formValue.controls['gender'].touched">
+          <small class="text-danger">Please select gender</small>
+        </div>
+      </div>
+  
+      <!-- Present Address Field -->
+      <div class="form-group mb-3">
+        <label for="presentAddress">Present Address</label>
+        <input type="text" id="presentAddress" class="form-control" formControlName="presentAddress" placeholder="Enter Present Address">
+        <div *ngIf="formValue.controls['presentAddress'].invalid && formValue.controls['presentAddress'].touched">
+          <small class="text-danger">Present address is required</small>
+        </div>
+      </div>
+  
+      <!-- Permanent Address Field -->
+      <div class="form-group mb-3">
+        <label for="permanentAddress">Permanent Address</label>
+        <input type="text" id="permanentAddress" class="form-control" formControlName="permanentAddress" placeholder="Enter Permanent Address">
+        <div *ngIf="formValue.controls['permanentAddress'].invalid && formValue.controls['permanentAddress'].touched">
+          <small class="text-danger">Permanent address is required</small>
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="col-md-3 mx-auto">
+          <button type="submit" class="btn btn-primary w-100">Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  

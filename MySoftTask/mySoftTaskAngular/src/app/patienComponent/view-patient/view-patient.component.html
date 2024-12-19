@@ -1,0 +1,36 @@
+<div class="container bg-supplier-table py-4">
+    <h1 class="text-center mb-4">Patients Details</h1>
+  
+    <div class="row">
+      <div *ngFor="let reg of registrations" class="col-md-4 mb-4">
+        <div class="card shadow-sm border-0">
+          <div class="card-body">
+            <!-- Patient Name -->
+            <h1 class="card-title text-center text-primary"><strong>{{ reg.name }}</strong></h1>
+  
+            <!-- Patient Details -->
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><strong>ID:</strong> {{ reg.id }}</li>
+              <li class="list-group-item"><strong>DoB:</strong> {{ reg.dob | date :'yyyy-MM-dd' }}</li>
+              <li class="list-group-item"><strong>Age:</strong> {{ calculateAge(reg.dob) }}</li>
+              <li class="list-group-item"><strong>Cell No:</strong> {{ reg.mobile }}</li>
+              <li class="list-group-item"><strong>Gender:</strong> {{ reg.gender }}</li>
+              <li class="list-group-item"><strong>Present Address:</strong> {{ reg.presentAddress }}</li>
+              <li class="list-group-item"><strong>Permanent Address:</strong> {{ reg.permanentAddress }}</li>
+            </ul>
+  
+            <!-- Action Buttons -->
+            <div class="d-flex justify-content-between mt-3">
+              <button class="btn btn-sm btn-warning w-45" (click)="updateRegister(reg.id)">
+                 Edit
+              </button>
+              <button class="btn btn-sm btn-danger w-45" (click)="deleteRegister(reg.id)">
+                 Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

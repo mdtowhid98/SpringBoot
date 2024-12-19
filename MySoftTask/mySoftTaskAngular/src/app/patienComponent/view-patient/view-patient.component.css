@@ -1,0 +1,105 @@
+/* Container Styles */
+.container.bg-supplier-table {
+  background-color: #48dcf7;
+  padding: 2rem;
+  border-radius: 10px;
+}
+
+/* Card Styles */
+.card {
+  border-radius: 15px;
+  transition: all 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+/* List Group Styles */
+.list-group-item {
+  background-color: #ffffff;
+  font-size: 0.95rem;
+}
+
+/* Button Styles */
+.btn {
+  border-radius: 8px;
+}
+
+.btn-warning {
+  background-color: #34d8f5;
+  color: #ffffff;
+}
+
+.btn-danger {
+  background-color: #e74c3c;
+  color: #ffffff;
+}
+
+.w-45 {
+  width: 45%;
+}
+
+.d-flex.justify-content-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Mobile View */
+@media (max-width: 768px) {
+  .col-md-4 {
+    width: 100%;
+  }
+
+  .d-flex.justify-content-between {
+    flex-direction: column;
+  }
+
+  .btn {
+    margin-bottom: 10px;
+  }
+}
+
+/* Custom Alert Centered on Screen */
+.alert-confirm {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #f8d7da;
+  padding: 20px 40px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  z-index: 1000;
+  text-align: center;
+}
+
+.alert-confirm button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.alert-confirm button:hover {
+  background-color: #c0392b;
+}
+
+.alert-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
