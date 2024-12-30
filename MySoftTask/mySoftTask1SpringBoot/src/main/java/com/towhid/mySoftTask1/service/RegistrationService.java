@@ -29,9 +29,9 @@ public class RegistrationService {
     }
 
     public Registration findByid(int id) {
+
         return registrationRepository.findById(id).get();
     }
-
 
 
     public Registration updateRegistration(Registration r, int id) {

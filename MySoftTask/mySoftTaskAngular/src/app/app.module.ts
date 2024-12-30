@@ -21,7 +21,6 @@ import { UpdatePatientComponent } from './patienComponent/update-patient/update-
   declarations: [
     AppComponent,
     NavbarComponent,
-   
     ViewPatientComponent,
     CreatePatientComponent,
     UpdatePatientComponent,
